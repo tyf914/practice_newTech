@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif; }
+
+body {
+  margin: 0 auto;
+  background-color: #303538; }
+
+.container {
+  margin: 0 auto;
+  padding: 50px 60px;
+  width: 810px;
+  background-color: white; }
+  .container > div {
+    margin-bottom: 80px; }
+
+.topNav {
+  background-color: #303538;
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .topNav ~ div {
+    padding: 20px; }
+
+.topNav_text {
+  font-size: 35px;
+  font-weight: 900;
+  line-height: 50px;
+  color: white;
+  text-align: center; }
+
+.h1, .h2, .h3, .h4 {
+  font-weight: bolder; }
+
+.h1 {
+  font-size: 40px;
+  line-height: 60px;
+  margin-bottom: 15px; }
+
+.h2 {
+  font-size: 30px;
+  line-height: 50px; }
+
+.h3 {
+  font-size: 22px;
+  line-height: 42px; }
+
+.h4 {
+  font-size: 17px;
+  line-height: 43px; }
+
+ul, ol {
+  margin-left: -20px;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+#contact > ul {
+  list-style-type: square;
+  font-size: 22px; }
+  #contact > ul > li {
+    line-height: 35px; }
+
+#info table {
+  width: 100%;
+  border: 1px solid gainsboro; }
+#info tr {
+  width: 100%; }
+
+#info li {
+  font-size: 22px; }
+
+td {
+  padding: 10px; }
+
+img#portrait {
+  width: 150px; }
+
+#thanks {
+  text-align: right; }
+
+/*# sourceMappingURL=resume.css.map */

@@ -1,0 +1,122 @@
+@import "layout";
+
+$nav-bgColor: #303538;
+$mk-h1-size: 40px;
+
+body {
+  margin: 0 auto;
+  background: {
+    color: #303538;
+  };
+}
+
+.container {
+  margin: 0 auto;
+  padding: 50px 60px;
+  width: 810px;
+  background: {
+    color: white;
+  };
+  >div {
+    margin-bottom: 80px;
+  }
+}
+
+.topNav {
+  background: {
+    color: $nav-bgColor;
+  };
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ~div {
+    padding: 20px;
+  }
+}
+
+.topNav_text {
+  font: {
+    size: 35px;
+    weight: 900;
+  }
+  line-height: 50px;
+  color: white;
+  text-align: center;
+}
+
+
+.h1, .h2, .h3, .h4 {
+  font-weight: bolder;
+}
+
+.h1 {
+  font-size: $mk-h1-size;
+  line-height: $mk-h1-size + 20;
+  margin-bottom: 15px;
+}
+
+.h2 {
+  font-size: $mk-h1-size - 10;
+  line-height: $mk-h1-size + 10;
+}
+
+.h3 {
+  font-size: $mk-h1-size - 18;
+  line-height: $mk-h1-size + 2;
+}
+
+.h4 {
+  font-size: $mk-h1-size - 23;
+  line-height: $mk-h1-size + 3;
+}
+
+ul, ol {
+  margin: {
+    left: -20px;
+    top: 0;
+    bottom: 0;
+  };
+}
+
+#contact>ul {
+  list-style: {
+    type: square;
+  };
+  font: {
+    size: 22px;
+  };
+
+  >li {
+    line-height: 35px;
+  }
+}
+
+#info {
+  table {
+    width: 100%;
+    border: 1px solid gainsboro;
+  }
+  tr {
+    width: 100%;
+  }
+}
+
+#info li {
+  font: {
+    size: 22px;
+  };
+}
+
+td {
+  padding: 10px;
+}
+
+img#portrait {
+  width: 150px;
+}
+
+#thanks {
+  text-align: right;
+}
