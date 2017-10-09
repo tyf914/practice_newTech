@@ -2,9 +2,11 @@
   "name": "myblog",
   "version": "1.0.0",
   "description": "Plan: node.js+^es5+koa+mongoDB+sass+vue.js+iview",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch public/sass:public/css",
+    "super": "supervisor app.js"
   },
   "repository": {
     "type": "git",

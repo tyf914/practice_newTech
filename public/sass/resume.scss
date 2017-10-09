@@ -1,7 +1,8 @@
 @import "layout";
+@import "mixins/mk";
+@import "mixins/wrapText";
 
 $nav-bgColor: #303538;
-$mk-h1-size: 40px;
 
 body {
   margin: 0 auto;
@@ -10,15 +11,35 @@ body {
   };
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
+  @include wrapText;
   margin: 0 auto;
   padding: 50px 60px;
   width: 810px;
   background: {
     color: white;
   };
-  >div {
+  >div:not(:last-of-type) {
     margin-bottom: 80px;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 20vh;
+  text-align: right;
+  width: 100px;
+  padding: 40px 20px;
+  color: white;
+  background-color: dimgray;
+  >a {
+    text-decoration: none;
+    color: white;
   }
 }
 
@@ -44,32 +65,6 @@ body {
   line-height: 50px;
   color: white;
   text-align: center;
-}
-
-
-.h1, .h2, .h3, .h4 {
-  font-weight: bolder;
-}
-
-.h1 {
-  font-size: $mk-h1-size;
-  line-height: $mk-h1-size + 20;
-  margin-bottom: 15px;
-}
-
-.h2 {
-  font-size: $mk-h1-size - 10;
-  line-height: $mk-h1-size + 10;
-}
-
-.h3 {
-  font-size: $mk-h1-size - 18;
-  line-height: $mk-h1-size + 2;
-}
-
-.h4 {
-  font-size: $mk-h1-size - 23;
-  line-height: $mk-h1-size + 3;
 }
 
 ul, ol {
