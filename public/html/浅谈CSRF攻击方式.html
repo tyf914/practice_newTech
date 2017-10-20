@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>浅谈CSRF攻击方式 - hyddd - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=ChDk9h03-S75WEqNhGvXkWireJ5cCWdK1xRM9NIXfnM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/Minyx2_Lite/bundle-Minyx2_Lite.css?v=SZw2BbxDoNzf2KY426xlQ2dJcAOuGveB7B4R0GLdxs01"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/49647.css?v=KPdkhxl4qP0Mn13yVzDbaPWddgQ%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/Minyx2_Lite/bundle-Minyx2_Lite-mobile.css?v=dQWSwTbNPjY2uq2QjR90l17aNZe95f9WadvAIcPIMh01"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/hyddd/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/hyddd/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/hyddd/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'hyddd', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=wUUQbLTt-LocHM-6RVSAUwAYdrfA1Lt3ool1ZdiICfI1" type="text/javascript"></script>
+<script src="/skins/Minyx2_Lite/bundle-Minyx2_Lite.js?v=dAK2Rw4GyogXqBvhMZEW0IkYD2kjtuL3y_BKRj-vp4g1" language="javascript" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                <div id="blog_stats">
+Posts - 92, 
+Articles - 54, 
+Comments - 746
+<!----></div>
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="http://www.cnblogs.com/hyddd/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="http://www.cnblogs.com/hyddd/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/hyddd">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="http://www.cnblogs.com/hyddd/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="http://www.cnblogs.com/hyddd/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="http://www.cnblogs.com/hyddd/">hyddd</a>
+            <!-- 子标题 -->
+            <small>
+                知行合一</small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+<div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html">浅谈CSRF攻击方式</a></h2>
+    <small>2009-04-09 22:44 by hyddd, <span id="post_view_count">...</span> 阅读, <span id="post_comment_count">...</span> 评论, <a href="#" onclick="AddToWz(1432744);return false;">收藏</a>,  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=1432744" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body"><p><span style="font-size: large;"><b>一.CSRF是什么？</b></span></p>
+<p>　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。</p>
+<p><span style="font-size: large;"><b>二.CSRF可以做什么？</b></span></p>
+<p>　　你这可以这么理解CSRF攻击：<span style="color: #ff0000;">攻击者盗用了你的身份，以你的名义发送恶意请求</span>。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账......造成的问题包括：个人隐私泄露以及财产安全。</p>
+<p><span style="font-size: large;"><b>三.CSRF漏洞现状</b></span></p>
+<p>　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI......而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为&ldquo;沉睡的巨人&rdquo;。</p>
+<p><span style="font-size: large;"><b>四.CSRF的原理</b></span></p>
+<p>　　下图简单阐述了CSRF攻击的思想：</p>
+<p>　　<img src="http://pic002.cnblogs.com/img/hyddd/200904/2009040916453171.jpg" width="884" height="498" /></p>
+<p>　　从上图可以看出，要完成一次CSRF攻击，<span style="color: #0000ff;">受害者必须依次完成两个步骤</span>：</p>
+<p>　　1.<span style="color: #0000ff;">登录受信任网站A，并在本地生成Cookie</span>。</p>
+<p>　　2.<span style="color: #0000ff;">在不登出A的情况下，访问危险网站B</span>。</p>
+<p>　　看到这里，你也许会说：&ldquo;<span style="color: #0000ff;">如果我不满足以上两个条件中的一个，我就不会受到CSRF的攻击</span>&rdquo;。是的，确实如此，但你不能保证以下情况不会发生：</p>
+<p>　　1.你不能保证你登录了一个网站后，不再打开一个tab页面并访问另外的网站。</p>
+<p>　　2.你不能保证你关闭浏览器了后，你本地的Cookie立刻过期，你上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了......）</p>
+<p>　　3.上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。</p>
+<p>&nbsp;</p>
+<p>　　上面大概地讲了一下CSRF攻击的思想，下面我将用几个例子详细说说具体的CSRF攻击，这里我以一个银行转账的操作作为例子（仅仅是例子，真实的银行网站没这么傻:&gt;）</p>
+<p><b>　　<span style="font-size: medium;">示例1：</span></b></p>
+<p>　　银行网站A，它以GET请求来完成银行转账的操作，如：http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</p>
+<p>　　危险网站B，它里面有一段HTML的代码如下：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #0000FF;">　　&lt;</span><span style="color: #800000;">img&nbsp;</span><span style="color: #FF0000;">src</span><span style="color: #0000FF;">=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</span><span style="color: #0000FF;">&gt;</span></div>
+<p>　　首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块......</p>
+<p>　　为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的&lt;img&gt;以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源&ldquo;http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&rdquo;，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作......</p>
+<p>　　<span style="font-size: medium;"><b>示例2：</b></span></p>
+<p>　　为了杜绝上面的问题，银行决定改用POST请求完成转账操作。</p>
+<p>　　银行网站A的WEB表单如下：　　</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #0000FF;">　　&lt;</span><span style="color: #800000;">form&nbsp;</span><span style="color: #FF0000;">action</span><span style="color: #0000FF;">="Transfer.php"</span><span style="color: #FF0000;">&nbsp;method</span><span style="color: #0000FF;">="POST"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　　　&lt;</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">ToBankId:&nbsp;</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">input&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="text"</span><span style="color: #FF0000;">&nbsp;name</span><span style="color: #0000FF;">="toBankId"</span><span style="color: #FF0000;">&nbsp;</span><span style="color: #0000FF;">/&gt;&lt;/</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　　　&lt;</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">Money:&nbsp;</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">input&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="text"</span><span style="color: #FF0000;">&nbsp;name</span><span style="color: #0000FF;">="money"</span><span style="color: #FF0000;">&nbsp;</span><span style="color: #0000FF;">/&gt;&lt;/</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　　　&lt;</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;&lt;</span><span style="color: #800000;">input&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="submit"</span><span style="color: #FF0000;">&nbsp;value</span><span style="color: #0000FF;">="</span><span style="color: #0000FF;">Transfer</span><span style="color: #0000FF;">"</span><span style="color: #FF0000;">&nbsp;</span><span style="color: #0000FF;">/&gt;&lt;/</span><span style="color: #800000;">p</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　&lt;/</span><span style="color: #800000;">form</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span></div>
+<p>　　后台处理页面Transfer.php如下：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">　　&lt;?</span><span style="color: #000000;">php<br /></span><span style="color: #008080;">　　　　session_start</span><span style="color: #000000;">();<br /></span><span style="color: #0000FF;">　　　　if</span><span style="color: #000000;">&nbsp;(</span><span style="color: #0000FF;">isset</span><span style="color: #000000;">(</span><span style="color: #800080;">$_REQUEST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">toBankId</span><span style="color: #000000;">'</span><span style="color: #000000;">]&nbsp;</span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;">　</span><span style="color: #0000FF;">isset</span><span style="color: #000000;">(</span><span style="color: #800080;">$_REQUEST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">money</span><span style="color: #000000;">'</span><span style="color: #000000;">]))<br />　　　　{<br />　　　　&nbsp;&nbsp;&nbsp; buy_stocks(</span><span style="color: #800080;">$_REQUEST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;"></span><span style="color: #000000;">toBankId</span><span style="color: #000000;">'</span><span style="color: #000000;">]</span><span style="color: #000000;">,</span><span style="color: #000000;">　</span><span style="color: #800080;">$_REQUEST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;"></span><span style="color: #000000;">money</span><span style="color: #000000;">'</span><span style="color: #000000;">]);<br />　　　　}<br /></span><span style="color: #000000;">　　?&gt;</span><span style="color: #000000;"><br /></span></div>
+<p>　　危险网站B，仍然只是包含那句HTML代码：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">　　</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">img&nbsp;</span><span style="color: #FF0000;">src</span><span style="color: #0000FF;">=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</span><span style="color: #0000FF;">&gt;</span></div>
+<p>　　和示例1中的操作一样，你首先登录了银行网站A，然后访问危险网站B，结果.....和示例1一样，你再次没了1000块～T_T，这次事故的原因是：银行后台使用了$_REQUEST去获取请求的数据，而$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用$_GET和$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。</p>
+<p>　　<span style="font-size: medium;"><b>示例3：</b></span></p>
+<p>　　经过前面2个惨痛的教训，银行决定把获取请求数据的方法也改了，改用$_POST，只获取POST请求的数据，后台处理页面Transfer.php代码如下：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">　　</span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">php<br />　　　　</span><span style="color: #008080;">session_start</span><span style="color: #000000;">();<br />　　　　</span><span style="color: #0000FF;">if</span><span style="color: #000000;">&nbsp;(</span><span style="color: #0000FF;">isset</span><span style="color: #000000;">(</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">toBankId</span><span style="color: #000000;">'</span><span style="color: #000000;">]&nbsp;</span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;">　</span><span style="color: #0000FF;">isset</span><span style="color: #000000;">(</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">money</span><span style="color: #000000;">'</span><span style="color: #000000;">]))<br />　　　　{<br />　　　　&nbsp;&nbsp;&nbsp;&nbsp;buy_stocks(</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">toBankId</span><span style="color: #000000;">'</span><span style="color: #000000;">]</span><span style="color: #000000;">,</span><span style="color: #000000;">　</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">money</span><span style="color: #000000;">'</span><span style="color: #000000;">]);<br />　　　　}<br />　　</span><span style="color: #000000;">?&gt;</span><span style="color: #000000;"><br /></span></div>
+<p>　　然而，危险网站B与时俱进，它改了一下代码：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;"></span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">html</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　&lt;</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span>　　　　<span style="color: #000000;"></span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">script&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="text/javascript"</span><span style="color: #0000FF;">&gt;</span><span style="background-color: #F5F5F5; color: #000000;"><br /></span><span style="background-color: #F5F5F5; color: #0000FF;">　　　　　　function</span><span style="background-color: #F5F5F5; color: #000000;">&nbsp;steal()<br />　　　　　　{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　 iframe&nbsp;</span><span style="background-color: #F5F5F5; color: #000000;">=</span><span style="background-color: #F5F5F5; color: #000000;">&nbsp;document.frames[</span><span style="background-color: #F5F5F5; color: #000000;">"</span><span style="background-color: #F5F5F5; color: #000000;">steal</span><span style="background-color: #F5F5F5; color: #000000;">"</span><span style="background-color: #F5F5F5; color: #000000;">];<br />　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iframe.document.Submit(</span><span style="background-color: #F5F5F5; color: #000000;">"</span><span style="background-color: #F5F5F5; color: #000000;">transfer</span><span style="background-color: #F5F5F5; color: #000000;">"</span><span style="background-color: #F5F5F5; color: #000000;">);<br />　　　　　　}<br /></span><span style="color: #0000FF;">　　　　&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /><br />　　</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">body&nbsp;</span><span style="color: #FF0000;">onload</span><span style="color: #0000FF;">="steal()"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　</span><span style="color: #0000FF;">　　&lt;</span><span style="color: #800000;">iframe&nbsp;</span><span style="color: #FF0000;">name</span><span style="color: #0000FF;">="steal"</span><span style="color: #FF0000;">&nbsp;display</span><span style="color: #0000FF;">="none"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　　　　　&lt;</span><span style="color: #800000;">form&nbsp;</span><span style="color: #FF0000;">method</span><span style="color: #0000FF;">="POST"</span><span style="color: #FF0000;">&nbsp;name</span><span style="color: #0000FF;">="transfer"</span><span style="color: #FF0000;">　action</span><span style="color: #0000FF;">="http://www.myBank.com/Transfer.php"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br />　　　　　　　　</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">input&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="hidden"</span><span style="color: #FF0000;">&nbsp;name</span><span style="color: #0000FF;">="toBankId"</span><span style="color: #FF0000;">&nbsp;value</span><span style="color: #0000FF;">="11"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br />　　　　　　　　</span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">input&nbsp;</span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">="hidden"</span><span style="color: #FF0000;">&nbsp;name</span><span style="color: #0000FF;">="money"</span><span style="color: #FF0000;">&nbsp;value</span><span style="color: #0000FF;">="1000"</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"></span><span style="color: #000000;"><br />　　　　　　</span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">form</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　　　&lt;/</span><span style="color: #800000;">iframe</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">　　&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;"><br /></span></div>
+<p>如果用户仍是继续上面的操作，很不幸，结果将会是再次不见1000块......因为这里危险网站B暗地里发送了POST请求到银行!</p>
+<p>　　总结一下上面3个例子，CSRF主要的攻击模式基本上是以上的3种，其中以第1,2种最为严重，因为触发条件很简单，一个&lt;img&gt;就可以了，而第3种比较麻烦，需要使用JavaScript，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了CSRF攻击，后果都有可能很严重。</p>
+<p>　　理解上面的3种攻击模式，其实可以看出，<span style="color: #ff0000;">CSRF攻击是源于WEB的隐式身份验证机制！WEB的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的</span>！</p>
+<p><span style="font-size: large;"><b>五.CSRF的防御</b></span></p>
+<p>　　我总结了一下看到的资料，CSRF的防御可以从<span style="color: #3366ff;">服务端</span>和<span style="color: #3366ff;">客户端</span>两方面着手，防御效果是从服务端着手效果比较好，现在一般的CSRF防御也都在服务端进行。</p>
+<p>　　<span style="font-size: medium;"><b>1.服务端进行CSRF防御</b></span></p>
+<p>　　服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面<span style="color: #ff0000;">增加伪随机数</span>。</p>
+<p>　　(1).Cookie Hashing(所有表单都包含同一个伪随机值)：</p>
+<p>　　这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了:&gt;</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">　　&lt;?</span><span style="color: #000000;">php<br /></span><span style="color: #008000;">　　　　//</span><span style="color: #008000;">构造加密的Cookie信息</span><span style="color: #008000;"><br /></span><span style="color: #800080;">　　　　$value</span><span style="color: #000000;">&nbsp;</span><span style="color: #000000;">=</span><span style="color: #000000;">&nbsp;&ldquo;DefenseSCRF&rdquo;;<br /></span><span style="color: #008080;">　　　　setcookie</span><span style="color: #000000;">(&rdquo;cookie&rdquo;</span><span style="color: #000000;">,</span><span style="color: #000000;">&nbsp;</span><span style="color: #800080;">$value</span><span style="color: #000000;">,</span><span style="color: #000000;">&nbsp;</span><span style="color: #008080;">time</span><span style="color: #000000;">()</span><span style="color: #000000;">+</span><span style="color: #000000;">3600</span><span style="color: #000000;">);<br /></span><span style="color: #000000;">　　?&gt;<br /></span></div>
+<p>　　在表单里增加Hash值，以认证这确实是用户发送的请求。</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">　　&lt;?</span><span style="color: #000000;">php</span><span style="color: #008000;"></span><span style="color: #008000;"><br /></span><span style="color: #800080;">　　　　$hash</span><span style="color: #000000;">&nbsp;</span><span style="color: #000000;">=</span><span style="color: #000000;">&nbsp;</span><span style="color: #008080;">md5</span><span style="color: #000000;">(</span><span style="color: #800080;">$_COOKIE</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">cookie</span><span style="color: #000000;">'</span><span style="color: #000000;">]);<br /></span><span style="color: #000000;">　　?&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　&lt;</span><span style="color: #000000;">form&nbsp;method</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;POST&rdquo;&nbsp;action</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;transfer</span><span style="color: #000000;">.</span><span style="color: #000000;">php&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　　　&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;text&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;toBankId&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　　　&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;text&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;money&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　　　&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;hidden&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;hash&rdquo;&nbsp;value</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;</span><span style="color: #000000;">&lt;?=</span><span style="color: #800080;">$hash</span><span style="color: #000000;">;</span><span style="color: #000000;">?&gt;</span><span style="color: #000000;">&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　　　&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;submit&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;submit&rdquo;&nbsp;value</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;Submit&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #000000;">　　&lt;/</span><span style="color: #000000;">form</span><span style="color: #000000;">&gt;</span></div>
+<p>　　然后在服务器端进行Hash值验证</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">php<br /></span><span style="color: #008000;"></span><span style="color: #000000;">　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #0000FF;">if</span><span style="color: #000000;">(</span><span style="color: #0000FF;">isset</span><span style="color: #000000;">(</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">check</span><span style="color: #000000;">'</span><span style="color: #000000;">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #800080;">$hash</span><span style="color: #000000;">&nbsp;</span><span style="color: #000000;">=</span><span style="color: #000000;">&nbsp;</span><span style="color: #008080;">md5</span><span style="color: #000000;">(</span><span style="color: #800080;">$_COOKIE</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">cookie</span><span style="color: #000000;">'</span><span style="color: #000000;">]);</span><span style="color: #008000;"><br /></span><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 </span><span style="color: #0000FF;">if</span><span style="color: #000000;">(</span><span style="color: #800080;">$_POST</span><span style="color: #000000;">[</span><span style="color: #000000;">'</span><span style="color: #000000;">check</span><span style="color: #000000;">'</span><span style="color: #000000;">]&nbsp;</span><span style="color: #000000;">==</span><span style="color: #000000;">&nbsp;</span><span style="color: #800080;">$hash</span><span style="color: #000000;">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 doJob();<br />　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;</span><span style="color: #0000FF;">else</span><span style="color: #000000;">&nbsp;{<br />　　　　　　　　//...</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 }<br />　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;</span><span style="color: #0000FF;">else</span><span style="color: #000000;">&nbsp;{<br />　　　　　　//...</span><span style="color: #000000;"><br />　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">?&gt;</span></div>
+<p>　　这个方法个人觉得已经可以杜绝99%的CSRF攻击了，那还有1%呢....由于用户的Cookie很容易由于网站的XSS漏洞而被盗取，这就另外的1%。一般的攻击者看到有需要算Hash值，基本都会放弃了，某些除外，所以如果需要100%的杜绝，这个不是最好的方法。<br />　　(2).验证码</p>
+<p>　　这个方案的思路是：每次的用户提交都需要用户在表单中填写一个图片上的随机字符串，厄....这个方案可以完全解决CSRF，但个人觉得在易用性方面似乎不是太好，还有听闻是验证码图片的使用涉及了一个被称为MHTML的Bug，可能在某些版本的微软IE中受影响。</p>
+<p>　　(3).One-Time Tokens(不同的表单包含一个不同的伪随机值)</p>
+<p>　　在实现One-Time Tokens时，需要注意一点：就是&ldquo;并行会话的兼容&rdquo;。如果用户在一个站点上同时打开了两个不同的表单，CSRF保护措施不应该影响到他对任何表单的提交。考虑一下如果每次表单被装入时站点生成一个伪随机值来覆盖以前的伪随机值将会发生什么情况：用户只能成功地提交他最后打开的表单，因为所有其他的表单都含有非法的伪随机值。必须小心操作以确保CSRF保护措施不会影响选项卡式的浏览或者利用多个浏览器窗口浏览一个站点。</p>
+<p>　　以下我的实现:</p>
+<p>　　1).先是令牌生成函数(gen_token())：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">php</span><span style="color: #008000;"><br /></span><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000FF;">function</span><span style="color: #000000;">&nbsp;gen_token()&nbsp;{<br /></span><span style="color: #008000;"></span><span style="color: #000000;"></span><span style="color: #000000;"></span><span style="color: #000000;"> </span><span style="color: #008080;"></span><span style="color: #008000;">　　　　//这里我是贪方便，实际上单使用Rand()得出的随机数作为令牌，也是不安全的。<br />　　　　//这个可以参考我写的Findbugs笔记中的<a href="/hyddd/articles/1391737.html">《Random object created and used only once》</a><br /></span><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #800080;">$token</span><span style="color: #000000;">&nbsp;</span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #008080;">md5</span><span style="color: #000000;">(</span><span style="color: #008080;">uniqid</span><span style="color: #000000;">(</span><span style="color: #008080;">rand</span><span style="color: #000000;">()</span><span style="color: #000000;">,</span><span style="color: #000000;">&nbsp;</span><span style="color: #0000FF;">true</span><span style="color: #000000;">));</span><span style="color: #008000;"></span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000FF;">return</span><span style="color: #000000;">&nbsp;</span><span style="color: #800080;">$token</span><span style="color: #000000;">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div>
+<p>　　2).然后是Session令牌生成函数(gen_stoken())：</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">php<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000FF;">　　function</span><span style="color: #000000;">&nbsp;gen_stoken()&nbsp;{<br /></span>　　　　　　<span style="color: #000000;"></span><span style="color: #000000;"></span><span style="color: #000000;"></span><span style="color: #800080;">$pToken = ""</span><span style="color: #000000;">;</span><span style="color: #000000;"></span><br /><span style="color: #000000;">　　　　　　if(</span><span style="color: #000000;"></span><span style="color: #800080;">$_SESSION</span><span style="color: #000000;">[STOKEN_NAME]&nbsp; == </span><span style="color: #800080;">$pToken</span><span style="color: #000000;">){<br />　　　　　　　　//没有值，赋新值<br />　　　　　　</span><span style="color: #800080;">　　$_SESSION</span><span style="color: #000000;">[STOKEN_NAME]&nbsp;</span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #000000;">gen_token()</span><span style="color: #000000;">;</span><br /><span style="color: #000000;">　　　　　　}&nbsp;&nbsp;&nbsp; <br />　　　　　　else{<br />　　　　　　　　//继续使用旧的值<br />　　　　　　}</span><span style="color: #800080;"></span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">?&gt;</span></div>
+<p>　　3).WEB表单生成隐藏输入域的函数：　　</p>
+<div class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;?php<br />　　&nbsp;&nbsp;&nbsp;&nbsp; function gen_input() {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; gen_stoken();<br />　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo &ldquo;&lt;input type=\&rdquo;hidden\&rdquo; name=\&rdquo;" . FTOKEN_NAME . &ldquo;\&rdquo;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; value=\&rdquo;" . $_SESSION[STOKEN_NAME] . &ldquo;\&rdquo;&gt; &ldquo;;<br />&nbsp;&nbsp;&nbsp;&nbsp; 　　}<br />&nbsp;&nbsp;&nbsp;&nbsp; ?&gt;<br /></span><span style="color: #000000;"></span></div>
+<p>　　4).WEB表单结构：</p>
+<div class="cnblogs_code"><span style="color: #000000;"></span><span style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">php<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #008080;">session_start</span><span style="color: #000000;">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000FF;">include</span><span style="color: #000000;">(&rdquo;functions</span><span style="color: #000000;">.</span><span style="color: #000000;">php&rdquo;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">?&gt;</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">form&nbsp;method</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;POST&rdquo;&nbsp;action</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;transfer</span><span style="color: #000000;">.</span><span style="color: #000000;">php&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;text&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;toBankId&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;text&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;money&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"></span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;?</span><span style="color: #000000;">&nbsp;gen_input();&nbsp;</span><span style="color: #000000;">?&gt;</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">input&nbsp;type</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;submit&rdquo;&nbsp;name</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;submit&rdquo;&nbsp;value</span><span style="color: #000000;">=</span><span style="color: #000000;">&rdquo;Submit&rdquo;</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000;">&lt;/</span><span style="color: #000000;">FORM</span><span style="color: #000000;">&gt;</span></div>
+<p>　　5).服务端核对令牌：</p>
+<p>　　这个很简单，这里就不再啰嗦了。</p>
+<p>　　上面这个其实不完全符合&ldquo;并行会话的兼容&rdquo;的规则，大家可以在此基础上修改。</p>
+<p>&nbsp;</p>
+<p>　　其实还有很多想写，无奈精力有限，暂且打住，日后补充，如果错漏，请指出:&gt;</p>
+<p>　　PS：今天下午写这篇文档的时候FF崩溃了一次，写了一半文章的全没了，郁闷好久T_T.......</p>
+<p>　　转载请说明出处，谢谢[hyddd(http://www.cnblogs.com/hyddd/)]</p>
+<p><span style="font-size: large;"><b>六.参考文献</b></span></p>
+<p>[1].<a href="http://www.playhack.net/view.php?id=31">Preventing CSRF</a></p>
+<p>[2].<a href="http://shiflett.org/articles/cross-site-request-forgeries">Security Corner: Cross-Site Request Forgeries</a></p>
+<p>[3].<a href="http://netsecurity.51cto.com/art/200812/102951.htm">《深入解析跨站请求伪造漏洞：原理剖析》</a></p>
+<p>[4].<a href="http://netsecurity.51cto.com/art/200811/97281.htm">《Web安全测试之跨站请求伪造（CSRF）》</a></p>
+<p>[5].<a href="http://netsecurity.51cto.com/art/200812/102925.htm">《深入解析跨站请求伪造漏洞：实例讲解》</a></p>
+<p>[6].http://baike.baidu.com/view/1609487.htm</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info">
+        </div>
+        <div class="clear"></div>
+        <div id="post_next_prev"></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory"></li>
+        <li class="icon_bullet" id="EntryTag"></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=49647,cb_entryId=1432744,cb_blogApp=currentBlogApp,cb_blogUserGuid='9208470b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2009/4/9 22:44:00';loadViewCount(cb_entryId);</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="/skins/Minyx2_Lite/images/btnsearch.gif" id="btnZzk"  class="submit" onclick="zzk_go();return false;"/>
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword" /></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            </div>
+            <div id="sideRight">
+            </div>
+            <div id="sideLeft">
+            </div>
+            
+                <div id="sideContainer">
+                </div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright &copy;2017 hyddd
+</p>
+<p>
+<a href="http://www.cnblogs.com">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+</body>
+</html>

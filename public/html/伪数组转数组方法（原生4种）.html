@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>伪数组转数组方法（原生4种） - NT.Wang - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=ChDk9h03-S75WEqNhGvXkWireJ5cCWdK1xRM9NIXfnM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/red_autumnal_leaves/bundle-red_autumnal_leaves.css?v=TssLmz6RaFz6L7UXJxXEWF3XZhkLas0lSHVLVROuVxM1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/red_autumnal_leaves/bundle-red_autumnal_leaves-mobile.css?v=FDQ3BTKugHbrGR2Ofu_ZzeB_9jRgFlPHn6iF2gGlvLc1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/NTWang/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/NTWang/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/NTWang/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'NTWang', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=wUUQbLTt-LocHM-6RVSAUwAYdrfA1Lt3ool1ZdiICfI1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/NTWang/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/NTWang/">NT.Wang</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/NTWang/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/NT.Wang">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/NTWang/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/NTWang/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 35&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 18</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/NTWang/p/6280447.html">伪数组转数组方法（原生4种）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>伪数组也称类数组。像arguments 或者 获取一组元素返回的集合都是伪数组。</p>
+<p>伪数组如何转换成真正数组，其实我们很少去这么做，但是那帮面试官可能会问，并且不止一种方法让你去实现</p>
+<p><strong>方法一、 声明一个空数组，通过遍历伪数组把它们重新添加到新的数组中，大家都会，这不是面试官要的</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080">1</span> <span style="color: #0000ff">var</span> aLi = document.querySelectorAll('li'<span style="color: #000000">);
+</span><span style="color: #008080">2</span>     <span style="color: #0000ff">var</span> arr =<span style="color: #000000"> [];
+</span><span style="color: #008080">3</span>     <span style="color: #0000ff">for</span> (<span style="color: #0000ff">var</span> i = 0; i &lt; aLi.length; i++<span style="color: #000000">) {
+</span><span style="color: #008080">4</span>         arr[arr.length] =<span style="color: #000000"> aLi[i]
+</span><span style="color: #008080">5</span>     }</pre>
+</div>
+<p><strong>方法二、使用数组的slice()方法 它返回的是数组，使用call或者apply指向伪数组&nbsp;</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080">1</span> <span style="color: #0000ff">var</span> arr = Array.prototype.slice.call(aLi);</pre>
+</div>
+<p>　模拟一下它的内部实现</p>
+<p>　<img src="http://images2015.cnblogs.com/blog/1032359/201701/1032359-20170112234219244-623205035.png" alt=""></p>
+<p><strong>　方法三 、使用原型继承</strong></p>
+<pre><strong>aLi.__proto__ = Array.prototype;</strong></pre>
+<p><strong>1 . 伪数组是html元素集合，虽然看着好像挺奇怪 ，但是总算转换成功，不管它。</strong></p>
+<p><strong>到这里我使用push()&nbsp;</strong><strong>但是竟然没有变化也不报错，第一反应什么情况，方法继承却无法使用，不应该啊。试过很多方法都不行，</strong><strong>暂时放弃了，</strong></p>
+<p><strong>后来我突然想到我push的时候，length增加了啊，为什么看不到，这次我push()更多的</strong><strong>内容，竟然出现了，length值和我push进去的length值相同，大概知道是怎么回事了，被html元素遮蔽了。具体什么原因，或许是规范或许是安全考虑 。如果不遮蔽岂不是能修改所以html元素了 ，哈哈</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080"><span style="font-size: 14px"><strong>html 元素 </strong></span><br>1</span> <span style="color: #0000ff">var</span> aLi = document.querySelectorAll('li'<span style="color: #000000">);
+</span><span style="color: #008080">2</span> 
+<span style="color: #008080">3</span>     console.log(aLi.constructor === Array) <span style="color: #008000">//</span><span style="color: #008000">false</span>
+<span style="color: #008080">4</span>         
+<span style="color: #008080">5</span>     <span style="color: #ff0000"><strong>aLi.__proto__ = Array.prototype;
+</strong></span><span style="color: #008080">6</span> 
+<span style="color: #008080">7</span>     console.log(aLi.constructor === Array) <span style="color: #008000">//</span><span style="color: #008000">true<br><br></span></pre>
+</div>
+<p>下图证明 没有push的情况下，length = 0（实际应该是4）　　　　　　push()添加了9个，但是前4个被遮蔽。length=9</p>
+<p>&nbsp;<img src="http://images2015.cnblogs.com/blog/1032359/201701/1032359-20170113003156963-1491622632.png" alt=""> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="http://images2015.cnblogs.com/blog/1032359/201701/1032359-20170113002930260-895993574.png" alt=""></p>
+<p>&nbsp;</p>
+<p><strong>2 arguments &nbsp;无影响正常使用，看来只是限制了html对象</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080">1</span> <span style="color: #0000ff">function</span><span style="color: #000000"> test (){
+</span><span style="color: #008080">2</span>     arguments.__proto__ =<span style="color: #000000"> Array.prototype;
+</span><span style="color: #008080">3</span>     arguments.push(10<span style="color: #000000">)
+</span><span style="color: #008080">4</span> <span style="color: #000000">    console.log(arguments)
+</span><span style="color: #008080">5</span> <span style="color: #000000">}
+</span><span style="color: #008080">6</span>     test(1,2,3,4)</pre>
+</div>
+<p><strong>方法4、 ES6中数组的新方法 from()</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080">1</span> <span style="color: #0000ff">function</span><span style="color: #000000"> test(){
+</span><span style="color: #008080">2</span>     <span style="color: #0000ff">var</span> arg =<span style="color: #000000"> Array.from(arguments);
+</span><span style="color: #008080">3</span>     arg.push(5<span style="color: #000000">);
+</span><span style="color: #008080">4</span>     console.log(arg);<span style="color: #008000">//</span><span style="color: #008000">1,2,3,4,5</span>
+<span style="color: #008080">5</span> 
+<span style="color: #008080">6</span> <span style="color: #000000">}
+</span><span style="color: #008080">7</span> test(1,2,3,4);</pre>
+</div>
+<p><strong>方法5 、 顺便说下jq的makeArray()，toArray()方法 它们也可以实现伪数组转数组的功能，但是实现的原理并不太一样</strong></p>
+<p>core_deletedIds = []</p>
+<p>core_slice = core_deletedIds.slice,</p>
+<p>core_push = core_deletedIds.push,</p>
+<p><strong>toArray: 使用了数组的slice方法</strong></p>
+<p><strong><img src="http://images2017.cnblogs.com/blog/1032359/201708/1032359-20170824114834121-1557162809.png" alt=""></strong></p>
+<p><strong>makeArray:使用了push方法</strong></p>
+<p><img src="http://images2017.cnblogs.com/blog/1032359/201708/1032359-20170824120705043-801903013.png" alt=""></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">var</span> aDiv = $('div'<span style="color: #000000">);
+console.log($.isArray(aDiv)); </span><span style="color: #008000">//</span><span style="color: #008000">false</span>
+<span style="color: #0000ff">var</span> aDiv = aDiv.toArray(); <span style="color: #008000">//</span><span style="color: #008000">实例方法</span>
+<span style="color: #0000ff">var</span> aDiv = $.makeArray(aDiv);<span style="color: #008000">//</span><span style="color: #008000">静态方法</span>
+console.log($.isArray(aDiv));<span style="color: #008000">//</span><span style="color: #008000">true</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>有错请指出 ，我会及时更正 谢谢。期待更多的方法！</strong></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-01-13 00:44</span> <a href='http://www.cnblogs.com/NTWang/'>NT.Wang</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6280447" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6280447);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=318242,cb_entryId=6280447,cb_blogApp=currentBlogApp,cb_blogUserGuid='ad092ec6-2d82-e611-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/1/13 0:44:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 NT.Wang
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

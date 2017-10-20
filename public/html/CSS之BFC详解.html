@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="Shortcut Icon" href="http://htmljs.b0.upaiyun.com//images/logo.ico?123">
+    <link href="http://htmljs.b0.upaiyun.com//images/logo.ico?123" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/bootstrap.css?dddddddd" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/main.css?zdzjjddddddddddxdz" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/prettify.css?22" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/glyphicons.css?2d2ddddddd" type="text/css">
+    <script src="http://htmljs.b0.upaiyun.com//js/jquery.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/htmljs.js?12ddd2ddeddddddd23"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/prettify.js?12"></script><meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="http://htmljs.b0.upaiyun.com//images/icon.png" rel="apple-touch-icon"/>
+    <meta name="keywords" content="前端, 前端开发, web前端, web前端开发, 前端开发工程师, 前端开发攻城师,设计, 开发, 前端资源, CSS, JavaScript, Ajax, jQuery, html,html5,css3,浏览器兼容, 前端开发工具, 前端招聘, jQuery API, CSS整形和优化工具 , JS压缩工具 , JS格式化工具 , CSS参考手册 ,HTML参考手册 , 多重搜索 , nodejs , node , boostrap , sublime"/>
+    <meta name="baidu-site-verification" content="OnKVgNu37S" />
+    <script>if($.browser.msie<8){alert("请不要使用ie浏览本站！本站不支持ie10以下浏览器。")}</script>
+    <title>CSS之BFC详解 - &lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt; - 前端乱炖</title><meta name="description" content="最近总结了一个前端学习的方法，就是3W(What,Why,hoW)方法。其实对于很多前端知识点还有一些api都可以这样去学习，当然这也是从平常的应试教育学习中借鉴过来的，接下来我们用这个方法来学一下B">
+    <style>
+      #bdshare a{}
+      .ad-blank{opacity:0.6;}
+    </style>
+    <script src="http://htmljs.b0.upaiyun.com//js/bootstrap/bootstrap-tooltip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/bootstrap/bootstrap-scrollspy.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/tips.js?dddddddd"></script>
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/tips.css?2dd2dddddddd" type="text/css">
+  </head>
+  <body id="article">
+    <div id="header">
+      <div class="wrapper clearfix"><a href="/" title="前端乱炖" class="logo"><span class="dun">炖</span></a>
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <div class="container">
+              <div class="nav-collapse collapse">
+                <ul class="nav left-nav">
+                  <li pageId="0" class=""><a href="/"><i class="icon-home"></i>首页</a></li>
+                  <li pageId="1" class="active"><a href="/article"><i class="icon-book-open"></i>专栏</a></li>
+                  <li pageId="7" class=""><a href="/qa"><i class="icon-lightbulb"></i>问答</a></li>
+                  <li pageId="10" class=""><a href="/topic"><i class="icon-group"></i>讨论区</a></li>
+                  <li pageId="20" class="hidden "><a href="/talk"><i class="icon-conversation"></i>实时讨论</a></li>
+                  <li pageId="15" class="hidden "><a href="/blog"><i class="icon-sampler"></i>博集</a></li>
+                  <li pageId="8" class="hidden "><a href="/tag">标签</a></li>
+                  <li pageId="2" class="hidden "><a href="/job"><i class="icon-leaf"></i>招聘</a></li>
+                  <li pageId="2" class=""><a href="/cards"><i class="icon-nameplate"></i>花名册</a></li>
+                  <li pageId="101" class=""><a href="http://www.jiankongbao.com/labs/http">免费性能测试</a></li>
+                  <li class="search">
+                    <form action="/search" method="get" style="margin:0;"><i class="icon-search"></i>
+                      <input id="keyword" type="text" name="q" placeholder="搜索全站、站外内容" class="span2 input-large">
+                    </form>
+                  </li>
+                  <li pageId="6" class="hidden "><a href="/book">免费送书</a></li>
+                </ul>
+                <ul class="right-nav">
+                  <li><a href="/user/login?redirect=undefined">登录</a></li>
+                  <li><a href="/talk"><i class="icon-conversation"></i>在线聊天</a></li>
+                  <li class="hidden sub-trigger"><a>其他功能</a>
+                    <ul class="sub-menu hidden">
+                      <li pageId="5" class=""><a href="/act">活动</a></li>
+                      <li pageId="9" class=""><a href="/tools"><i class="icon-classic-hammer hidden"></i>常用工具</a><span class="my-favs"></span></li>
+                      <li><a href="/talk">
+                           
+                          实时讨论</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $(".sub-trigger").mouseenter(function(){
+          $(".sub-menu",this).removeClass("hidden")
+          }).mouseleave(function(){
+          $(".sub-menu",this).addClass("hidden")
+          })
+        })       
+    </script>
+    <div id="content" class="clearfix">
+      <div class="daen"></div>
+      <ul class="breadcrumb hidden">
+        <li><a href="/">首页</a><span class="divider">/</span></li>
+        <li><a href="/article">所有专栏</a><span class="divider">/</span></li>
+        <li><a href="/article/column/56">&lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt;</a><span class="divider">/</span></li>
+        <li class="active"><span>CSS之BFC详解</span></li>
+      </ul>
+      <div class="title">
+        <div class="wrapper">
+          <div style="font-size: 30px;line-height:50px;" href="http://p.html-js.com/article/1866" title="CSS之BFC详解" rel="bookmark" class="3">CSS之BFC详解</div>
+          <div class="info">
+            <div class="line"><span class="author vcard item"><a rel="author" href="/user/968" class="value url fn">Gothic</a> 发布在<a href="/article/column/56" class="value">&lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt;</a></span><span class="item">2016年5月14日</span><span class="item"><span class="index">view：</span><span class="value">38507</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wapper">
+        <div class="content">
+          <div class="left"><a href="http://t.cn/Ri2cBT0" style="margin-top:20px;opacity:1;display:block;background: #eee;margin: 10px 0;cursor: pointer;"> <img src="http://htmljs.b0.upaiyun.com/uploads/1487998258135-ee1ba88327a47ae94c9d34f8755d0a63.png"></a>
+            <div style="margin-top:20px;" class="alert">在文章任何区域双击击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div></div>
+            <article id="post-1866" style="overflow:hidden;" class="post">
+              <div class="wrapper">
+                <div style="padding-top:0;" class="entry-content"><!--<a href="http://passport.lagou.com/landingPage.html?utm_source=AD__html-js&amp;utm_medium=banner&amp;utm_campaign=lp" class="ad-blank"></a><img src="http://htmljs.b0.upaiyun.com/uploads/1439192041460-7786e01e91744693f0cc2c15f7ce9ab3.png">--><pre><code class='language-javascript'>  最近总结了一个前端学习的方法，就是3W(What,Why,hoW)方法。其实对于很多前端知识点还有一些api都可以这样去学习，当然这也是从平常的应试教育学习中借鉴过来的，接下来我们用这个方法来学一下BFC这个东西。
+</code></pre>
+
+<p><strong>What:</strong>了解该知识点的概念，本质以及有关牵扯到的相关知识概念</p>
+
+<p>BFC这个东西说常见的话你可能不觉得，但是你肯定会常用，也许你在用的时候也没想到BFC这东西。网上也有很多写这些东西的文章，但是自己写一遍印象更深一点。</p>
+
+<p>首先我们看看w3c对BFC是怎么定义的:</p>
+
+<p><a href="http://www.w3.org/TR/CSS2/visuren.html#block-formatting">http://www.w3.org/TR/CSS2/visuren.html#block-formatting</a></p>
+
+<blockquote>
+  <p>Floats, absolutely positioned elements, block containers (such as
+  inline-blocks, table-cells, and table-captions) that are not block
+  boxes, and block boxes with ‘overflow’ other than ‘visible’ (except
+  when that value has been propagated to the viewport) establish new
+  block formatting contexts for their contents.</p>
+  
+  <p>In a block formatting context, boxes are laid out one after the other,
+  vertically, beginning at the top of a containing block. The vertical
+  distance between two sibling boxes is determined by the ‘margin’
+  properties. Vertical margins between adjacent block-level boxes in a
+  block formatting context collapse.</p>
+  
+  <p>In a block formatting context, each box’s left outer edge touches the
+  left edge of the containing block (for right-to-left formatting, right
+  edges touch). This is true even in the presence of floats (although a
+  box’s line boxes may shrink due to the floats), unless the box
+  establishes a new block formatting context (in which case the box
+  itself may become narrower due to the floats).</p>
+</blockquote>
+
+<p>用谷歌翻译(笑..我是谷歌脑残粉)过来就是：</p>
+
+<blockquote>
+  <p>浮动元素和绝对定位元素，非块级盒子的块级容器（例如 inline-blocks, table-cells, 和
+  table-captions），以及overflow值不为“visiable”的块级盒子，都会为他们的内容创建新的块级格式化上下文。</p>
+  
+  <p>在一个块级格式化上下文里，盒子从包含块的顶端开始垂直地一个接一个地排列，两个盒子之间的垂直的间隙是由他们的margin
+  值所决定的。两个相邻的块级盒子的垂直外边距会发生叠加。</p>
+  
+  <p>在块级格式化上下文中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(border-left)（对于从右到左的格式来说，则触碰到右边缘），即使存在浮动也是如此，除非这个盒子创建一个新的块级格式化上下文。</p>
+</blockquote>
+
+<p>从上面我们还可找出几个几个比较重要的概念东西，比如:boxe , block  formatting context。毫无疑问BFC就是block  formatting context的缩写，中文就是“块级格式化上下文”的意思。我们在那个w3c那个页面发现还有其他inline formatting context，所以我们可以看看 formatting context是个什么东西：</p>
+
+<p>Formatting context是W3C CSS2.1规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
+
+<p>最常见的Formatting context有Block fomatting context(简称BFC)和Inline formatting context(简称IFC)。CSS2.1 中只有BFC和IFC, CSS3中还增加了GFC和FFC.</p>
+
+<p>至于那个box还要讲吗？嗯，还是回顾一下：</p>
+
+<p>Box是CSS布局的对象和基本单位， 直观点来说，就是一个页面是由很多个Box(即boxes)组成的。元素的类型和display属性，决定了这个Box的类型。 不同类型的Box， 会参与不同的Formatting context(一个决定如何渲染文档的容器)，因此Box内的元素会以不同的方式渲染。常见的盒子类型</p>
+
+<p>block-level box: display属性为block, list-item, table的元素，会生成block-level box。并且参与block fomatting context。
+inline-level box: display属性为inline, inline-block, inline-table的元素，会生成inline-level box。并且参与inline formatting context。
+妈蛋四级刚刚飘过的孩子看这点英文不容易啊，有时候我们总觉的书上或者官方的概念定义的东西不利于我们理解，所以我们更喜欢有些老师通俗的讲解。这里我们也通俗的理解一下：</p>
+
+<p>BFC就是“块级格式化上下文”的意思，创建了 BFC的元素就是一个独立的盒子，不过只有Block-level box可以参与创建BFC， 它规定了内部的Block-level Box如何布局，并且与这个独立盒子里的布局不受外部影响，当然它也不会影响到外面的元素。</p>
+
+<p>BFC有一下特性：</p>
+
+<ol>
+<li>内部的Box会在垂直方向，从顶部开始一个接一个地放置。</li>
+<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加</li>
+<li>每个元素的margin box的左边， 与包含块border
+box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
+<li>BFC的区域不会与float box叠加。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。</li>
+<li>计算BFC的高度时，浮动元素也参与计算。</li>
+</ol>
+
+<p>好了What这一阶段就到这了，基本的概念我们都要了解清楚，不清楚的多看几遍，是在不清楚的我猜是我写的不够通俗易解。</p>
+
+<p>接下来我一般会考虑<strong>Why</strong>，即为什么会出现这个问题，为什么要这样用，为什么会出现这些效果。但是这里就不写了，因为我也不知道写啥(哭…求高手指点)…</p>
+
+<p>到最后我就是考虑How了，不用说你也知道了，就是怎么解决这些问题，这些知识点该怎么用，还有没有其他的方法..</p>
+
+<p>那么我们该怎么使用BFC呢，如何触发BFC呢？：</p>
+
+<ol>
+<li>float 除了none以外的值</li>
+<li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
+<li>display    (table-cell，table-caption，inline-block, flex,
+inline-flex)</li>
+<li>position值为（absolute，fixed）</li>
+<li>fieldset元素</li>
+</ol>
+
+<p>在以上的情况里可以创建BFC。</p>
+
+<p>接下我们看下怎么运用BFC，在哪些场景可以用到BFC.</p>
+
+<p><strong>1.解决margin叠加问题</strong>
+<iframe width="100%" height="300" src="http://jsfiddle.net/gothic/7yhdL/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+三P每个p之间的距离为50px，发生了外边距叠加。 要解决这个叠加问题即让每个P之间是100px，我们可以新建一个BFC，怎么建呢？可以给p元素添加一个父元素，让它触发BFC。如下:
+     <iframe width="100%" height="300" src="http://jsfiddle.net/gothic/B6E8F/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe> </p>
+
+<p><strong>2.用于布局</strong></p>
+
+<p><iframe width="100%" height="300" src="http://jsfiddle.net/gothic/xU2LA/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+从图中我们会发现上面BFC的第三个特性，就是元素的左外边距会触碰到包含块容器的做外边框，就算存在浮动也会如此。那么我们如何解决这个问题呢？看上面BFC第四个特性，就是BFC不会与浮动盒子叠加，那么我们是不是可以创建一个新的BFC来解决这个问题呢？来看看：
+<iframe width="100%" height="300" src="http://jsfiddle.net/gothic/Jn8FN/embedded/result,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>
+
+<p>发现我们用overflow:hidden触发main元素的BFC之后，效果立马出现了,一个两栏布局就这么妥妥的搞掂…</p>
+
+<p><strong>3.用于清除浮动，计算BFC高度.</strong></p>
+
+<p>因为上面第六个特性提到计算BFC高度时，浮动元素也会参与计算，我们先看一个例子：
+<iframe width="100%" height="300" src="http://jsfiddle.net/gothic/ZJvq3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>
+
+<p>我们发现由于里面两个子元素浮动的关系，两个box已经脱离了父元素的包含块，父元素高度已经塌陷，我们需要让父元素包含两个box子元素，这样计算高度时，两个浮动子元素就会参与，所以我们要闭合浮动，触发父元素的BFC，我们还是继续用overflow:hidden来看看效果吧：</p>
+
+<p><iframe width="100%" height="300" src="http://jsfiddle.net/gothic/N85MZ/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>
+
+<p>怎么样，效果还很明显的吗，当然清理(闭合)浮动还有很多方法，大家可以看看一丝大神写的那些年我们一起清除过的浮动。
+好了写到这里基本才不多了，BFC是个很奇怪的东西，她一直隐式的存在我们的css样式里，但是我们要记住BFC是页面元素里一个独立存在作用块，它不影响它外面的布局，外面的元素也不会影响到BFC里面的布局。</p>
+
+<p>参考文章：<a href="http://www.w3.org/TR/CSS2/visuren.html#block-formatting">http://www.w3.org/TR/CSS2/visuren.html#block-formatting</a>
+<a href="http://www.iyunlu.com/view/css-xhtml/55.html">http://www.iyunlu.com/view/css-xhtml/55.html</a>，<a href="http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html">http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p><script src="http://htmljs.b0.upaiyun.com//js/tuiku.js"></script>
+                </div>
+                <div class="entry-meta">
+                  <p>本站专栏文章皆为原创，转载请注明出处（带有 前端乱炖 字样）和本文的显式链接(<a href="http://www.html-js.com/article/1866">http://www.html-js.com/article/1866</a>)，本站和作者保留随时要求删除文章的权利！</p>
+                </div>
+              </div>
+            </article>
+            <div id="comment" class="comment module">
+              <div class="hd">评论</div>
+              <div class="bd">
+                <div class="publish">
+                  <textarea id="comment-text" placeholder="参与讨论。支持markdown语法" class="input-block-level"></textarea>
+                  <div id="comment-submit" class="btn comment-submit">发表评论</div>
+                </div>
+                <div class="comment-list">
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva1.sinaimg.cn/crop.0.0.480.480.50/843a64c8jw8egf8w9sdq6j20dc0dcdgo.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10919" class="value url fn">吃葡萄皮倒吐葡萄肉</a>
+                          <div class="hd-time">15天前</div></span>
+                        <div class="html">添加了一枚【评注】:margin box 是什么?,这个词在规范中(https://www.w3.org/TR/CSS21/visuren.html)只出现过两次,而且在float那一节</div>
+                      </div>
+                      <div class="time"><a data-nick="吃葡萄皮倒吐葡萄肉" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva1.sinaimg.cn/crop.0.0.480.480.50/843a64c8jw8egf8w9sdq6j20dc0dcdgo.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10919" class="value url fn">吃葡萄皮倒吐葡萄肉</a>
+                          <div class="hd-time">15天前</div></span>
+                        <div class="html">添加了一枚【评注】:补充:block, list-item, table这些产生块级元素(block elemet),只有参与BFC的块级元素才是块级盒(block-level box)
+</div>
+                      </div>
+                      <div class="time"><a data-nick="吃葡萄皮倒吐葡萄肉" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/1759647363/50/5677977291/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/4185" class="value url fn">十痞子十</a>
+                          <div class="hd-time">1个月前</div></span>
+                        <div class="html"><p>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。 这句话啥意思没看懂。。。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="十痞子十" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva2.sinaimg.cn/crop.0.0.1125.1125.50/82265980jw8f8zjjpbmftj20v90v9go0.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10836" class="value url fn">757上的加菲猫</a>
+                          <div class="hd-time">2个月前</div></span>
+                        <div class="html"><p>alert('shit');</p></div>
+                      </div>
+                      <div class="time"><a data-nick="757上的加菲猫" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva2.sinaimg.cn/crop.0.0.1125.1125.50/82265980jw8f8zjjpbmftj20v90v9go0.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10836" class="value url fn">757上的加菲猫</a>
+                          <div class="hd-time">2个月前</div></span>
+                        <div class="html">alert('shit');</div>
+                      </div>
+                      <div class="time"><a data-nick="757上的加菲猫" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva3.sinaimg.cn/crop.0.0.996.996.50/006qnmEFjw8f48qtvlf64j30ro0rp768.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10734" class="value url fn">Mr咯麦林炮手</a>
+                          <div class="hd-time">3个月前</div></span>
+                        <div class="html">添加了一枚【评注】:没有block吗？</div>
+                      </div>
+                      <div class="time"><a data-nick="Mr咯麦林炮手" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva3.sinaimg.cn/crop.0.0.996.996.50/006qnmEFjw8f48qtvlf64j30ro0rp768.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10734" class="value url fn">Mr咯麦林炮手</a>
+                          <div class="hd-time">3个月前</div></span>
+                        <div class="html">添加了一枚【评注】:没有block吗？</div>
+                      </div>
+                      <div class="time"><a data-nick="Mr咯麦林炮手" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva2.sinaimg.cn/crop.0.0.180.180.50/b85ee961jw1e8qgp5bmzyj2050050aa8.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10306" class="value url fn">bw_angle</a>
+                          <div class="hd-time">8个月前</div></span>
+                        <div class="html"><p>@<em>暮雨</em> 应该是box。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="bw_angle" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva3.sinaimg.cn/crop.0.0.640.640.50/898080fejw8emkptotx4fj20hs0hsglt.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/10084" class="value url fn">easyT1me</a>
+                          <div class="hd-time">10个月前</div></span>
+                        <div class="html"><p>学习学习~</p></div>
+                      </div>
+                      <div class="time"><a data-nick="easyT1me" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tva4.sinaimg.cn/crop.80.52.283.283.50/63739cabgw1ed4aqpnwgrj20c80cu761.jpg" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/9137" class="value url fn">---珠君---</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html"><p>why就是这是w3c定下的规范，就像ie的haslayout</p></div>
+                      </div>
+                      <div class="time"><a data-nick="---珠君---" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/5069168095/50/5729514523/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/8554" class="value url fn">用户jlzgqi88vd</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html">添加了一枚【评注】:概念上不是说inline-box会创建一个新的块级格式化上下文，此处应该要去掉inline-box</div>
+                      </div>
+                      <div class="time"><a data-nick="用户jlzgqi88vd" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp1.sinaimg.cn/1807024204/50/1295015083/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5290" class="value url fn">_暮雨_</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html">添加了一枚【评注】:boxes?</div>
+                      </div>
+                      <div class="time"><a data-nick="_暮雨_" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp2.sinaimg.cn/2566293917/50/22832908765/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5445" class="value url fn">magicdawn</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="magicdawn" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp2.sinaimg.cn/2566293917/50/22832908765/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5445" class="value url fn">magicdawn</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="magicdawn" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp2.sinaimg.cn/1995306965/50/40032490448/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/747" class="value url fn">要大胆的刘健爹</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>对于BFC特性的第三点：每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
+我的疑问是：左浮动的子元素不是碰到父元素的内容块（content box）的左边吗？</p></div>
+                      </div>
+                      <div class="time"><a data-nick="要大胆的刘健爹" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp1.sinaimg.cn/3762333524/50/40057430599/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7479" class="value url fn">Sibarone</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="Sibarone" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp1.sinaimg.cn/3266323272/50/5666746553/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7082" class="value url fn">fengtaijun</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>神文，谢谢楼主分享。不过，我有个问题对于第二例子，最终新的bfc远离他的父级bfc的边缘。创建bfc的块级元素应该还是属于父级的box，他在父级的位置反过来就不符合第二个特性，请问这如何解释呢？</p></div>
+                      </div>
+                      <div class="time"><a data-nick="fengtaijun" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp2.sinaimg.cn/1943775181/50/40069778290/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/3874" class="value url fn">JerryZou</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="JerryZou" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp2.sinaimg.cn/1908104385/50/5718087196/0" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7323" class="value url fn">Yawenina</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p><a href="/user/7127">@滨那个滨</a> BFC的高度包含浮动元素的高度。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="Yawenina" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/5430928827/50/5715525185/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7145" class="value url fn">日尧鑫</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p><a href="/user/7127">@滨那个滨</a> 根据BFC的布局规则：“计算BFC的高度时，浮动元素也参与计算”，触发这一规则，是父元素的高度回复。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="日尧鑫" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/2097396935/50/40066967801/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7127" class="value url fn">滨那个滨</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>最后一个例子，清除浮动跟BFC有什么关系，在文档中也没找到相关定义。个人觉得，那个只是float脱离了文档流而使父元素高度塌陷了而已，跟BFC应该没什么关系吧。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="滨那个滨" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/1763156287/50/40066799385/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/3180" class="value url fn">billfeller</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="billfeller" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/1750162715/50/5685418341/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5868" class="value url fn">有鱼飞过海</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="有鱼飞过海" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp3.sinaimg.cn/3263902582/50/5697883071/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/6037" class="value url fn">执笔续言</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>“inline-level box: display属性为inline, inline-block, inline-table的元素，会生成inline-level box。并且参与inline formatting context。”这句话有问题吧，inline-block不是应该是参与block formatting context吗？</p></div>
+                      </div>
+                      <div class="time"><a data-nick="执笔续言" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp1.sinaimg.cn/3282526992/50/0/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5966" class="value url fn">nadi</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>&#8220;BFC的区域不会与float box叠加&#8221;  这句话不能这样翻译  绝对定位的元素就创建了一个BFC, 但绝对定位的元素是可以和浮动元素叠加的</p></div>
+                      </div>
+                      <div class="time"><a data-nick="nadi" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp3.sinaimg.cn/2189705174/50/5622441463/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/5757" class="value url fn">xsmallbird</a>
+                          <div class="hd-time">2年前</div></span>
+                        <div class="html"><p>好文！！！</p></div>
+                      </div>
+                      <div class="time"><a data-nick="xsmallbird" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                </div>
+                <script id="comment-tpl" type="text/template">
+                  <div class="comment-item clearfix"><a class="headpic"><img src="{{user_headpic}}" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/{{user_id}}" class="value url fn">{{user_nick}}：</a></span>
+                        <div class="html">{{{html}}}</div>
+                      </div>
+                      <div class="time">{{createdAt}}<a data-nick="{{user_nick}}" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right"><!--<a target="_blank" href="http://www.oneapm.com/bi/feature.html?utm_source=htmljs&amp;utm_medium=billboard&amp;utm_term=bi&amp;utm_campaign=JulyTechAds&amp;from=maadfisejs" style="width:100%;display:block;margin-top:20px;" class="ad-blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1436597035936-4450bd15970bac6348a570d12c151324.png"></a>-->
+          <div style="padding:0;margin-top:20px;" class="module"><img src="http://htmljs.b0.upaiyun.com/uploads/1417158556053-%E6%9C%AA%E6%A0%87%E9%A2%98-5.png"></div>
+          <div class="writer-and-column clearfix">
+            <div class="writer module">
+              <div class="hd">WRITTEN BY</div>
+              <!--a.head-pic(href="/user/#{writer.id}")-->
+              <!--  img(src='#{writer.head_pic}')-->
+              <div class="info"><a href="/user/968" class="nick">哥特复兴</a>
+                <div class="desc">汪，汪汪</div><a href="http://weibo.cn/2175915602" target="_blank" class="weibo">TA的新浪微博</a>
+              </div>
+            </div>
+            <div class="column module">
+              <div class="hd">PUBLISHED IN</div>
+              <div class="info"><a href="/article/column/56" class="name">&lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt;</a>
+                <div class="desc"><p>&lt;svg&gt;&lt;script&gt;alert(/"我是蓝翔的"/)&lt;/script&gt;</p></div>
+                <div class="action"><a href="/article/column/1/rss" class="rssit btn small-btn"><i class="rss social"></i> 订阅</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="other-articles module">
+            <div class="hd">本专栏其他文章</div>
+            <div class="bd">
+              <div class="item"><a href="/article/2599">给你的网站换一个登录表单试试吧</a>
+                <div class="others"><span class="time">时间:2015-01-17</span><span class="visit_count">浏览:2639</span><span class="zan_count">赞:0</span></div>
+              </div>
+              <div class="item"><a href="/article/2566">CSS  奇淫技巧之固定宽高比</a>
+                <div class="others"><span class="time">时间:2015-01-06</span><span class="visit_count">浏览:7877</span><span class="zan_count">赞:1</span></div>
+              </div>
+              <div class="item"><a href="/article/2182">You Know Nothing About Code 【译】</a>
+                <div class="others"><span class="time">时间:2014-08-14</span><span class="visit_count">浏览:2325</span><span class="zan_count">赞:2</span></div>
+              </div>
+              <div class="item"><a href="/article/1866">CSS之BFC详解</a>
+                <div class="others"><span class="time">时间:2014-03-06</span><span class="visit_count">浏览:38507</span><span class="zan_count">赞:10</span></div>
+              </div>
+              <div class="item"><a href="/article/1832">【译】Less vs Sass? 是时候选择Sass了</a>
+                <div class="others"><span class="time">时间:2014-02-26</span><span class="visit_count">浏览:18167</span><span class="zan_count">赞:3</span></div>
+              </div>
+              <div class="item"><a href="/article/1744">css之position详解</a>
+                <div class="others"><span class="time">时间:2014-01-10</span><span class="visit_count">浏览:3941</span><span class="zan_count">赞:2</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-action module">
+            <div class="wrapper">
+              <div class="actions"><a href="javascript:void(0);" class="zan action"><i class="icon-thumbs-up"></i><em>赞</em> <span>10</span></a><span class="zanlogs"><a href="/user/5445" data-original-title="大四，求职中。Node.js ，前端。" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/2566293917/50/22832908765/1"></a><a href="/user/7479" data-original-title="你说我能找着实习嘛！" class="tooltip-trigger"><img data-original="http://tp1.sinaimg.cn/3762333524/50/40057430599/1"></a><a href="/user/3874" data-original-title="我喜欢前端的技术、喜欢研究不同的编程语言之间的联系与差异、最爱的编程语言是 javascript；而我的梦想是成为一名独立游戏开发者。" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/1943775181/50/40069778290/1"></a><a href="/user/3180" data-original-title="life is to live with yourself.-Weibo" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/1763156287/50/40066799385/1"></a><a href="/user/5868" data-original-title="电子产品爱好者，目标是有Geek范，深挖javascript中" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/1750162715/50/5685418341/1"></a><a href="/user/2940" data-original-title="前端爱好者" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/5269735661/50/0/1"></a><a href="/user/34" data-original-title="专注前端技术和关爱前端人员情感问题20年 http://www.html-js.com" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/1734409185/50/40022299601/1"></a><a href="/user/1666" data-original-title="在企鹅的手艺人，也为@viswow视觉生活 添砖加瓦。" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/1651115055/50/22864464474/1"></a><a href="/user/1465" data-original-title="web前端" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/1883664643/50/5610550103/1"></a></span>
+              </div>
+              <div class="actions"><a target="_blank" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%2Farticle%2F1866&amp;title=分享一篇@Gothic 的原创文章【CSS之BFC详解】来自@前端乱炖 专栏「&lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt;」 。前端乱炖是一个专业的前端知识原创内容社区&amp;pic=http://www.html-js.com/uploads/article_thumb/1866.png&amp;appkey=659341943" class="action"><i class="icon-new-window"></i><em style="background:none !important;float:none;display:inline;padding:0;" class="bds_more">分享到微博</em></a><a href="javascript:void(0);" class="add_fav action"><em>收藏</em> <span>6</span></a>
+              </div>
+            </div>
+          </div>
+          <div id="fixed-modules">
+            <div>
+              <script type="text/javascript">
+                /*250*250 创建于 2017/9/29*/
+                var cpro_id = "u3106647";
+              </script> 
+              <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+              
+            </div>
+            <!--a.ad-blank(target="_blank",href="https://coding.net/marketing/codeinsight?hmsr=http%3A%2F%2Fwww.html-js.com%2F&hmmd=%E5%9B%BE%E7%89%87%E5%B9%BF%E5%91%8A&hmpl=CodeInsight&hmkw=&hmci=",style="width:280px;height:120px;display:block;")-->
+            <!--  img(src="http://htmljs.b0.upaiyun.com/uploads/1425371986895-coding.png")-->
+          </div>
+        </div>
+      </div>
+      <p>
+        <script id="bdshare_js" data="type=tools&amp;uid=2555549" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        var bds_config={"bdText":"分享一篇@Gothic 的原创文章【CSS之BFC详解】来自@前端乱炖 专栏「&lt;svg&gt;&lt;script&gt;alert(/&quot;我是蓝翔的&quot;/)&lt;/script&gt;」 {{前端乱炖是国内最专业的前端知识原创内容社区}}","bdPic":"http://www.html-js.com/uploads/article_thumb/1866.png","snsKey":{'tsina':'659341943','tqq':'','t163':'','tsohu':''}}
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+      </p>
+      <script id="tip_tpl" type="text/template">
+        {{#tips}}
+          <li class="ng-scope single-comment pin-comment">
+            <div class="comment-body ng-binding" >{{content}}</div>
+            <div class="comment-meta">
+              <span class="author-name ng-binding">— {{user_nick}} </span>
+              <time class="create-time" >{{time}}</time>
+            </div>
+          </li>
+          {{/tips}}
+      </script>
+    </div>
+    <script src="http://htmljs.b0.upaiyun.com//js/mustache.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/messageTip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/loadingTip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/lazyload.js?12"></script>
+    <script>
+      $(window).scroll(function(){
+        if($(window).scrollTop()+$(window).height()>=$(".comment").offset().top){
+          $(".comment-layer").addClass("hidden")
+        }else{
+        $(".comment-layer").removeClass("hidden")
+        }
+        })
+      $(".comment-layer").click(function(){
+        $("html,body").animate({
+          scrollTop:$(".comment").offset().top-200
+          })
+        $(".comment textarea").focus()
+        })
+      var comment_tpl = $("#comment-tpl").html()
+      //- loadingTip.show("评论加载中")
+      //- $.ajax({
+      //-   url:"/comment/article_1866",
+      //-   type:"get",
+      //-   dataType:"json",
+      //-   success:function(data){
+      //-     loadingTip.hide("正在提交中")
+      //-       if(data.success){
+      //-       for(var i=0;i<data.comments.length;i++){
+      //-       var comment = data.comments[i]
+      //-         var html = Mustache.render(comment_tpl,comment);
+      //-         $(".comment-list").append(html)
+      //-         $(".reply").click(function(){
+      //-   $("#comment-text").val("@"+$(this).attr("data-nick")+" ").focus()
+      //-    $("#comment-text")[0].setSelectionRange($("#comment-text")[0].value.length, $("#comment-text")[0].value.length)
+      //-   })
+      //-       }
+      //-       }else{
+      //-       alert(data.info)
+      //-       }
+      
+      //-   }
+      //-   })
+      $(".headpic img").lazyload();
+      $(".tooltip-trigger img").lazyload();
+      $(".reply").click(function(){
+        $("#comment-text").val("@"+$(this).attr("data-nick")+" ").focus()
+         $("#comment-text")[0].setSelectionRange($("#comment-text")[0].value.length, $("#comment-text")[0].value.length)
+        })
+      $("#comment-submit").click(function(){
+        var text = $("#comment-text").val();
+        if(!text){
+          messageTip.show("请输入评论内容");
+        }else{
+          loadingTip.show("正在提交中")
+           HtmlJS.util.ajax("/comment/add",{
+              md:text,
+              target_id:"article_1866"
+           },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                $("#comment-text").val("")
+                var html = Mustache.render(comment_tpl,data.comment);
+                  $(".comment-list").prepend(html)
+                }else{
+                  alert(data.info)
+                }
+           },function(){
+           
+            },null,function(){
+            HtmlJS.util.ajax("/comment/add",{
+              md:text,
+              target_id:"article_1866"
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                $("#comment-text").val("")
+                var html = Mustache.render(comment_tpl,data.comment);
+                  $(".comment-list").prepend(html)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            
+          })
+          })
+        }
+        })
+        
+        $(".zan").click(function(){
+          var self = this;
+            HtmlJS.util.ajax("/article/1866/zan",{
+              score:$(self).attr("data-index")
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                
+                  messageTip.show("成功！")
+                    $("em",self).html("已赞")
+                    $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            HtmlJS.util.ajax("/article/1866/zan",{
+              score:$(self).attr("data-index")
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                  messageTip.show("成功！")
+                    $("em",self).html("已赞")
+                    $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            
+          })
+          })
+          })
+          $('.user').tooltip({
+          placement:"bottom"
+          });
+          $(".add_fav").click(function(){
+            var self=this;
+            HtmlJS.util.ajax("/user/fav",{
+              uuid:"dd21c9b5-c08f-44d1-9e6d-88e3f043ad80"
+            },"post",function(data){
+                loadingTip.hide()
+                if(data.success){
+                  messageTip.show("收藏成功！")
+                    $("em",self).html("已收藏")
+                     $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){},null,function(){
+                HtmlJS.util.ajax("/user/fav",{
+                  uuid:"dd21c9b5-c08f-44d1-9e6d-88e3f043ad80"
+                },"post",function(data){
+                    loadingTip.hide()
+                    if(data.success){
+                      messageTip.show("收藏成功！")
+                         $("em",self).html("已收藏")
+                          $("span",self).html($("span",self).html()*1+1)
+                    }else{
+                      alert(data.info)
+                    }
+                },function(){
+                })
+            })
+            });
+            $(document).ready(function(){
+                if($(window).width()>600){
+                  new Tip().init({
+                      selector:".post",
+                      url:"/tip/add",
+                      uuid:"1866"
+                  })
+                }
+                
+            })
+            
+    </script>
+    <div id="footer">
+      <div class="wrapper">
+        <div class="module">
+          <div style="font-size:12px;line-height:20px;">Power By NodeJS，本站所有代码的地址在<a href="https://github.com/xinyu198736/htmljs" target="_blank">这里</a>  浙ICP备12047043号  <a href="/friendlink">友情链接</a>  <a href="https://f2e.souche.com/blog" target="_blank">大搜车前端团队博客</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="coin-fixed"><span id="gotop"><i class="icon-airplane"></i></span><span class="my-favs"><i class="icon-heart"></i><a href="/user/fav"> 我的收藏      </a></span>
+    </div>
+    <script>
+      try{
+        $('.tooltip-trigger').tooltip({
+              placement:"bottom"
+              });
+      }catch(e){};
+      
+      
+      
+    </script>
+    <div class="hidden">
+      <script>
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2fc2fae0509f820259c1760fce28d7d2' type='text/javascript'%3E%3C/script%3E"));
+        
+      </script>
+    </div>
+  </body>
+</html>

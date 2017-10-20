@@ -1,0 +1,1279 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/freshlover/article/details/12132801"/> 
+
+    <script type="text/javascript">
+        var username = "freshlover";var _blogger = username;var blog_address = "http://blog.csdn.net/freshlover";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '12132801';var commentscount = 9; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=9;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.033">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="什么是CSS hack
+由于不同厂商的流览器或某浏览器的不同版本（如IE6-IE11,Firefox/Safari/Opera/Chrome等），对CSS的支持、解析不一样，导致在不同浏览器的环境中呈现出不一致的页面效果。这时，我们为了获得统一的页面效果，就需要针对不同的浏览器或不同版本写特定的CSS样式，我们把这个针对不同的浏览器/不同版本写相应的CSS code的过程，叫做CSS hack。" />
+    <meta name="keywords" content="CSS hack,IE条件注释" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>史上最全的CSS hack方式一览 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">史上最全的CSS hack方式一览</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2013年09月28日 15:57:08</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=CSS hack&t=blog" target="_blank">CSS hack</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=IE条件注释&t=blog" target="_blank">IE条件注释</a> <span>/</span></li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">152512</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<div class="blk">
+<p>做前端多年，虽然不是经常需要hack，但是我们经常会遇到各浏览器表现不一致的情况。基于此，某些情况我们会极不情愿的使用这个不太友好的方式来达到大家要求的页面表现。我个人是不太推荐使用hack的，要知道一名好的前端，要尽可能不使用hack的情况下实现需求，做到较好的用户体验。可是啊，现实太残酷，浏览器厂商之间历史遗留的问题让我们在目标需求下不得不向hack妥协，虽然这只是个别情况。今天，结合自己的经验和理解，做了几个demo把IE6~IE10和其他标准浏览器的CSS hack做一个总结，也许本文应该是目前最全面的hack总结了吧。</p>
+<h3>什么是CSS hack</h3>
+<p>由于不同厂商的流览器或某浏览器的不同版本（如IE6-IE11,Firefox/Safari/Opera/Chrome等），对CSS的支持、解析不一样，导致在不同浏览器的环境中呈现出不一致的页面展现效果。这时，我们为了获得统一的页面效果，就需要针对不同的浏览器或不同版本写特定的CSS样式，我们把这个针对不同的浏览器/不同版本写相应的CSS code的过程，叫做CSS hack!</p>
+<h3>CSS hack的原理</h3>
+<p>由于不同的浏览器和浏览器各版本对CSS的支持及解析结果不一样，以及CSS优先级对浏览器展现效果的影响，我们可以据此针对不同的浏览器情景来应用不同的CSS。</p>
+<h3>CSS hack分类</h3>
+<p>CSS Hack大致有3种表现形式，CSS属性前缀法、选择器前缀法以及IE条件注释法（即HTML头部引用if IE）Hack，实际项目中CSS Hack大部分是针对IE浏览器不同版本之间的表现差异而引入的。</p>
+<ul>
+<li>属性前缀法(即类内部Hack)：例如 IE6能识别下划线&quot;_&quot;和星号&quot; * &quot;，IE7能识别星号&quot; * &quot;，但不能识别下划线&quot;_&quot;，IE6~IE10都认识&quot;\9&quot;，但firefox前述三个都不能认识。</li><li>选择器前缀法(即选择器Hack)：例如 IE6能识别*html .class{}，IE7能识别*&#43;html .class{}或者*:first-child&#43;html .class{}。</li><li>IE条件注释法(即HTML条件注释Hack)：针对所有IE(注：IE10&#43;已经不再支持条件注释)： &lt;!--[if IE]&gt;IE浏览器显示的内容 &lt;![endif]--&gt;，针对IE6及以下版本： &lt;!--[if lt IE 6]&gt;只在IE6-显示的内容 &lt;![endif]--&gt;。这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都会生效。</li></ul>
+　　
+<p>CSS hack书写顺序，一般是将适用范围广、被识别能力强的CSS定义在前面。</p>
+<h3>CSS hack方式一：条件注释法</h3>
+　
+<p>这种方式是IE浏览器专有的Hack方式，微软官方推荐使用的hack方式。举例如下</p>
+<pre>	只在IE下生效
+	&lt;!--[if IE]&gt;
+	这段文字只在IE浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE6下生效
+	&lt;!--[if IE 6]&gt;
+	这段文字只在IE6浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE6以上版本生效
+	&lt;!--[if gte IE 6]&gt;
+	这段文字只在IE6以上(包括)版本IE浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE8上不生效
+	&lt;!--[if ! IE 8]&gt;
+	这段文字在非IE8浏览器显示
+	&lt;![endif]--&gt;
+	
+	非IE浏览器生效
+	&lt;!--[if !IE]&gt;
+	这段文字只在非IE浏览器显示
+	&lt;![endif]--&gt;
+</pre>
+<h3>CSS hack方式二：类内属性前缀法</h3>
+<p>属性前缀法是在CSS样式属性名前加上一些只有特定浏览器才能识别的hack前缀，以达到预期的页面展现效果。</p>
+<p>IE浏览器各版本 CSS hack 对照表</p>
+<table border="1" cellspacing="0">
+<tbody>
+<tr>
+<td>hack</td>
+<td>写法</td>
+<td>实例</td>
+<td>IE6(S)</td>
+<td>IE6(Q)</td>
+<td>IE7(S)</td>
+<td>IE7(Q)</td>
+<td>IE8(S)</td>
+<td>IE8(Q)</td>
+<td>IE9(S)</td>
+<td>IE9(Q)</td>
+<td>IE10(S)</td>
+<td>IE10(Q)</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*color</td>
+<td style="">青色</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+</tr>
+<tr>
+<td>&#43;</td>
+<td>&#43;color</td>
+<td style="">绿色</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-color</td>
+<td style="">黄色</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td>N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+</tr>
+<tr>
+<td>_</td>
+<td>_color</td>
+<td style="">蓝色</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+</tr>
+<tr>
+<td>#</td>
+<td>#color</td>
+<td style="">紫色</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>color:red\0</td>
+<td style="">红色</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+</tr>
+<tr>
+<td>\9\0</td>
+<td>color:red\9\0</td>
+<td style="color:#F0F\9\0">粉色</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+</tr>
+<tr>
+<td>!important</td>
+<td>color:blue !important;color:green;</td>
+<td style="color:#630!important; color:#000">棕色</td>
+<td class="unrender">N</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="unrender">N</td>
+<td class="render">Y</td>
+<td class="render">Y</td>
+</tr>
+</tbody>
+</table>
+<p>说明：在标准模式中</p>
+<ul>
+<li>“-″减号是IE6专有的hack</li><li>“\9″ IE6/IE7/IE8/IE9/IE10都生效</li><li>“\0″ IE8/IE9/IE10都生效，是IE8/9/10的hack</li><li>“\9\0″ 只对IE9/IE10生效，是IE9/10的hack</li></ul>
+<p>demo如下</p>
+<pre name="code" class="css">&lt;script type=&quot;text/javascript&quot;&gt;
+	//alert(document.compatMode);
+&lt;/script&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body:nth-of-type(1) .iehack{
+	color: #F00;/* 对Windows IE9/Firefox 7&#43;/Opera 10&#43;/所有Chrome/Safari的CSS hack ，选择器也适用几乎全部Mobile/Linux/Mac browser*/
+}
+.demo1,.demo2,.demo3,.demo4{
+	width:100px;
+	height:100px;
+}
+.hack{
+/*demo1 */
+/*demo1 注意顺序，否则IE6/7下可能无法正确显示，导致结果显示为白色背景*/
+	background-color:red; /* All browsers */
+	background-color:blue !important;/* All browsers but IE6 */
+	*background-color:black; /* IE6, IE7 */
+	&#43;background-color:yellow;/* IE6, IE7*/
+	background-color:gray\9; /* IE6, IE7, IE8, IE9, IE10 */
+	background-color:purple\0; /* IE8, IE9, IE10 */
+	background-color:orange\9\0;/*IE9, IE10*/
+	_background-color:green; /* Only works in IE6 */
+	*&#43;background-color:pink; /*  WARNING: Only works in IE7 ? Is it right? */
+}
+
+/*可以通过javascript检测IE10，然后给IE10的&lt;html&gt;标签加上class=”ie10″ 这个类 */
+.ie10 #hack{
+	color:red; /* Only works in IE10 */
+}
+
+/*demo2*/
+.iehack{
+/*该demo实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序
+IE6显示为：绿色，
+IE7显示为：黑色，
+IE8显示为：红色，
+IE9显示为：蓝色，
+Firefox/Chrome显示为：橘色，
+（本例IE10效果同IE9,Opera最新版效果同IE8）
+*/
+	background-color:orange;  /* all - for Firefox/Chrome */
+	background-color:red\0;  /* ie 8/9/10/Opera - for ie8/ie10/Opera */
+	background-color:blue\9\0;  /* ie 9/10 - for ie9/10 */
+	*background-color:black;  /* ie 6/7 - for ie7 */
+	_background-color:green;  /* ie 6 - for ie6 */
+}
+
+/*demo3
+实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序
+IE6显示为：红色，
+IE7显示为：蓝色，
+IE8显示为：绿色，
+IE9显示为：粉色，
+Firefox/Chrome显示为：橘色，
+（本例IE10效果同IE9，Opera最新版效果也同IE9为粉色）
+
+*/
+.element {
+	background-color:orange;	/* all IE/FF/CH/OP*/
+}
+.element {
+	*background-color: blue;    /* IE6&#43;7, doesn't work in IE8/9 as IE7 */
+}
+.element {
+	_background-color: red;     /* IE6 */
+}
+.element {
+	background-color: green\0; /* IE8&#43;9&#43;10  */
+}
+:root .element { background-color:pink\0; }  /* IE9&#43;10 */
+
+/*demo4*/
+/*
+
+该实例是用于区分标准模式下ie6~ie10和Opera/Firefox/Chrome的hack，本例特别要注意顺序
+IE6显示为：橘色，
+IE7显示为：粉色，
+IE8显示为：黄色，
+IE9显示为：紫色，
+IE10显示为：绿色，
+Firefox显示为：蓝色，
+Opera显示为：黑色，
+Safari/Chrome显示为：灰色，
+
+*/
+.hacktest{ 
+	background-color:blue;      /* 都识别，此处针对firefox */
+	background-color:red\9;      /*all ie*/
+	background-color:yellow\0;    /*for IE8/IE9/10 最新版opera也认识*/
+	&#43;background-color:pink;        /*for ie6/7*/
+	_background-color:orange;       /*for ie6*/
+}
+
+@media screen and (min-width:0){ 
+	.hacktest {background-color:black\0;}  /*opera*/
+} 
+@media screen and (min-width:0) { 
+    .hacktest { background-color:purple\9; }/*  for IE9/IE10  PS:国外有些习惯常写作\0，根本没考虑Opera也认识\0的实际 */
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+   .hacktest { background-color:green; } /* for IE10&#43; 此写法可以适配到高对比度和默认模式，故可覆盖所有ie10的模式 */
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){ .hacktest {background-color:gray;} }  /*for Chrome/Safari*/
+
+/* #963棕色 :root is for IE9/IE10, 优先级高于@media, 慎用！如果二者合用，必要时在@media样式加入 !important 才能区分IE9和IE10 */
+/*
+:root .hacktest { background-color:#963\9; } 
+*/
+&lt;/style&gt;
+</pre>
+<br>
+<br>
+<p></p>
+<p>demo1是测试不同IE浏览器下hack 的显示效果<br>
+IE6显示为：粉色，<br>
+IE7显示为：粉色，<br>
+IE8显示为：蓝色，<br>
+IE9显示为：蓝色，<br>
+Firefox/Chrome/Opera显示为：蓝色，<br>
+若去掉其中的!important属性定义，则IE6/7仍然是粉色，IE8是紫色，IE9/10为橙色，Firefox/Chrome变为红色，Opera是紫色。是不是有些奇怪：除了IE6以外，其他所有的表现都符合我们的期待。那为何IE6表现的颜色不是_background-color:green;的绿色而是*&#43;background-color:pink的粉色呢？其实是最后一句所谓的IE7私有hack惹的祸？不是说*&#43;是IE7的专有hack吗？？？错，你可能太粗心了！我们常说的IE7专有*&#43;hack的&#26684;式是*&#43;html
+ selector，而不是上面的直接在属性上加*&#43;前缀。如果是为IE7定制特殊样式，应该这样使用：</p>
+<pre>*&#43;html #ie7test { /* IE7 only*/
+	color:green;
+}
+</pre>
+<p>经过测试，我发现属性前缀*&#43;background-color:pink;只有IE6和IE7认识。而*&#43;html selector只有IE7认识。所以我们在使用时候一定要特别注意。</p>
+<p>demo2实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序<br>
+IE6显示为：绿色，<br>
+IE7显示为：黑色，<br>
+IE8显示为：红色，<br>
+IE9显示为：蓝色，<br>
+Firefox/Chrome显示为：橘色，<br>
+（本例IE10效果同IE9,Opera最新版效果同IE8）</p>
+<p>demo3实例也是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序<br>
+IE6显示为：红色，<br>
+IE7显示为：蓝色，<br>
+IE8显示为：绿色，<br>
+IE9显示为：粉色，<br>
+Firefox/Chrome显示为：橘色，<br>
+（本例IE10效果同IE9，Opera最新版效果也同IE9为粉色）</p>
+<p>demo4实例是用于区分标准模式下ie6~ie10和Opera/Firefox/Chrome的hack，本例特别要注意顺序<br>
+IE6显示为：橘色，<br>
+IE7显示为：粉色，<br>
+IE8显示为：黄色，<br>
+IE9显示为：紫色，<br>
+IE10显示为：绿色，<br>
+Firefox显示为：蓝色，<br>
+Opera显示为：黑色，<br>
+Safari/Chrome显示为：灰色，</p>
+<p align="center"><img src="http://img.blog.csdn.net/20130928192555546?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+<h3>CSS hack方式三：选择器前缀法</h3>
+<p>选择器前缀法是针对一些页面表现不一致或者需要特殊对待的浏览器，在CSS选择器前加上一些只有某些特定浏览器才能识别的前缀进行hack。</p>
+<p>目前最常见的是</p>
+<pre>*html *前缀只对IE6生效
+*&#43;html *&#43;前缀只对IE7生效
+@media screen\9{...}只对IE6/7生效
+@media \0screen {body { background: red; }}只对IE8有效
+@media \0screen\,screen\9{body { background: blue; }}只对IE6/7/8有效
+@media screen\0 {body { background: green; }} 只对IE8/9/10有效
+@media screen and (min-width:0\0) {body { background: gray; }} 只对IE9/10有效
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {body { background: orange; }} 只对IE10有效
+等等
+</pre>
+<p style="text-align:center; font-size:14px">结合CSS3的一些选择器，如html:first-child，body:nth-of-type(1)，衍生出更多的hack方式，具体的可以参考下表：</p>
+<p style="text-align:center"><img src="http://img.blog.csdn.net/20130928162104078?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+<h3>CSS3选择器结合JavaScript的Hack</h3>
+<p>我们用IE10进行举例：</p>
+<p>由于IE10用户代理字符串（UserAgent）为：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)，所以我们可以使用javascript将此属性添加到文档标签中，再运用CSS3基本选择器匹配。</p>
+<p>JavaScript代码:</p>
+<pre>	var htmlObj = document.documentElement;
+	htmlObj.setAttribute('data-useragent',navigator.userAgent);
+	htmlObj.setAttribute('data-platform', navigator.platform );
+</pre>
+<p>CSS3匹配代码：</p>
+<pre>html[data-useragent*='MSIE 10.0'] #id {
+	color: #F00;
+}
+</pre>
+<h3>CSS hack利弊</h3>
+<p>一般情况下，我们尽量避免使用CSS hack，但是有些情况为了顾及用户体验实现向下兼容，不得已才使用hack。比如由于IE8及以下版本不支持CSS3,而我们的项目页面使用了大量CSS3新属性在IE9/Firefox/Chrome下正常渲染，这种情况下如果不使用css3pie或htc或条件注释等方法时,可能就得让IE8-的专属hack出马了。使用hack虽然对页面表现的一致性有好处，但过多的滥用会造成html文档混乱不堪，增加管理和维护的负担。相信只要大家一起努力，少用、慎用hack，未来一定会促使浏览器厂商的标准越来越趋于统一，顺利过渡到标准浏览器的主流时代。抛弃那些陈旧的IE
+ hack，必将减轻我们编码的复杂度，少做无用功。</p>
+<p>最后补上一张引自国外某大牛总结的CSS hack表，这时一张6年前的旧知识汇总表了，放在这里仅供需要时候方便参考。</p>
+<p><img src="http://img.blog.csdn.net/20130928193301890?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="">
+<br>
+</p>
+<p>说明：本文测试环境为IE6~IE10，Chrome 29.0.1547.66 m，Firefox 20.0.1 ，Opera 12.02等。一边工作，一边总结，总结了几天写下整理好，今天把它分享出来，文中难免有纰漏，如大侠发现请及时告知！</p>
+<p>转载请注明来自CSDN freshlover的博客专栏《<a target="_blank" target="_blank" href="http://blog.csdn.net/freshlover/article/details/12132801">史上最全CSS Hack方式一览</a>》<br>
+</p>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>9</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/freshlover/comment/submit?id=12132801" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/albert528108/article/details/11925715"  target="_blank" strategy="BlogCommendFromBaidu_0">CSS Hack (各个浏览器兼容的问题)</a></h2>
+                    <div class="summary">
+                        写css样式的时候，恐怕最头疼的就是各个浏览器下的兼容性问题，即css hack，明明感觉应该是对的，但是就是出不来效果，我根据平时所接触的，总结一下关于兼容
+性的技巧，希望可以对大家有所帮助……
+C...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/albert528108" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/4/8/3/2_albert528108.jpg" alt="albert528108" title="albert528108"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/albert528108">albert528108</a></li>
+                        <li class="time">2013-09-23 11:54</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>8446</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/fuohua/article/details/75734851"  target="_blank" strategy="BlogCommendFromBaidu_1">2017年前端面试题最新汇总</a></h2>
+                    <div class="summary">
+                        我们开始：
+
+
+
+
+「 CSS篇 」
+
+
+
+
+
+
+
+1. CSS 盒子模型，绝对定位和相对定位
+
+
+
+
+2. 清除浮动，什么时候需要清除浮动，清除浮动都有哪些方法...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Fuohua" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/E/4/8/2_fuohua.jpg" alt="Fuohua" title="Fuohua"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Fuohua">Fuohua</a></li>
+                        <li class="time">2017-07-22 15:02</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>204</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/fuqinyijiu/article/details/41315123"  target="_blank" strategy="BlogCommendFromBaidu_2">HTML5触摸事件(touchstart、touchmove和touchend)</a></h2>
+                    <div class="summary">
+                        HTML5中新添加了很多事件，但是由于他们的兼容问题不是很理想，应用实战性不是太强，所以在这里基本省略，咱们只分享应用广泛兼容不错的事件，日后随着兼容情况提升以后再陆续添加分享。今天为大家介绍的事件主...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/fuqinyijiu" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/6/7/7/2_fuqinyijiu.jpg" alt="fuqinyijiu" title="fuqinyijiu"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/fuqinyijiu">fuqinyijiu</a></li>
+                        <li class="time">2014-11-20 16:18</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>140474</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/a6627651/article/details/12773213"  target="_blank" strategy="BlogCommendFromBaidu_3">4399面试总结</a></h2>
+                    <div class="summary">
+                        前几天参加了4399的笔试，我笔试的岗位是游戏开发工程师，笔试的内容对我来说是比较合适的，考察了C/C++语言基础、数据结构、算法分析（排序算法，效率分析等）、Linux知识、网络编程知识等。
+&#160; &#160;...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/a6627651" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/3/7/5/2_a6627651.jpg" alt="a6627651" title="a6627651"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/a6627651">a6627651</a></li>
+                        <li class="time">2013-10-16 10:22</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>13314</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/freshlover/article/details/11579669"  target="_blank" strategy="BlogCommendFromBaidu_4">盘点8种CSS实现垂直居中水平居中的绝对定位居中技术</a></h2>
+                    <div class="summary">
+                        我们经常用margin:0 auto来实现水平居中，而一直认为margin:auto不能实现垂直居中……实际上，实现垂直居中仅需要声明元素高度和下面的CSS:
+
+.Absolute-Center {
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/freshlover" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/6/4/0/2_freshlover.jpg" alt="freshlover" title="freshlover"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/freshlover">freshlover</a></li>
+                        <li class="time">2013-09-11 21:06</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>294037</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u013637066/article/details/76262683"  target="_blank" strategy="BlogCommendFromBaidu_5">web前端面试题-http协议</a></h2>
+                    <div class="summary">
+                        1.http全称：超文本协议传输
+2.http工作流程：首先客户机与服务器需要建立连接。只要单击某个超级链接，HTTP的工作开始。
+&#160;1.收线客户机与服务器需要建立连接，只要单击某个超级连接，http...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u013637066" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/C/9/C/2_u013637066.jpg" alt="u013637066" title="u013637066"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u013637066">u013637066</a></li>
+                        <li class="time">2017-07-28 15:32</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>111</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/wly_heart/article/details/25709281"  target="_blank" strategy="BlogCommendFromBaidu_6">请实现，鼠标点击页面中的任意标签，alert该标签的名称．（注意兼容性）</a></h2>
+                    <div class="summary">
+                        阻止JavaScript事件冒泡传递（cancelBubble 、stopPropagation） &#160;
+ &#160;
+ &#160;
+function doSomething (obj,evt) { &#160;&#160;
+va...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/wly_heart" target="_blank" strategy="BlogCommendFromBaidu_6"><img src="http://avatar.csdn.net/0/1/0/2_wly_heart.jpg" alt="wly_heart" title="wly_heart"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/wly_heart">wly_heart</a></li>
+                        <li class="time">2014-05-13 14:46</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1001</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/playboyanta123/article/details/48035987"  target="_blank" strategy="BlogCommendFromBaidu_7">IE系列兼容性hack大全</a></h2>
+                    <div class="summary">
+                        ie hack css 兼容
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/playboyanta123" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/4/A/7/2_playboyanta123.jpg" alt="playboyanta123" title="playboyanta123"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/playboyanta123">playboyanta123</a></li>
+                        <li class="time">2015-08-27 21:45</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1085</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/kongjiea/article/details/42641177"  target="_blank" strategy="BlogCommendFromBaidu_8">css hack全解，最齐全的ie css hack方式讲解</a></h2>
+                    <div class="summary">
+                        CSS hack分类
+
+CSS Hack大致有3种表现形式，CSS属性前缀法、选择器前缀法以及IE条件注释法（即HTML头部引用if IE）Hack，实际项目中CSS Hack大部分是针对IE浏览器不...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/kongjiea" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/1/0/B/2_kongjiea.jpg" alt="kongjiea" title="kongjiea"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/kongjiea">kongjiea</a></li>
+                        <li class="time">2015-01-12 13:23</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2493</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/freshlover/article/details/7610269"  target="_blank" strategy="BlogCommendFromBaidu_9">CSS3阴影 box-shadow的使用和技巧总结</a></h2>
+                    <div class="summary">
+                        text-shadow是给文本添加阴影效果，box-shadow是给元素块添加周边阴影效果。随着html5和CSS3的普及，这一特殊效果使用越来越普遍。
+基本语法是{box-shadow:[inse...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/freshlover" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/6/4/0/2_freshlover.jpg" alt="freshlover" title="freshlover"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/freshlover">freshlover</a></li>
+                        <li class="time">2012-05-28 18:58</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>596054</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/freshlover" target="_blank">
+                        <img src="http://avatar.csdn.net/6/4/0/1_freshlover.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/freshlover" target="_blank" id="uid">freshlover</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>120</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>605</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/freshlover" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/freshlover/article/details/50631016" target="_blank">MySQL触发器与定时器的介绍和错误处理</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/freshlover/article/details/50429384" target="_blank">Docker for Windows安装与Linux+PHP开发环境搭建（二）</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/freshlover/article/details/48055831" target="_blank">Docker for Windows安装与Linux+PHP开发环境搭建（一）</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/freshlover/article/details/46794405" target="_blank">PHP之Laravel框架使用问题汇总与解决方式</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+
+<!-- 请置于所有广告位代码之前 -->
+<script src="http://dup.baidustatic.com/js/dm.js"></script>
+           
+<!-- 广告位：PC端-博客详情页右侧视窗1（feed流）-300*250 -->
+<script>
+(function() {
+    var s = "_" + Math.random().toString(36).slice(2);
+    document.write('<div id="' + s + '"></div>');
+    (window.slotbydup=window.slotbydup || []).push({
+        id: '4770930',
+        container: s,
+        size: '300,250',
+        display: 'inlay-fix'
+    });
+})();
+</script>
+
+		    </div>
+        </div>
+
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/68?utm_source=wx2" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710200924553321.png" alt="用户画像系统应用与技术解析" title="用户画像系统应用与技术解析">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/68?utm_source=wx2" target="_blank">用户画像系统应用与技术解析</a></p>
+                      <p>讲师：汪剑</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/70?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710200910059870.jpg" alt="2017 求职面试集训营之VIP服务版" title="2017 求职面试集训营之VIP服务版">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/70?utm_source=blog7" target="_blank">2017 求职面试集训营之VIP服务版</a></p>
+                      <p>讲师：刘道宽</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/freshlover/article/details/11579669">盘点8种CSS实现垂直居中水平居中的绝对定位居中技术</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>293726</span></div>
+            </li>
+ 
+            <li>
+              <a href="/freshlover/article/details/44261229">Sublime Text 无法使用Package Control或插件安装失败的解决方法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>247459</span></div>
+            </li>
+ 
+            <li>
+              <a href="/freshlover/article/details/12132801">史上最全的CSS hack方式一览</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>152400</span></div>
+            </li>
+ 
+            <li>
+              <a href="/freshlover/article/details/42528643">移动端Web开发调试之Chrome远程调试(Remote Debugging)</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>144753</span></div>
+            </li>
+ 
+            <li>
+              <a href="/freshlover/article/details/17143341">CSS透明opacity和IE各版本透明度滤镜filter的最准确用法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>111792</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">69</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+                nowTime = {
+                  year: new Date().getFullYear(),
+                  month: parseInt(new Date().getMonth())+1,
+                  day: new Date().getDate(),
+                  hours: parseInt(new Date().getHours()),
+                  minutes: parseInt(new Date().getMinutes()),
+                  seconds: parseInt(new Date().getSeconds())
+                }
+                var data = {
+                    articleId: fileName,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+                    blogUser: username
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=2017.033"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.033"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

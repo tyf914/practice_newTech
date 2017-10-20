@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSS中position属性介绍(新增sticky) - 小狒 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=ChDk9h03-S75WEqNhGvXkWireJ5cCWdK1xRM9NIXfnM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/AnotherEon001/bundle-AnotherEon001.css?v=dNz80TfH9-81kuLR86t4JWgT2tb_J0B779DQM4kw0WU1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/AnotherEon001/bundle-AnotherEon001-mobile.css?v=e_QVfUeTMKJaQaYv1olAXHEIJXw3W1tp4SPxjnummuY1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/s1nker/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/s1nker/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/s1nker/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 's1nker', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=wUUQbLTt-LocHM-6RVSAUwAYdrfA1Lt3ool1ZdiICfI1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/s1nker/">sinker</a></h1>
+<div id="subtitle">sinker:即下沉球，又称为伸卡球。一种朝投球方向斜向下落的变化球，球速一般在85到95公里每小时。容易使击球者打出滚地球而出局。</div>
+</div>
+<div id="sub"><div id="blog_stats">
+<div class="BlogStats">随笔 - 11, 文章 - 0, 评论 - 1, 引用 - 0</div>
+</div></div>
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/s1nker/p/4835079.html">CSS中position属性介绍(新增sticky)</a>
+		</h2>
+		<div class="postbody">
+		<div id="cnblogs_post_body"><p>　　最近有点忘了position几个取值的内容，在这里简单总结一下。</p>
+<p>　　position的含义是指定位类型，取值类型可以有：static、relative、absolute、fixed、inherit和sticky，这里sticky是CSS3新发布的一个属性。</p>
+<p>1、position: static</p>
+<p>　　static(没有定位)是position的默认值，元素处于正常的文档流中，会忽略left、top、right、bottom和z-index属性。</p>
+<p>2、position: relative</p>
+<p>　　relative(相对定位)是指给元素设置相对于原本位置的定位，元素并不脱离文档流，因此元素原本的位置会被保留，其他的元素位置不会受到影响。</p>
+<p>3、position: absolute</p>
+<p>　　absolute(绝对定位)是指给元素设置绝对的定位，相对定位的对象可以分为两种情况：</p>
+<p>　　1) 设置了absolute的元素如果存在有祖先元素设置了position属性为relative或者absolute，则这时元素的定位对象为此已设置position属性的祖先元素。</p>
+<p>　　2) 如果并没有设置了position属性的祖先元素，则此时相对于body进行定位。</p>
+<p>4、position: fixed</p>
+<p>　　可以简单说fixed是特殊版的absolute，fixed元素总是相对于body定位的。</p>
+<p>5、inherit</p>
+<p>　　继承父元素的position属性，但需要注意的是<strong>IE8以及往前的版本都不支持inherit属性</strong>。</p>
+<p>　　在讲sticky之前，先上代码：</p>
+<p>　　html：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>Relative<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div-container div-container1"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div1"</span><span style="color: #0000ff;">&gt;</span>static1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div2"</span><span style="color: #0000ff;">&gt;</span>relative1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div3"</span><span style="color: #0000ff;">&gt;</span>static1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>Absolute<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div-container div-container2"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div1"</span><span style="color: #0000ff;">&gt;</span>static2<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div2"</span><span style="color: #0000ff;">&gt;</span>absolute2<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div3"</span><span style="color: #0000ff;">&gt;</span>static2<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>Relative contains Absolute<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div-container div-container3"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div1"</span><span style="color: #0000ff;">&gt;</span>static3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div2"</span><span style="color: #0000ff;">&gt;</span>absolute3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div3"</span><span style="color: #0000ff;">&gt;</span>static3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>Absolute contains Absolute<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h5</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div-container div-container4"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div1"</span><span style="color: #0000ff;">&gt;</span>static3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div2"</span><span style="color: #0000ff;">&gt;</span>absolute3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="div3"</span><span style="color: #0000ff;">&gt;</span>static3<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>　　具体div的定位属性可以看块中的文字，显示的效果如下，可以看到与上面讲的一致：</p>
+<p><br /><img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/735518/201509/735518-20150924133422522-89699064.png" alt="" /></p>
+<p>6、sticky</p>
+<p>　　position属性中最有意思的就是sticky了，设置了sticky的元素，在屏幕范围（viewport）时该元素的位置并不受到定位影响（设置是top、left等属性无效），当该元素的位置将要移出偏移范围时，定位又会变成fixed，根据设置的left、top等属性成固定位置的效果。</p>
+<p>　　可以知道sticky属性有以下几个特点：</p>
+<ul>
+<li>该元素并不脱离文档流，仍然保留元素原本在文档流中的位置。</li>
+<li>当元素在容器中被滚动超过指定的偏移值时，元素在容器内固定在指定位置。亦即如果你设置了top: 50px，那么在sticky元素到达距离相对定位的元素顶部50px的位置时固定，不再向上移动。</li>
+<li>元素固定的相对偏移是相对于离它最近的具有滚动框的祖先元素，如果祖先元素都不可以滚动，那么是相对于viewport来计算元素的偏移量</li>
+
+
+</ul>
+<p>　　比较蛋疼的是这个属性的兼容性还不是很好，目前仍是一个试验性的属性，并不是W3C推荐的标准。它之所以会出现，也是因为监听<code>scroll</code>事件来实现粘性布局使浏览器进入慢滚动的模式，这与浏览器想要通过硬件加速来提升滚动的体验是相悖的。</p>
+<p>　　具体情况可以看下图，基本上可以说这个属性使用的浏览器只有FireFox和iOS的Safari：</p>
+<p><img src="http://images2015.cnblogs.com/blog/735518/201509/735518-20150924124313631-198865771.png" alt="" /></p>
+<p>　　简单的说，要让sticky属性生效的条件有以下两点：</p>
+<ul>
+<li>一个是元素自身在文档流中的位置</li>
+<li>另一个是该元素的父容器的边缘</li>
+
+
+</ul>
+<p>　　第一点上面已经讲过了，如果设置了top: 50px，那么元素在达到距离顶部50px时才会发生定位，否则并不会发生定位。</p>
+<p>　　第二点则需要考虑父容器的高度情况：sticky元素在到达父容器的底部时，则不会再发生定位，如果父容器高度并没有比sticky元素高，那么sticky元素一开始就达到了底部，并不会有定位的效果。</p>
+<p>　　此外还有一点就是父元素的overflow属性，如果父元素的overflow属性并不是默认的visible属性，那么sticky元素则相对于该父元素定位。也就是如果要定位在顶部的话，此时这个效果就无效了。。。</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<p class="postfoot">
+			posted on <span id="post-date">2015-09-24 13:35</span> <a href='http://www.cnblogs.com/s1nker/'>小狒</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=4835079" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4835079);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=219831,cb_entryId=4835079,cb_blogApp=currentBlogApp,cb_blogUserGuid='76bb127c-40d2-e411-b908-9dcfd8948a71',cb_entryCreatedDate='2015/9/24 13:35:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+<li>
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+<li>
+<a id="blog_nav_myhome" class="two_words" href="http://www.cnblogs.com/s1nker/">首页</a></li>
+<li>
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li>
+<a id="blog_nav_contact" accesskey="9" class="two_words" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%B0%8F%E7%8B%92">联系</a></li>
+<li>
+<a id="blog_nav_rss" class="two_words" href="http://www.cnblogs.com/s1nker/rss">订阅</a>
+<a id="blog_nav_rss_image" href="http://www.cnblogs.com/s1nker/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+</li>
+<li>
+<a id="blog_nav_admin" class="two_words" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+<meta name="vs_showGrid" content="False">
+
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+
+<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/"><font face="Verdana">博客园</font></a>
+	<br />
+	Copyright &copy; 小狒
+</p>
+</div>
+</div>
+
+<!--PageEndHtml Block Begin-->
+<center>
+  <span>18 til I die.</span>
+</center>
+<!--PageEndHtml Block End-->
+</body>
+</html>

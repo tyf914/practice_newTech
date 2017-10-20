@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>【原】用css让一个容器水平垂直 - 咸鱼老弟 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=ChDk9h03-S75WEqNhGvXkWireJ5cCWdK1xRM9NIXfnM1"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/239339.css?v=2FoRw%2fJ%2ba%2fsEh8s9lMt%2fSUzLWy0%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/red_autumnal_leaves/bundle-red_autumnal_leaves-mobile.css?v=FDQ3BTKugHbrGR2Ofu_ZzeB_9jRgFlPHn6iF2gGlvLc1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/xianyulaodi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/xianyulaodi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/xianyulaodi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'xianyulaodi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=wUUQbLTt-LocHM-6RVSAUwAYdrfA1Lt3ool1ZdiICfI1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/xianyulaodi/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/xianyulaodi/">咸鱼老弟</a></h1>
+<h2>此博客不再更新，新博客地址：<a href="https://xianyulaodi.github.io" style="color:#f60;">https://xianyulaodi.github.io</a> ，欢迎来访</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/xianyulaodi/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%92%B8%E9%B1%BC%E8%80%81%E5%BC%9F">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/xianyulaodi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/xianyulaodi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 66&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 197</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/xianyulaodi/p/5863305.html">【原】用css让一个容器水平垂直</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>这种css布局平时用的比较多，也是面试题常出的一个题，网上一搜一大丢，不过还是想自己总结一下。</p>
+<p>这种方法比较多，本文只总结其中的几种，以便加深印象。</p>
+<p>&nbsp;</p>
+<p>效果图都为这个：</p>
+<p><img src="http://images2015.cnblogs.com/blog/776370/201609/776370-20160911233635479-7156758.png" alt="" /></p>
+<p>&nbsp;</p>
+<h2>方法一：position加margin</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre>/**html**/<br />&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">center</span><span style="color: #800000;">"</span>&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+<span style="color: #008000;">/*</span><span style="color: #008000;">*css*</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+.wrap {
+    width: 200px;
+    height: 200px;
+    background: yellow;
+    position: relative;
+}
+.wrap .center {
+    width: 100px;
+    height: 100px;
+    background: green;
+    margin: auto;
+    position: absolute;
+    left: </span><span style="color: #800080;">0</span><span style="color: #000000;">;
+    right: </span><span style="color: #800080;">0</span><span style="color: #000000;">;
+    top: </span><span style="color: #800080;">0</span><span style="color: #000000;">;
+    bottom: </span><span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<p>兼容性：主流浏览器均支持，IE6不支持</p>
+<p>&nbsp;</p>
+<h2>方法二： diaplay:table-cell</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #800000;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+     &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">css</span><span style="color: #008000;">*/</span><span style="color: #800000;">
+.wrap</span>{<span style="color: #ff0000;">
+    width</span>:<span style="color: #0000ff;"> 200px</span>;<span style="color: #ff0000;">
+    height</span>:<span style="color: #0000ff;"> 200px</span>;<span style="color: #ff0000;">
+    background</span>:<span style="color: #0000ff;"> yellow</span>;<span style="color: #ff0000;">
+    display</span>:<span style="color: #0000ff;"> table-cell</span>;<span style="color: #ff0000;">
+    vertical-align</span>:<span style="color: #0000ff;"> middle</span>;<span style="color: #ff0000;">
+    text-align</span>:<span style="color: #0000ff;"> center</span>;
+}<span style="color: #800000;">
+.center</span>{<span style="color: #ff0000;">
+    display</span>:<span style="color: #0000ff;"> inline-block</span>;<span style="color: #ff0000;">
+    vertical-align</span>:<span style="color: #0000ff;"> middle</span>;<span style="color: #ff0000;">
+    width</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    height</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    background</span>:<span style="color: #0000ff;"> green</span>;
+}</pre>
+</div>
+<p>&nbsp;兼容性：由于display:table-cell的原因，IE6\7不兼容</p>
+<p>&nbsp;</p>
+<h2>方法三：position加&nbsp;transform</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+	&lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+/* css */
+.wrap {
+	position: relative;
+    background: yellow;
+	width: 200px;
+	height: 200px;}
+
+.center {
+    position: absolute;
+    background: green;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    width: 100px;
+    height: 100px;
+}
+</pre>
+</div>
+<p>兼容性：ie9以下不支持&nbsp;transform，手机端表现的比较好。</p>
+<p>　　</p>
+<h2><strong>方法四：flex;</strong>align-items: center;justify-content: center</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre>&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+<span style="color: #008000;">/*</span><span style="color: #008000;"> css </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+.wrap {
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    display: flex; 
+    align</span>-<span style="color: #000000;">items: center; 
+    justify</span>-<span style="color: #000000;">content: center;
+}
+
+.center {
+    background: green;
+    width: 100px;
+    height: 100px;
+}</span></pre>
+</div>
+<p>&nbsp;移动端首选</p>
+<h2>方法五：display:flex;margin:auto</h2>
+<div class="cnblogs_code">
+<pre>&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+<span style="color: #008000;">/*</span><span style="color: #008000;"> css </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+.wrap {
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    display: flex; 
+}
+
+.center {
+    background: green;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}</span></pre>
+</div>
+<p>&nbsp;移动端首选</p>
+<p>&nbsp;</p>
+<h2>方法六：纯position</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+/* css */
+.wrap {
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+/**方法一**/
+.center {
+    background: green;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50px;
+    top: 50px;  
+　　
+}
+/**方法二**/
+.center {
+    background: green;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%; 
+　　margin-left:-50px; 
+　　margin-top:-50px;
+}</pre>
+</div>
+<p>　 兼容性：适用于所有浏览器</p>
+<p><span style="font-size: 15px;">&nbsp; &nbsp;方法六中的方法一计算公式如下：</span></p>
+<p>　　子元素（conter）的left值计算公式：left=(父元素的宽 - 子元素的宽 ) / 2=(200-100) / 2=50px;</p>
+<p>　　子元素（conter）的top值计算公式：top=(父元素的高&nbsp;- 子元素的高&nbsp;) / 2=(200-100) / 2=50px;</p>
+<p>&nbsp;</p>
+<p>　　方法二计算公式：</p>
+<p>　　left值固定为50%;</p>
+<p>　　子元素的margin-left= -（子元素的宽/2）=-100/2= -50px;</p>
+<p>　　top值也一样，固定为50%</p>
+<p>&nbsp; &nbsp; &nbsp;子元素的margin-top= -（子元素的高/2）=-100/2= -50px;</p>
+<p>　</p>
+<h2>方法七：兼容低版本浏览器，不固定宽高</h2>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">&lt;!-- html --&gt;
+&lt;div class="table"&gt;
+    &lt;div class="tableCell"&gt;
+        &lt;div class="content"&gt;不固定宽高，自适应&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+/*css*/
+.table {
+    height: 200px;/*高度值不能少*/
+    width: 200px;/*宽度值不能少*/
+    display: table;
+    position: relative;
+    float:left;
+    background: yellow;
+}       
+
+.tableCell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;         
+    *position: absolute;
+    padding: 10px;
+    *top: 50%;
+    *left: 50%;
+}
+.content {
+    *position:relative;
+    *top: -50%;
+    *left: -50%;
+     background: green;
+}
+</pre>
+</div>
+<p>　　</p>
+<p>　　　</p>
+<p>暂时总结上面的七种，这种方法太多，其实只要习惯了其中的一两种也就够用了。</p>
+<p>&nbsp;</p>
+<h2>总结</h2>
+<p>&nbsp;</p>
+<p>如果是<strong>移动端</strong>，那么用方法四和方法五是比较方便的。而且支持不固定宽高的情况，快、准、狠</p>
+<p>也就是用&nbsp;flex<strong>;&nbsp;</strong>align-items: center; justify-content: center;&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+/* css */
+.wrap {
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.center {
+    background: green;
+    width: 100px;
+    height: 100px;
+}
+</pre>
+</div>
+<p>或者 &nbsp;display:flex;margin:auto;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+/* css */
+.wrap {
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    display: flex; 
+}
+
+.center {
+    background: green;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+</pre>
+</div>
+<p>　　</p>
+<p>如果是<strong>PC端，要考虑兼容性的话</strong>。方法六是不错滴，也就是纯position。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #800000;">&lt;!-- html --&gt;
+&lt;div class="wrap"&gt;
+    &lt;div class="center"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+</span><span style="color: #008000;">/*</span><span style="color: #008000;"> css </span><span style="color: #008000;">*/</span><span style="color: #800000;">
+.wrap </span>{<span style="color: #ff0000;">
+    background</span>:<span style="color: #0000ff;"> yellow</span>;<span style="color: #ff0000;">
+    width</span>:<span style="color: #0000ff;"> 200px</span>;<span style="color: #ff0000;">
+    height</span>:<span style="color: #0000ff;"> 200px</span>;<span style="color: #ff0000;">
+    position</span>:<span style="color: #0000ff;"> relative</span>;
+}
+<span style="color: #008000;">/*</span><span style="color: #008000;">*方法一*</span><span style="color: #008000;">*/</span><span style="color: #800000;">
+.center </span>{<span style="color: #ff0000;">
+    background</span>:<span style="color: #0000ff;"> green</span>;<span style="color: #ff0000;">
+    position</span>:<span style="color: #0000ff;"> absolute</span>;<span style="color: #ff0000;">
+    width</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    height</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    left</span>:<span style="color: #0000ff;"> 50px</span>;<span style="color: #ff0000;">
+    top</span>:<span style="color: #0000ff;"> 50px</span>;  
+　　
+}
+<span style="color: #008000;">/*</span><span style="color: #008000;">*方法二*</span><span style="color: #008000;">*/</span><span style="color: #800000;">
+.center </span>{<span style="color: #ff0000;">
+    background</span>:<span style="color: #0000ff;"> green</span>;<span style="color: #ff0000;">
+    position</span>:<span style="color: #0000ff;"> absolute</span>;<span style="color: #ff0000;">
+    width</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    height</span>:<span style="color: #0000ff;"> 100px</span>;<span style="color: #ff0000;">
+    left</span>:<span style="color: #0000ff;"> 50%</span>;<span style="color: #ff0000;">
+    top</span>:<span style="color: #0000ff;"> 50%</span>;<span style="color: #ff0000;"> 
+　　margin-left</span>:<span style="color: #0000ff;">-50px</span>;<span style="color: #ff0000;"> 
+　　margin-top</span>:<span style="color: #0000ff;">-50px</span>;
+}　</pre>
+</div>
+<p>如果PC端的中间的元素<strong>高度不固定</strong>，那么就用方法七即可，代码就不复制了</p>
+<p>&nbsp;</p>
+<p>&nbsp;这种css元素垂直的如果真的要总结起来，应该有十几二十几种。不过也没必要全部掌握吧，只要大概了解一些，用起来没有副作用就行。</p>
+<p>有误之处，欢迎指出</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-09-13 17:10</span> <a href='http://www.cnblogs.com/xianyulaodi/'>咸鱼老弟</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=5863305" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5863305);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=239339,cb_entryId=5863305,cb_blogApp=currentBlogApp,cb_blogUserGuid='29bac201-5e16-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2016/9/13 17:10:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 咸鱼老弟
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<!-- JiaThis Button BEGIN f分享的js-->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0&amp;btn=r3.gif" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+<script language="javascript" type="text/javascript">
+//生成目录索引列表,目录锚点链接
+function GenerateContentList()
+{
+    var jquery_h3_list = $('#cnblogs_post_body h2');//如果你的章节标题不是h2,只需要将这里的h2换掉即可
+    if(jquery_h3_list.length>0)
+    {
+        var content = '<a name="_labelTop"></a>';
+        content    += '<div id="navCategory">';
+        content    += '<p style="font-size:18px"><b>阅读目录</b></p>';
+        content    += '<ul>';
+        for(var i =0;i<jquery_h3_list.length;i++)
+        {
+            var go_to_top = '<div style="text-align: right"><a href="#_labelTop">回到顶部</a><a name="_label' + i + '"></a></div>';
+            $(jquery_h3_list[i]).before(go_to_top);
+            var li_content = '<li><a href="#_label' + i + '">' + $(jquery_h3_list[i]).text() + '</a></li>';
+            content += li_content;
+        }
+        content    += '</ul>';
+        content    += '</div>';
+        if($('#cnblogs_post_body').length != 0 )
+        {
+            $($('#cnblogs_post_body')[0]).prepend(content);
+        }
+    }    
+}
+GenerateContentList();
+
+// 打赏红包
+$($('#cnblogs_post_body')[0]).append('<p style="padding-top:40px;">如果您觉得文章有用，可以打赏个咖啡钱</p><p ><img src="http://images2015.cnblogs.com/blog/776370/201609/776370-20160914124035805-437895007.png" alt="" /></p>');
+
+</script>
+<!--PageEndHtml Block End-->
+</body>
+</html>

@@ -6,6 +6,7 @@ const serve = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const views = require('koa-views');
 const hbs = require('handlebars');
+const superAgent = require('superagent');
 
 const app = new Koa();
 
@@ -33,8 +34,9 @@ app.use(bodyParser());
 app.use(require('./controller')());
 
 app.use(async (ctx, next) => {
+
    ctx.body = '<h1>404 Not Found</h1>'
 });
 
-app.listen(3000);
+app.listen(process.env.port || 3000);
 console.log('app started on port 3000...');

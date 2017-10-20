@@ -229,16 +229,16 @@
 
 
 10. **display的几种值**
-      > 1. inherit
-      > 2. none
-      > 3. inline&inline开头的
-      > 4. block
-      > 5. flex
-      > 6. ruby&ruby开头的
-      > 7. table&table开头的
-      > 8. list-item
-      > 9. run-in
-      > 10. compact
+    > 1. inherit
+    > 2. none
+    > 3. inline&inline开头的
+    > 4. block
+    > 5. flex
+    > 6. ruby&ruby开头的
+    > 7. table&table开头的
+    > 8. list-item
+    > 9. run-in
+    > 10. compact
 
 11. **响应式布局**
 
@@ -365,19 +365,19 @@
 
 10. **实现sum(2,3);sum(2,3,4);sum(2,3,4,5);sum里面的参数不确定；重新设计一下这个函数，让它直接拥有数组的方法**
 
-    > 答：
-    >
-    > 1.常规方法：
-    >
-    > ​	函数中循环arguments求和
-    >
-    > ​    高端方法：
-    >
-    > ​         用ES6的Array.from(arguments) 或rest，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
-    >
-    > 2.var arg = Array.prototype.slice.call(arguments);
-    >
-    > 一般用这个，实际上就是[伪数组转数组方法（原生4种）](http://www.cnblogs.com/NTWang/p/6280447.html)，这里我再添加一个方法`Object.setPrototypeOf(arguments, Array.prototype);`
+  > 答：
+  >
+  > 1.常规方法：
+  >
+  > ​	函数中循环arguments求和
+  >
+  > ​    高端方法：
+  >
+  > ​         用ES6的Array.from(arguments) 或rest，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
+  >
+  > 2.var arg = Array.prototype.slice.call(arguments);
+  >
+  > 一般用这个，实际上就是[伪数组转数组方法（原生4种）](http://www.cnblogs.com/NTWang/p/6280447.html)，这里我再添加一个方法`Object.setPrototypeOf(arguments, Array.prototype);`
 
 11. **各种文本框，复选框之类的值怎么获取**
 
@@ -576,31 +576,36 @@
    >      quickSort(left,i-1);
    >      quickSort(i+1,right);
    >    }
+   >    ```
+   >
+   >    ​
+   >
+   > 2. 选择排序
+   >
+   >    ```javascript
    >
    >    ```
    >
-   >
-   > ​
-   > 2. 选择排序
-   >
+   >    ​
    >
    > 3. 冒泡排序
    >
    >    ```javascript
-   >       //冒泡排序
-   >       function bubbleSort(arr) {
-   >           for(var i=0;i<arr.length-1;i++){
-   >               for(var j=0;j<arr.length-i;j++){
-   >                   if(arr[j]>arr[j+1]){
-   >                       temp=arr[j+1];
-   >                       arr[j+1]=arr[j];
-   >                       arr[j]=temp;
-   >                   }
-   >               }
-   >           }
-   >       }
+   >    //冒泡排序
+   >    function bubbleSort(arr) {
+   >      for(var i=0;i<arr.length-1;i++){
+   >        for(var j=0;j<arr.length-i;j++){
+   >          if(arr[j]>arr[j+1]){
+   >            temp=arr[j+1];
+   >            arr[j+1]=arr[j];
+   >            arr[j]=temp;
+   >          }
+   >        }
+   >      }
+   >    }
    >    ```
    >
+   >    ​
    >
    > 4. 桶排序
    >
@@ -624,6 +629,8 @@
    >        return arr;
    >    }
    >    ```
+   >
+   >
 
 2. **栈，队列，堆**
 
@@ -819,4 +826,5 @@
     [1]: http://www.nowcoder.com/discuss/7600
     [2]: http://www.nowcoder.com/discuss/5168
     [3]: https://mdluo.github.io/blog/about-front-end-interview/
-    [4]: https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers   （高端向，还没看先存着）
+    [4]: https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers   （高端向，还没看先存着）
+  

@@ -1,0 +1,803 @@
+<!DOCTYPE HTML>
+<html lang="zh-hans" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://www.w3cplus.com/sites/all/themes/w3cplusV2/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta content="CSS3 选择器——伪类选择器" about="/css3/pseudo-class-selector" property="dc:title" />
+<meta name="description" content="前面花了两节内容分别在《CSS3选择器——基本选择器》和《CSS3选择器——属性选择器》介绍了CSS3选择器中的基本选择器和属性选择器使用方法，今天要和大家一起学习CSS3选择器中的第三部分，也是最后一部分——伪类选择器。伪类选择器对于大家来说最熟悉的莫过于:link,:focus,:hover之类的了，因为这些在平时中是常用到的伪类选择器，那么先和大家一起简单总结一下CSS中常用的伪类选择器的使用方法，最后把重心放到CSS3新增加的&quot;:nth-child&quot;选择器的使用方法。 和前面一样，在开始之前先创建一个Dom:" />
+<meta name="keywords" content="前端,css3选择器, 伪类选择器, CSS选择器,教程" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="https://www.w3cplus.com/css3/pseudo-class-selector" />
+<link rel="shortlink" href="https://www.w3cplus.com/node/110" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta itemprop="name" content="W3cplus" />
+  <meta itemprop="image" content="//www.w3cplus.com/w3cplus-logo.jpg" />
+  <meta name="baidu-site-verification" content="ftyq813qEZgpw9nb" />
+  <meta name="applicable-device" content="pc,mobile" />
+  <title>CSS3 选择器——伪类选择器_css3选择器, 伪类选择器, CSS选择器 教程_w3cplus</title>
+  <link type="text/css" rel="stylesheet" href="https://www.w3cplus.com/sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.w3cplus.com/sites/default/files/css/css_hYCLW089C9S9sP3ZYkuG6R-Q5ZHbEhblZBFjwZ_bE_I.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.w3cplus.com/sites/default/files/css/css_rJUBdT2SlFgltMk5Co8MLf3X-CyFSvQlj5MDgaVsYZY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.w3cplus.com/sites/default/files/css/css_FjWdtfD_8xCqMqEyh4qy1A62uDPO85_OPMib7A_q1TM.css" media="all" />
+  <script type="text/javascript" src="https://www.w3cplus.com/sites/all/modules/contrib/respondjs/lib/respond.min.js?owox12"></script>
+<script type="text/javascript" src="https://www.w3cplus.com/sites/default/files/js/js_oCVMDTeSNt-_QxknevWyf6yO5OzmME3AhRz3ggZgNtg.js"></script>
+<script type="text/javascript" src="https://www.w3cplus.com/sites/default/files/js/js_DRdrb2tCPgWulBWFR9WDynUyFjHHZr2LpGZqMSx5sYo.js"></script>
+<script type="text/javascript" src="https://www.w3cplus.com/sites/default/files/js/js_aFpEO8xgepFmYR6MVDl2VWX8tfLcSmPIQGq5kCnaxRk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"w3cplusV2","theme_token":"aRYu1FtLHiicokgfLZewBz03lb4qfzX3qVeTjwS4PIc","js":{"0":1,"modules\/statistics\/statistics.js":1,"sites\/all\/modules\/contrib\/respondjs\/lib\/respond.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"public:\/\/languages\/zh-hans_Oq970VelHN9fa2F_FV03LgDp5jSIv3m9KbI0_jJ9cjM.js":1,"sites\/all\/modules\/contrib\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/contrib\/baidu_analytics\/baidu_analytics.js":1,"sites\/all\/modules\/contrib\/disqus\/disqus.js":1,"sites\/all\/themes\/w3cplusV2\/js\/highlight.pack.js":1,"sites\/all\/themes\/w3cplusV2\/js\/main.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ckeditor\/ckeditor.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/custom_search\/custom_search.css":1,"sites\/all\/themes\/w3cplusV2\/css\/style.css":1}},"custom_search":{"form_target":"_self","solr":0},"baidu_analytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"},"disqus":{"domain":"w3cplus","url":"https:\/\/www.w3cplus.com\/css3\/pseudo-class-selector","title":"CSS3 \u9009\u62e9\u5668\u2014\u2014\u4f2a\u7c7b\u9009\u62e9\u5668","identifier":"node\/110","developer":1,"language":"zh-hans"},"statistics":{"data":{"nid":"110"},"url":"\/modules\/statistics\/statistics.php"}});
+//--><!]]>
+</script>
+<!-- w3cplus.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?177319b798978621f83845b12c86fa29";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body class="html not-front not-logged-in one-sidebar sidebar-second page-node page-node- page-node-110 node-type-blog featured" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">跳转到主要内容</a>
+  </div>
+    <div id="header" role="header">
+  <div class="container">
+    <h1 id="logo">
+      <a href="/" title="记述前端那些事,引领web前沿,打造精品css3教程" id="site_name">w3cplus</a>
+    </h1>
+    <div class="toggle-topbar menu-icon" id="pull">
+      <a href="#"><span>Menu</span></a>
+    </div>
+    <div class="toogle-topbar-content" id="pull-menu">
+              <ul class="menu clearfix"><li class="first leaf"><a href="/CSS3" title="">CSS3</a></li>
+<li class="leaf"><a href="/JavaScript" title="JavaScript">JavaScript</a></li>
+<li class="leaf"><a href="/blog/react" title="React">React</a></li>
+<li class="leaf"><a href="/blog/vue" title="Vue">Vue</a></li>
+<li class="leaf"><a href="/mobile" title="">Mobile</a></li>
+<li class="leaf"><a href="/blog/tags/302.html" title="Sass教程">Sass</a></li>
+<li class="leaf"><a href="/blog/translations" title="译文">译文</a></li>
+<li class="leaf"><a href="/blog/tags/411.html" title="SVG">SVG</a></li>
+<li class="leaf"><a href="http://fe.apelearn.com/?utm_source=w3cplus&amp;utm_medium=banner&amp;utm_campaign=w3cplus" title="视频教程">视频教程</a></li>
+<li class="leaf"><a href="/tags" title="标签云">标签云</a></li>
+<li class="last leaf"><a href="/rss.xml" title="RSS">RSS</a></li>
+</ul>        <!-- /#main-menu -->
+          </div>
+  </div>
+</div>
+
+  <div id="branding" role="branding">
+    <div class="container">
+        <div class="region region-branding">
+    <div id="block-block-44" class="block block-block">
+
+    
+  <div class="content">
+    <div class="ct-ad-article-wrapper" id="content-ad1" style="margin:0;padding:0;">
+  <div class="ct-ad-article">
+    <div class="bsap">
+     <a href="https://ke.qq.com/course/222222#tuin=d45b558e" target="_blank">
+      <img src="/sites/default/files/blogs/2017/1707/yideng.png">
+     </a>
+    </div>
+  </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div> 
+
+<div id="page" role="page">
+  <div class="container">
+    
+    <div class="col-main">
+      <div class="main-wrap">
+        
+                    <div class="region region-featured">
+    <div id="block-block-50" class="block block-block">
+
+    
+  <div class="content">
+    <div class="ct-ad-article-wrapper" id="content-ad1">
+  <div class="ct-ad-article">
+    <div class="bsap">
+     <a href="http://web.tanzhouedu.com/index/keCourse.html?from=w3cplus" target="_blank">
+      <img src="/sites/default/files/blogs/2017/1707/dwad960-90.png">
+     </a>
+    </div>
+  </div>
+</div>  </div>
+</div>
+  </div>
+                
+        <div class="page-inner">
+                      <div id="breadcrumb" role="breadcrumb">
+              <h2 class="element-invisible">你在这里</h2><div class="breadcrumb"><a href="/">首页</a> » <a href="/blog">博客</a> » <a href="/blogs/airen">Airen的博客</a></div>            </div>
+          
+          
+          <a id="main-content"></a>
+                                <h1 class="title" id="page-title">
+              CSS3 选择器——伪类选择器            </h1>
+          
+                    
+                                <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-110" class="node node-blog node-promoted node-full clearfix" about="/css3/pseudo-class-selector" typeof="sioc:Post sioct:BlogPost">
+  
+  <div class="node-header">
+              <div class="submitted">
+          作者：<span>大漠</span>          日期：<span>2011-08-12</span>          点击：<span>103137</span>        </div>
+            <div class="tags">
+        <div class="field field-name-field-blog-tag field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/blog/tags/127.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">css3选择器</a></div><div class="field-item odd"><a href="/blog/tags/97.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">伪类选择器</a></div><div class="field-item even"><a href="/blog/tags/288.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">CSS选择器</a></div></div></div>      </div>
+  </div>
+
+      <div id="node-top" class="node-top">
+      <div id="block-block-38" class="block block-block">
+
+    
+  <div class="content">
+    <div class="ct-ad-article-wrapper" id="content-ad">
+  <div class="ct-ad-article">
+    <div class="bsap">
+     <a href="http://www.miaov.com/" target="_blank">
+      <img src="/sites/default/files/blogs/2017/1707/miaowei.jpg" width=960 height=90 />
+     </a>
+    </div>
+  </div>
+</div>
+<div>
+<blockquote>
+<p>编辑推荐： <a href="//juejin.im?utm_source=w3cplus&utm_medium=word&utm_campaign=q1_website" target="_blank">掘金</a>是一个高质量的技术社区，从 CSS 到 Vue.js，性能优化到开源类库，让你不错过前端开发的每一个技术干货。 <a href="//juejin.im?utm_source=w3cplus&utm_medium=word&utm_campaign=q1_website" target="_blank">点击链接</a>查看最新前端内容，或到各大应用市场搜索「 <a href="//juejin.im?utm_source=w3cplus&utm_medium=word&utm_campaign=q1_website" target="_blank">掘金</a>」下载APP，技术干货尽在掌握中。</p>
+</blockquote>
+</div>
+  </div>
+</div>
+    </div>
+  
+  <div class="body-content clearfix">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>前面花了两节内容分别在《<a href="http://www.w3cplus.com/css3/basic-selectors" target="_blank">CSS3选择器——基本选择器</a>》和《<a href="http://www.w3cplus.com/css3/attribute-selectors" target="_blank">CSS3选择器——属性选择器</a>》介绍了<a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS3选择器</a>中的基本选择器和属性选择器使用方法，今天要和大家一起学习<a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS3选择器</a>中的第三部分，也是最后一部分——伪类选择器。伪类选择器对于大家来说最熟悉的莫过于:link,:focus,:hover之类的了，因为这些在平时中是常用到的伪类选择器，那么先和大家一起简单总结一下CSS中常用的伪类选择器的使用方法，最后把重心放到CSS3新增加的":nth-child"选择器的使用方法。</p>
+<p>和前面一样，在开始之前先创建一个Dom:</p>
+<pre>
+&lt;div class="demo clearfix"&gt;
+  &lt;ul class="clearfix"&gt;
+	&lt;li class="first links odd" id="first"&gt;&lt;a href=""&gt;1&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links even"&gt;&lt;a href=""&gt;2&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links odd"&gt;&lt;a href=""&gt;3&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links even"&gt;&lt;a href=""&gt;4&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links odd"&gt;&lt;a href=""&gt;5&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links even"&gt;&lt;a href=""&gt;6&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links odd"&gt;&lt;a href=""&gt;7&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links even"&gt;&lt;a href=""&gt;8&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links odd"&gt;&lt;a href=""&gt;9&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="links even last" id="last"&gt;&lt;a href=""&gt;10&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+		</pre>
+<p>同样先加上一些样式，让他看起来好看一点</p>
+<pre>
+			.demo {
+				width: 300px;
+				border: 1px solid #ccc;
+				padding: 10px;			
+			}
+			.demo li {
+				border: 1px solid #ccc;
+				padding: 2px;
+				float: left;
+				margin-right:4px;
+			}
+		 	.demo a {
+				float: left;
+				display: block;
+				height: 20px;
+				line-height: 20px;
+				width: 20px;
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border-radius: 10px;
+				text-align: center;
+				background: #f36;
+				color: green;
+				text-decoration: none;
+			}
+		</pre>
+<p>最出效果：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-pausse1.png" /></p>
+<p>CSS的伪类语法和别的语法有点不一样，其主要有两种语法表达方式</p>
+<pre>
+			E:pseudo-class {property:value}/*其中E为元素;pseudo-class为伪类名称;property是css的属性;value为css的属性值*/
+		</pre>
+<p>示例：</p>
+<pre>
+			a:link {color:red;}
+		</pre>
+<p>第二种写法</p>
+<pre>
+			E.class:pseudo-class{property:value}
+		</pre>
+<p>如：</p>
+<pre>
+			a.selected:hover {color: blue;}
+		</pre>
+<p>下面开始我们一起来看看这些伪类的具体应用：</p>
+<h4>
+	一、动态伪类</h4>
+<p>动态伪类，因为这些伪类并不存在于HTML中,而只有当用户和网站交互的时候才能体现出来，动态伪类包含两种，第一种是我们在链接中常看到的锚点伪类，如":link",":visited";另外一种被称作用户行为伪类，如“:hover”,":active"和":focus"。先来看最常见的锚点伪类</p>
+<pre>
+			.demo a:link {color:gray;}/*链接没有被访问时前景色为灰色*/
+			.demo a:visited{color:yellow;}/*链接被访问过后前景色为黄色*/
+			.demo a:hover{color:green;}/*鼠标悬浮在链接上时前景色为绿色*/
+			.demo a:active{color:blue;}/*鼠标点中激活链接那一下前景色为蓝色*/
+		</pre>
+<p>对于这四个锚点伪类的设置，有一点需要特别注意，那就是他们的先后顺序，要让他们遵守一个<strong style="color:red;">爱恨原则LoVe/HAte,也就是Link--visited--hover--active</strong>。如果你把顺序搞错了会给你带来意想不到的错误，大家对于这个应该很熟悉的，如果是初学的朋友，可以私下练习一下。其中:hover和:active又同时被列入到用户行为伪类中，他们所表达的意思是：</p>
+<ol><li>
+		<strong>:hover</strong>用于当用户把鼠标移动到元素上面时的效果；</li>
+	<li>
+		<strong>:active</strong>用于用户点击元素那一下的效果（正发生在点的那一下，松开鼠标左键此动作也就完成了）</li>
+	<li>
+		<strong>:focus</strong>用于元素成为焦点，这个经常用在表单元素上。</li>
+</ol><p>本站的button就采用了这几处效果：</p>
+<pre>
+			.form-submit {
+			    -moz-transition: border-color 0.218s ease 0s;
+					-webkit-transition: border-color 0.218s ease 0s;
+					-o-transition: border-color 0.218s ease 0s;
+					-ms-transition: border-color 0.218s ease 0s;
+					transition: border-color 0.218s ease 0s;
+			    background: none repeat scroll 0 0 #F5F5F5;
+			    border: 1px solid #DCDCDC;
+					-moz-border-radius: 2px 2px 2px 2px;
+					-webkit-border-radius: 2px 2px 2px 2px;
+			    border-radius: 2px 2px 2px 2px;
+			    color: #333333;
+			    font: 11px/27px arial,sans-serif;
+			    height: 27px;
+			    padding: 0 8px;
+			    text-align: center;
+			    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+			}
+			.form-submit:hover {
+			    background-color: #F8F8F8;
+			    border-color: #C6C6C6;
+					-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+					-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+			    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+			    color: #333333;
+			}
+			.form-submit:active {
+			    border-color: #4D90FE;
+					-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+					-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+			    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+			    color: #000000;
+			}
+			.form-submit:focus {
+			    border: 1px solid #4D90FE !important;
+			}
+		</pre>
+<p>你可以点击<a href="http://www.w3cplus.com/contact" target="_blank">这里</a>体验一下这种效果。</p>
+<p><strong style="color:red;">对于:hover在IE6下只有a元素支持，:active只有IE7-6不支持，:focus在IE6-7下不被支持。</strong></p>
+<h4>
+	二、UI元素状态伪类</h4>
+<p>我们把":enabled",":disabled",":checked"伪类称为UI元素状态伪类，这些主要是针对于HTML中的Form元素操作，最常见的比如我们"type="text"有enable和disabled两种状态，前者为可写状态后者为不可状态；另外"type="radio"和"type="checkbox""有"checked"和"unchecked"两种状态。来看两个实例，比如说你想将"disabled"的文本框与别的文本框区别出来，你就可以这样应用</p>
+<pre>
+			input[type="text"]:disabled {border:1px solid #999;background-color: #fefefe;}
+		</pre>
+<p>这样一来就把页面中禁用的文本框应用了一个不同的样式。那么对于其他几个用法是一样的，这里就不在讲述。<strong style="color:red;">IE6-8不支持":checked",":enabled",":disabled"这三种选择器。</strong></p>
+<h4>
+	三、CSS3的:nth选择器</h4>
+<p>这节内容才是关键，也是CSS3选择器最新部分，有人也称这种选择器为CSS3结构类，下面我们通过实际的应用来具体了解他们的使用和区别，首先列出他具有的选择方法：</p>
+<ol><li>
+		<strong>:first-child</strong>选择某个元素的第一个子元素；</li>
+	<li>
+		<strong>:last-child</strong>选择某个元素的最后一个子元素；</li>
+	<li>
+		<strong>:nth-child()</strong>选择某个元素的一个或多个特定的子元素；</li>
+	<li>
+		<strong>:nth-last-child()</strong>选择某个元素的一个或多个特定的子元素，从这个元素的最后一个子元素开始算；</li>
+	<li>
+		<strong>:nth-of-type()</strong>选择指定的元素；</li>
+	<li>
+		<strong>:nth-last-of-type()</strong>选择指定的元素，从元素的最后一个开始计算；</li>
+	<li>
+		<strong>:first-of-type</strong>选择一个上级元素下的第一个同类子元素；</li>
+	<li>
+		<strong>:last-of-type</strong>选择一个上级元素的最后一个同类子元素；</li>
+	<li>
+		<strong>:only-child</strong>选择的元素是它的父元素的唯一一个了元素；</li>
+	<li>
+		<strong>:only-of-type</strong>选择一个元素是它的上级元素的唯一一个相同类型的子元素；</li>
+	<li>
+		<strong>:empty</strong>选择的元素里面没有任何内容。</li>
+</ol><p>下面我们针对上面所列的各种选择器，一个一个来介绍：</p>
+<p><strong>1、:first-child</strong></p>
+<p>:first-child是用来选择某个元素的第一个子元素，比如我们这里的这个demo，你想让列表中的"1"具有与从不同的样式，我们就可以使用:first-child来实现：</p>
+<pre>
+			.demo li:first-child {background: green; border: 1px dotted blue;}
+		</pre>
+<p>在没有这个选择器出现之前，我们都需在要第一个li上加上一个不同的class名，比如说“first”，然后在给他应用不同的样式</p>
+<pre>
+			.demo li.first {background: green; border: 1px dotted blue;}
+		</pre>
+<p>其实这两种最终效果是一样的，只是后面这种，我们需要在html增加一个额外的class名，请看效果：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth1.png" /></p>
+<p><strong style="color:red;">IE6不支持:first-child选择器。</strong></p>
+<p><strong>2、:last-child</strong></p>
+<p>:last-child选择器与:first-child选择器的作用类似，不同的是":last-child"选择是的元素的最后一个子元素。比如说，我们需要单独给列表最后一项一个不同的样式，我们就可以使用这个选择器，如：</p>
+<pre>
+			.demo li:last-child {background: green; border: 2px dotted blue;}
+		</pre>
+<p>这个效果和以前在列表上的“last”的class是一样的</p>
+<pre>
+			.demo li.last {background: green; border: 2px dotted blue;}
+		</pre>
+<p>他们效显示的效果都是一致的，如图所示；</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth2.png" /></p>
+<p><strong>3、:nth-child()</strong></p>
+<p>:nth-child()可以选择某个的一个或多个特定的子元素，你可以按这种方式进行选择：</p>
+<pre>
+			:nth-child(length);/*参数是具体数字*/
+			:nth-child(n);/*参数是n,n从0开始计算*/
+			:nth-child(n*length)/*n的倍数选择，n从0开始算*/
+			:nth-child(n+length);/*选择大于length后面的元素*/
+			:nth-child(-n+length)/*选择小于length前面的元素*/
+			:nth-child(n*length+1);/*表示隔几选一*/
+			//上面length为整数
+		</pre>
+<p>:nth-child()可以定义他的值（值可以是整数，也可以是表达式），如上面所示，用来选择特定的子元素，对于这个我们直接看实例，比我说的更好理解。</p>
+<p><strong>:nth-child(3)</strong>,选择某元素下的第三个子元素，（这里的3可以是你自己需要的数字），比如说，我需要选择列表中的第三个li元素，那么我们可以直接这样使用：</p>
+<pre>
+			.demo li:nth-child(3) {background: lime;}
+		</pre>
+<p>效果如下所示：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth3.png" /></p>
+<p><strong style="color:red;">这种不式不能引用负值，也就是说li:nth-child(-3)是不正确的使用方法。</strong></p>
+<p><strong>:nth-child(n)</strong>，其中n是一个简单的表达式，那么"n"取值是从“0”开始计算的，到什么时候结束我也不知道，如果你在实际应用中直接这样使用的话，将会选中所有子元素，比如说，在我们的demo中，你在li中使用":nth-child(n)",那么将选中所有的"li",如：</p>
+<pre>
+			.demo li:nth-child(n) {background: lime;} 
+			等于
+			.demo li {background: lime;}
+		</pre>
+<p>他其实是这样计算的</p>
+<pre>
+			n=0 －－》 没有选择元素
+			n=1 －－》 选择第一个li,
+			n=2 －－》 选择第二个li,后在的依此类推，这样下来就选中了所有的li
+		</pre>
+<p>请看效果：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth4.png" /></p>
+<p><strong style="color:red;">请注意了，这里的“n”只能是"n"，不能使用其他字母代替，不然会没有任何效果的。</strong></p>
+<p><strong>:nth-child(2n)</strong>,这中方式是前一种的变身，我们可以选择n的2倍数，当然其中“2”可以换成你自己需要的数字，如：</p>
+<pre>
+			.demo li:nth-child(2n) {background: lime;}
+			等于
+			.demo li:nth-child(even) {background: lime;}
+		</pre>
+<p>我们来看一下其计算的过程：</p>
+<pre>
+			n=0 －－》 2n=0 －－》 没有选中任何元素，
+			n=1 －－》 2n=2 －－》 选择了第二个li
+			n=2 －－》 2n＝4 －－》 选择了第四个li，后面的依此类推
+		</pre>
+<p>如果是“2n”这样跟我们以使用"even"命名class定义样式，所起到的效果是一样的，如图所示：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth5.png" /></p>
+<p><strong style="color:red;">“:nth-child(2n)”也等于":nth-child(even)"效果。</strong></p>
+<p><strong>:nth-child(2n-1)</strong>,这个选择器是在":nth-child(2n)"基础上演变过来的，上面说了人是选择偶数，那么我们在他的基础上减去“1”就变成奇数选择，如：</p>
+<pre>
+			.demo li:nth-child(2n-1) {background: lime;}
+		</pre>
+<p>我们来看看其实现过程</p>
+<pre>
+			n=0 －－》 2n-1=-1 －－》 也没有选中任何元素，
+			n=1 －－》 2n-1=1 －－》 选择第一个li
+			n=2 －－》 2n-1=3 －－》 选择第三个li,后面的依此类推
+		</pre>
+<p>其实实现这种奇数效果，我们还可以使用":nth-child(2n+1)"和":nth-child(odd)",一起来看他们的效果</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth6.png" /></p>
+<p><strong>:nth-child(n+5)</strong>这个选择器是选择从第五个元素开始选择，这里的数字你可以自己定义，如：</p>
+<pre>
+			.demo li:nth-child(n+5) {background: lime;}
+		</pre>
+<p>按前面的计算方法，我们来看看，</p>
+<pre>
+			n=0 －－》 n+5=5 －－》  选中第5个li
+			n=1 －－》 n+5=6 －－》  选择第6个li，后面的就不列出来了，原理一样
+		</pre>
+<p>你可以使用这种方法选择你需要开始选择的元素位置，也就是说换了数字，起始位置就变了，看下在的效果图：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth7.png" /></p>
+<p><strong>:nth-child(-n+5)</strong>这种选择器刚好和上面的选择器相反，这个是选择第5个前面的，如：</p>
+<pre>
+			.demo li:nth-child(-n+5) {background: lime;}
+		</pre>
+<p>如果不清楚怎么一回事，你只要计算一下就明白了</p>
+<pre>
+			n=0 －－》 -n+5=5 －－》 选择了第5个li
+			n=1 －－》 -n+5=4 －－》 选择了第4个li
+			n=2 －－》 -n+5=3 －－》 选择了第3个li
+			n=3 －－》 -n+5=2 －－》 选择了第2个li
+			n=4 －－》 -n+5=1 －－》 选择了第1个li
+			n=5 －－》 -n+5=0 －－》 没有选择任何元素
+		</pre>
+<p>从上面的计算方法中，大家很清楚的知道是怎么得来的，最后我们一起看看效果吧：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth8.png" /></p>
+<p><strong>:nth-child(4n+1)</strong>这种方法是实现隔几选一的效果，比如我们这里是隔三选一，如果你把"4"换成别的数字那就是另外的一种隔法了，比如这个实例</p>
+<pre>
+			.demo li:nth-child(4n+1) {background: lime;}
+		</pre>
+<p>我们主要来看其计算出来的结果</p>
+<pre>
+			n=0 －－》4n+1=1 －－》选择了第一个li
+			n=1 －－》4n+1=5 －－》选择了第五个li
+			n=2 －－》4n+1=9 －－》选择了第九个li
+		</pre>
+<p>效果如下</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth9.png" /></p>
+<p><strong style="color:red;">IE6-8和FF3-浏览器不支持":nth-child"选择器。</strong></p>
+<h4>
+	4、:nth-last-child()</h4>
+<p>":nth-last-child()"选择器和前面的":nth-child()"很相似，只是这里多了一个last，所以他起的作用就和前面的":nth-child"不一样了，他只要是从最后一个元素开始算，来选择特定元素。我们来看几个实例：</p>
+<pre>
+			.demo li:nth-last-child(4) {background: lime;}
+		</pre>
+<p>上面代码表示选择倒数第四个列表项，效果如下：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth10.png" /></p>
+<p>其中":nth-last-child(1)"和":last-child"所起作用是一样的，都表示的是选择最后一个元素。</p>
+<p>另外":nth-last-child()"也可以像“:nth-child()”一样，可以使用表达式来选择特定元素，下面我们来看几个特殊的表达式所起的作用</p>
+<p><strong>:nth-last-child(2n)</strong>,这个表示的是从元素后面计算，选择的是偶数个数，从而反过来说就是选择元素的奇数，和前面的":nth-child(2n+1)",":nth-child(2n-1)",":nth-child(odd)"所起的作用是一样的。如：</p>
+<pre>
+			.demo li:nth-last-child(2n) {background: lime;}
+			.demo li:nth-last-child(even) {background: lime;}
+			等于
+			.demo li:nth-child(2n+1) {background: lime;}
+			.demo li:nth-child(2n-1) {background: lime;}
+			.demo li:nth-child(odd) {background: lime;}
+		</pre>
+<p>请看效果：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth11.png" /></p>
+<p><strong>:nth-last-child(2n-1)</strong>这个选择器刚好跟上面的相反，从后面计算选择的是奇数，而从前面计算选择的就是偶数位了，这个前面的":nth-child(2n)"之类是相同的效果，如：</p>
+<pre>
+			.demo li:nth-last-child(2n+1) {background: lime;}
+			.demo li:nth-last-child(2n-1) {background: lime;}
+			.demo li:nth-last-child(odd) {background: lime;}
+			等于：
+			.demo li:nth-child(2n) {background: lime;}
+			.demo li:nth-child(even) {background: lime;}
+		</pre>
+<p>效果如下</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth12.png" /></p>
+<p>看了这几个实例，大家都知道":nth-last-child()"和"nth-child()"使用方法是一样的，只不过他们的区别是<strong style="color:red">“:nth-child()”是从元素的第一个开始计算，而“:nth-last-child()”是从元素的最后一个开始计算，他们的计算方法都是一样的。同样在IE6-8和FF3.0-浏览器不支持“:nth-last-child()”选择器。</strong></p>
+<h4>
+	5、:nth-of-type</h4>
+<p>:nth-of-type类似于:nth-child，不同的是他只计算选择器中指定的那个元素,其实我们前面的实例都是指定了具体的元素，这个选择器主要对用来定位元素中包含了好多不同类型的元素是很有用处，比如说，我们div.demo下有好多p元素，li元素，img元素等，但我只需要选择p元素，并让他每隔一个p元素就有不同的样式，那我们就可以简单的写成：</p>
+<pre>
+			.demo p:nth-of-type(even) {background-color: lime;}
+		</pre>
+<p><strong style="color:red;">其实这种使用和:nth-child使用是一样的，也可以使用:nth-child的那些表达式和使用方法，唯一不同的是这种指定了元素的类型而以。同样在IE6-8和FF3.0-浏览器不支持这种选择器</strong></p>
+<h4>
+	6、:nth-last-of-type</h4>
+<p>这个选择器不用说大家都能想得到了，他和前面的:nth-last-child一样使用，只是他指一了元素的类型而以。</p>
+<p><strong style="color:red;">同样在IE6-8和FF3.0-浏览器不支持这种选择器</strong></p>
+<h4>
+	7、:first-of-type和:last-of-type</h4>
+<p>:first-of-type和:last-of-type这两个选择器就类似于:first-child和:last-child;不同之处就是指定了元素的类型。</p>
+<p><strong style="color:red">:nth-of-type,:nth-last-of-type;:first-of-type和:last-of-type实际意义并不是很大，我们前面讲的:nth-child之类选择器就能达到这此功能，不过大家要是感兴趣还是可以了解一下，个人认为实用价值并不是很大。此类说法仅供参考。</strong></p>
+<h4>
+	8、:only-child和:only-of-type</h4>
+<p>":only-child"表示的是一个元素是它的父元素的唯一一个子元素。我们一起来看一个实例更好理解</p>
+<pre>
+			&lt;div class="post"&gt;
+	    	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur&lt;/p&gt;
+	    	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur&lt;/p&gt;
+	    &lt;/div&gt;
+	    &lt;div class="post"&gt;
+	    	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur&lt;/p&gt;
+	    &lt;/div&gt;	    
+		</pre>
+<p>css样式</p>
+<pre>
+			.demo .post p {background: lime;}
+		</pre>
+<p>初步效果</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth13.png" /></p>
+<p>如果我需要在div.post只有一个p元素的时候，改变这个p的样式，那么我们现在就可以使用:only-child,如：</p>
+<pre>
+			.demo .post p {background: lime;}
+			.demo .post p:only-child {background: red;}
+		</pre>
+<p>此时只有div.post只有一个子元素p时，那么他的背景色将会改变,如图所示：</p>
+<p><img alt="" src="http://www.w3cplus.com/sites/default/files/css3-selector-nth14.png" /></p>
+<p>:only-of-type是表示一个元素他有很多个子元素，而其中只有一个子元素是唯一的，那么我们使用这种选择方法就可以选择中这个唯一的子元素，比如说</p>
+<pre>
+			&lt;div class="post"&gt;
+	    	&lt;div&gt;Lorem ipsum dolor sit amet, consectetur&lt;/div&gt;
+	    	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur&lt;/p&gt;
+			  &lt;div&gt;Lorem ipsum dolor sit amet, consectetur&lt;/div&gt;
+	    &lt;/div&gt;
+		</pre>
+<p>如果我们想只选择中上面中的p元素，我们就可以这样写，</p>
+<pre>
+			p:only-of-type{background-color:red;}
+		</pre>
+<p><strong style="color:red;">IE6-8浏览器不支持:only-child选择器；IE6-8和FF3.0-浏览器不支持:only-of-type选择器。</strong></p>
+<h4>
+	9、:empty</h4>
+<p>:empty是用来选择没有任何内容的元素，这里没有内容指的是一点内容都没有，哪怕是一个空格，比如说，你有三个段落，其中一个段落什么都没有，完全是空的，你想这个p不显示，那你就可这样来写：</p>
+<pre>
+			p:empty {display: none;}
+		</pre>
+<p><strong style="color:red;">IE6-8浏览器不支持:empty选择器</strong></p>
+<h4>
+	三、否定选择器（:not）</h4>
+<p>否定选择器和jq中的:not选择器一模一样，就拿form中的元素来说明这个选择器的用法，比如你想对form中所有input加边框，但又不想submit也起变化，此时就可以使用:not为实现</p>
+<pre>
+			input:not([type="submit"]) {border: 1px solid red;}
+		</pre>
+<p><strong style="color:red;">否定选择器 :not()，可以让你定位不匹配该选择器的元素。IE6-8浏览器不支持:not()选择器</strong></p>
+<h4>
+	四、伪元素</h4>
+<p>CSS中的伪元素大家以前看过：:first-line,:first-letter,:before,:after;那么在CSS3中，他对伪元素进行了一定的调整，在以前的基础上增加了一个“：”也就是现在变成了“::first-letter,::first-line,::before,::after”另外他还增加了一个“::selection”,两个“：：”和一个“：”css3中主要用来区分伪类和伪元素，到目前来说，这两种方式都是被接受的，也就是说不管使用哪种写法所起的作用都是一样的，只是一个书写格式不同而以。</p>
+<p>那么我们简单了解一下他们的作用</p>
+<p><strong>::first-line</strong>选择元素的第一行，比如说改变每个段落的第一行文本的样式，我们就可以使用这个</p>
+<pre>
+			p::first-line {font-weight:bold;}
+		</pre>
+<p><strong>::first-letter</strong>选择文本块的第一个字母，除非在同一行里面包含一些其它元素，不过这个主要运用于段落排版上多，比如说首字下沉，</p>
+<pre>
+			p::first-letter {font-size: 56px;float:left;margin-right:3px;}
+		</pre>
+<p><strong>::before和::after</strong>这两个主要用来给元素的前面或后面插入内容，这两个常用"content"配合使用，见过最多的就是清除浮动，</p>
+<pre>
+			.clearfix:before,
+			.clearfix:after {
+			     content: ".";
+			     display: block;
+			     height: 0;
+			     visibility: hidden;
+			  }
+			 .clearfix:after {clear: both;}
+			 .clearfix {zoom: 1;}
+		</pre>
+<p>当然可以利用他们制作出其他更好的效果，比如本站首面的那个三角纸张效果，也是通过这个来实现的。</p>
+<p><strong>::selection</strong>用来改变浏览网页选中文的默认效果，有关于“::selection”使用，大家可以点击《<a href="http://www.w3cplus.com/content/css-selection" target="_blank">CSS ::Selection</a>》。</p>
+<p>那么有关于<a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS3的选择器</a>到这里就全部介绍完了，如果你对这个东西感兴趣，你可以点击<a href="http://kimblim.dk/css-tests/selectors/" target="_blank">这里</a>了解更多的知识。如果你全部看完了这三章关于<a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS3选择器</a>的文章你很快能发现，其实有很多选择器和<a href="http://api.jquery.com" target="_blank">jquery</a>中的<a href="http://api.jquery.com/category/selectors/" target="_blank">选择器</a>是很相似的，新的东西并不多，个人认为最实用的就是:nth-child这些，在特定的环境中所起的作用还是蛮大的，如果你是一位前端的大胆尝试者，你可以尝试这些新的选择器使用方法，这可以让你省去不少的标签，如果你认为还不实用在项目中，但让你学习还是蛮不错的。哈。。。。</p>
+<p>如需转载烦请注明出处：<strong><a href="http://www.w3cplus.com/" target="_blank">W3CPLUS</a></strong></p>
+</div></div></div>  </div>
+
+  
+   
+    <div id="node_footer" class="clearfix">
+              <div class="previous-next"><span class="prev">上一篇: </span><a href="/css3/attribute-selectors">CSS3 选择器——属性选择器</a> | <span class="next">下一篇: </span><a href="/css/oocss-concept">OOCSS——概念篇</a></div>            
+    </div>
+
+          <div id="node_bottom">
+        <div id="block-block-24" class="block block-block">
+
+    
+  <div class="content">
+    <div class="ct-ad-article-wrapper" id="content-bottom-ad" style="margin:0 0 10px;padding:0;border: none 0;">
+	<div class="ct-ad-article">
+		<div class="bsap">
+			<a href="http://fe.apelearn.com/?utm_source=w3cplus&utm_medium=banner&utm_campaign=w3cplus" target="_blank"><img src="/sites/default/files/blogs/2017/1706/damo-960.png" alt="在线视频教程" width="960" height="200" /></a>
+		</div>
+	</div>
+</div>
+  </div>
+</div>
+<div id="block-disqus-disqus-comments" class="block block-disqus">
+
+    
+  <div class="content">
+    <div id="disqus_thread"><noscript><p><a href="http://w3cplus.disqus.com/?url=https%3A%2F%2Fwww.w3cplus.com%2Fcss3%2Fpseudo-class-selector">View the discussion thread.</a></p></noscript></div>  </div>
+</div>
+      </div>
+        
+
+</div>  </div>
+</div>
+  </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    
+          <div id="sidebar-second" class="col-extra">
+        <!-- <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="//rp.baidu.com/rp3w/3w.js?sid=10994702955876242907') + '&t=' + (Math.ceil(new Date()/3600000)) + unescape('"%3E%3C/script%3E'));</script> -->
+          <div class="region region-sidebar-second">
+    <div id="block-custom-search-blocks-1" class="block block-custom-search-blocks">
+
+    
+  <div class="content">
+    <form class="search-form" role="search" action="/css3/pseudo-class-selector" method="post" id="custom-search-blocks-form-1" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-custom-search-blocks-form-1">
+  <label class="element-invisible" for="edit-custom-search-blocks-form-1--2">Search this site </label>
+ <input title="请输入您想搜索的关键词。" class="custom-search-box form-text" placeholder="" type="text" id="edit-custom-search-blocks-form-1--2" name="custom_search_blocks_form_1" value="" size="15" maxlength="128" />
+</div>
+<input type="hidden" name="delta" value="1" />
+<input type="hidden" name="form_build_id" value="form-3DSClBieNDNsdW4llUFaGtieaYKL8M9wFExFtXYBETw" />
+<input type="hidden" name="form_id" value="custom_search_blocks_form_1" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="搜索" class="form-submit" /></div></div></form>  </div>
+</div>
+<div id="block-block-49" class="block block-block">
+
+    
+  <div class="content">
+    <div style="margin-bottom:5px;"><a href="mailto:airenliao@gmail.com" target="_blank" title="2017上海QCon"><img alt="" src="/sites/default/files/blogs/w3cplus300.png" style="width: 300px; height: 160px;" /></a></div>
+
+<div><a href="http://fe.apelearn.com/?utm_source=w3cplus&amp;utm_medium=banner&amp;utm_campaign=w3cplus" target="_blank" title="在线视频教程"><img alt="" src="/sites/default/files/blogs/2017/1706/damo-300.png" style="width: 300px; height: 160px;" /></a></div>
+  </div>
+</div>
+<div id="block-block-18" class="block block-block">
+
+    <h2>合作网站</h2>
+  
+  <div class="content">
+    <ul class="clearfix" id="join_hands"><li>
+		<a href="https://scriptoj.com/" target="_blank" title="前端开发 ScriptOJ">前端开发 ScriptOJ</a></li>
+	<li>
+		<a href="http://moyu-edu.com/js.html" target="_blank" title="墨鱼前端培训">墨鱼前端培训</a></li>
+	<li>
+		<a href="http://www.html5dw.com/" target="_blank" title="HTML5梦工场">HTML5梦工场</a></li>
+	<li>
+		<a href="//www.w3cplus.com/sassguide/index.html" target="_blank" title="Sass入门指南">Sass入门指南</a></li>
+	<li>
+		<a href="//www.w3cplus.com/solution/index/index.html" target="_blank" title="CSS解决方案">CSS解决方案</a></li>
+	<li>
+		<a href="//www.w3ctech.com/" target="_blank" title="中国最大的前端技术社区">W3ctech</a></li>
+	<li>
+		<a href="http://fequan.com/" target="_blank" title="前端圈">前端圈</a></li>
+	<li>
+		<a href="//drupalchina.cn" target="_blank">Drupal中国</a></li>
+</ul>  </div>
+</div>
+<div id="block-views-friend-block-1" class="block block-views">
+
+    <h2>友情链接</h2>
+  
+  <div class="content">
+    <div class="view view-friend view-id-friend view-display-id-block_1 view-dom-id-dd8078b4805c1358b03deb73c9efa581">
+        
+  
+  
+      <div class="view-content">
+      <div class="item-list">    <ul>          <li class="views-row views-row-1 views-row-odd views-row-first">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="https://segmentfault.com/">segmentfault</a></span>  </div></li>
+          <li class="views-row views-row-2 views-row-even">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.alloyteam.com/">腾讯 AlloyTeam</a></span>  </div></li>
+          <li class="views-row views-row-3 views-row-odd">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.xiao-an.com/">广州微信开发</a></span>  </div></li>
+          <li class="views-row views-row-4 views-row-even">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.tuhaokuai.com/">在线图片压缩</a></span>  </div></li>
+          <li class="views-row views-row-5 views-row-odd">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.zuidaima.com/">java源代码学习</a></span>  </div></li>
+          <li class="views-row views-row-6 views-row-even">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///moyu-edu.com/js.html">墨鱼前端开发培训</a></span>  </div></li>
+          <li class="views-row views-row-7 views-row-odd">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.zbj.com/ydyykf/">猪八戒网</a></span>  </div></li>
+          <li class="views-row views-row-8 views-row-even">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.html5dw.com/">HTML5梦工场</a></span>  </div></li>
+          <li class="views-row views-row-9 views-row-odd">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.php-z.com/">PHP教程</a></span>  </div></li>
+          <li class="views-row views-row-10 views-row-even views-row-last">  
+  <div class="views-field views-field-title">        <span class="field-content"><a href="///www.proginn.com/">程序员客栈</a></span>  </div></li>
+      </ul></div>    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+</div>
+  </div>
+      </div>
+    
+
+  </div>
+</div>
+
+  <div id="footer-col" class="footer-col">
+    <div class="container">
+        <div class="region region-footer-col">
+    <div id="block-block-39" class="block block-block">
+
+    <h2>关于我们</h2>
+  
+  <div class="content">
+    <a class="media-object" href="http://www.w3cplus.com">W3cplus</a>
+<div class="media-body">
+	<p>W3cplus是一个致力于推广国内前端行业的技术博客。它以探索为己任，不断活跃在行业技术最前沿，努力提供高质量前端技术博文；其文章范围广泛，主要以CSS3、HTML5、处理器、Mobile、动画和各类DEMO为主。</p>
+	<p>W3cplus提供相关广告展示与招聘发布，有需要的请联系：微信号w3cplus，E-mail:<a href="mailto:airenliao@gmail.com" target="_blank">airenliao@gmail.com</a></p>
+</div>
+  </div>
+</div>
+<div id="block-block-40" class="block block-block">
+
+    <h2>关于站长</h2>
+  
+  <div class="content">
+    <p><a class="media-object" href="//www.w3cplus.com" target="_blank">大漠</a></p>
+<div class="media-body">
+	<p>常用昵称“大漠”，<a href="//www.w3cplus.com" target="_blank">W3CPlus</a>创始人，目前就职于淘宝。中国Drupal社区核心成员之一。对HTML5、CSS3和Sass等前端脚本语言有非常深入的认识和丰富的实践经验，尤其专注对CSS3、Sass和Mobile的研究，是国内最早研究和使用CSS3和Sass技术的一批人。CSS3、Sass和Drupal中国布道者。2014年出版《<a href="//www.w3cplus.com/book-comment.html">图解CSS3：核心技术与案例实战</a>》。</p>
+	<div class="social">
+		<a class="github" href="//github.com/airen" target="_blank" title="github">github</a> <a class="weibo" href="//weibo.com/w3cplus" target="_blank" title="weibo">weibo</a> <a class="facebook" href="//www.facebook.com/w3cplus" target="_blank" title="facebook">facebook</a> <a class="google" href="//plus.google.com/+AirenLiao" target="_blank" title="google">google</a> <a class="twitter" href="//twitter.com/w3cplus" target="_blank" title="twitter">twitter</a> <a class="linkedin" href="//cn.linkedin.com/in/w3cplus" target="_blank" title="linkedin">linkedin</a></div>
+</div>
+<p> </p>
+  </div>
+</div>
+<div id="block-block-41" class="block block-block">
+
+    <h2>我的作品</h2>
+  
+  <div class="content">
+    <a class="media-object" href="//www.w3cplus.com/book-comment.html" target="_blank">图解CSS3</a>
+<div class="media-body">
+	<p>本书是国内著名的Web前端专家历时2载的心血之作，根据最新的CSS3撰写，融入了作者在CSS领域多年的使用经验，旨在将本书打造成为CSS3领域最权威和实用的专业著作，供没有经验的读者系统学习，供有经验的读者参考备查。</p>
+<p>本书理论知识系统全面，详细讲解了选择器、伸缩布局盒模型、渐变、过渡、动画等主题下涵盖的所有CSS3新特性。</p></div>
+  </div>
+</div>
+  </div>
+    </div>
+  </div> 
+
+  <div id="footer" class="footer">
+    <div class="container">
+        <div class="region region-footer">
+    <div id="block-block-12" class="block block-block">
+
+    
+  <div class="content">
+    <p>湘ICP备13003850号-12，版权所有 衡阳瑞思信息技术有限公司 © 2011-2017 <a href="//www.w3cplus.com/page/26.html" target="_blank">W3CPLUS</a>，感谢<a href="//www.drupal.org" target="_blank">Drupal</a>开源技术。感谢<a href="//www.qiniu.com/" target="_blank">七牛云存储</a>提供静态资源空间。</p>
+<script type="application/ld+json" async>
+{
+  "@context": "//schema.org",
+  "@type": "Person",
+  "name": "W3cplus",
+  "url": "//www.w3cplus.com",
+  "image" : "//tp4.sinaimg.cn/1167075935/180/22838101204/1",
+  "sameAs" : [
+    "//twitter.com/w3cplus",
+    "//www.facebook.com/w3cplus",
+    "//cn.linkedin.com/in/w3cplus",
+    "//weibo.com/w3cplus/",
+    "//plus.google.com/+AirenLiao",
+    "//github.com/airen"
+  ]
+}
+</script>  </div>
+</div>
+  </div>
+    </div>
+  </div> 
+
+<div id="totop" style="position: fixed; bottom: 50px; right: 15px; cursor: pointer; z-index: 999999; display: block; opacity: 0;">
+    <a title="返回顶部">返回顶部</a>
+</div>
+
+  <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _hmt = _hmt || [];_hmt.push(["_setAccount", "177319b798978621f83845b12c86fa29"]);_hmt.push(["_trackPageview"]);(function() {var hm = document.createElement('script');hm.src = '//hm.baidu.com/hm.js?177319b798978621f83845b12c86fa29';hm.type = 'text/javascript';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(hm, s);})()
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.w3cplus.com/sites/default/files/js/js_VU7P4CTgUZdF2SyFko5LLAg9ZK0OSVjXVaAFnTLgVt0.js"></script>
+  
+  
+  
+</body>
+</html>
+<!-- Page cached by Boost @ 2017-10-20 16:32:52, expires @ 2017-10-27 16:32:52, lifetime 1 周 -->

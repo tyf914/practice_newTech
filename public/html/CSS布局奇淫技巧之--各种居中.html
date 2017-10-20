@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSS布局奇淫技巧之--各种居中 - 无双 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=ChDk9h03-S75WEqNhGvXkWireJ5cCWdK1xRM9NIXfnM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/marvin2/bundle-marvin2-brown.css?v=XX5jb76xyBTDkuz4GHc9T_qGUR-1oOf-1_iv8KwHFqI1"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/70308.css?v=0f4Lp59LazZKhM8%2befS%2bnjcawYA%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/marvin2/bundle-marvin2-brown-mobile.css?v=NZQbFJIojL2Z2D66mV-XfvWcCzEASnPhHnw95z8Hl-E1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/2050/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/2050/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/2050/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = '2050', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=wUUQbLTt-LocHM-6RVSAUwAYdrfA1Lt3ool1ZdiICfI1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="top">
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/2050/">无双</a></h1>
+<p id="tagline">博学善思，自强不息</p>
+</div>
+<div id="leftmenu">
+
+	
+<h3>导航</h3>
+<ul>
+	<li>
+		<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a>
+	<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/2050/">首页</a></li>
+	<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li>
+		<a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%97%A0%E5%8F%8C">联系</a>
+	<li>
+		<a id="blog_nav_rss" href="http://www.cnblogs.com/2050/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/2050/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+	<li>
+		<a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+	<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+	<div id="blog_stats">
+<h3>统计</h3>
+<ul>
+	<li>
+		随笔 -
+		117
+	<li>
+		文章 -
+		0
+	<li>
+		评论 -
+		631
+	<li>
+		引用 -
+		0
+	</li>
+</ul>
+</div>
+	
+<h3>公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+
+	<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+
+</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/2050/p/3392803.html">CSS布局奇淫技巧之--各种居中</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>居中是我们使用css来布局时常遇到的情况。使用css来进行居中时，有时一个属性就能搞定，有时则需要一定的技巧才能兼容到所有浏览器，本文就居中的一些常用方法做个简单的介绍。</p> <p>注：本文所讲方法除了特别说明外，都是兼容IE6+、谷歌、火狐等主流浏览器的。</p> <p>先来说几种简单的、人畜无害的居中方法</p> <p><strong>1. 把margin设为auto</strong></p> <p>具体来说就是把要居中的元素的margin-left和margin-right都设为auto，此方法只能进行水平的居中，且对浮动元素或绝对定位元素无效。</p> <p><strong>2、使用 text-align:center </strong></p> <p>这个没什么好说的，只能对图片，按钮，文字等行内元素(display为inline或inline-block等)进行水平居中。但要说明的是在IE6、7这两个奇葩的浏览器中，它是能对任何元素进行水平居中的。</p> <p><strong>3、使用line-height让单行的文字垂直居中</strong></p> <p>把文字的line-height设为文字父容器的高度，适用于只有一行文字的情况。</p> <p><strong>4、使用表格</strong></p> <p>如果你使用的是表格的话，那完全不用为各种居中问题而烦恼了，只要用到 td(也可能会用到 th)元素的 align="center" 以及 valign="middle" 这两个属性就可以完美的处理它里面内容的水平和垂直居中问题了,而且表格默认的就会对它里面的内容进行垂直居中。如果想在css中控制表格内容的居中，垂直居中可以使用 vertical-align:middle，至于水平居中，貌似css中是没有相对应的属性的,但是在IE6、7中我们可以使用text-align:center来对表格里的元素进行水平居中，IE8+以及谷歌、火狐等浏览器的text-align:center只对行内元素起作用，对块状元素无效。</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171704-b74614f47a0e4ac6bd8886e7bd062a82.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171704-4eeb424b8c5f4e8d85731c9ec2d40c05.png" width="761" height="117"></a></p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171704-ad286829d976424d9d86a87b309b456f.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171705-ffc45f8595c14167af61491e7ca4e988.png" width="248" height="288"></a></p> <p>在ie6、7中可以通过css的text-algin来控制表格内容的水平方向的对齐，无论内容是行内元素还是块状元素都有效。</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171705-70ba7fc45d9a4c2d9e8fbb9d7ec3bb30.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171706-78d670bf5b4b459390bd1aed0ece7ba0.png" width="244" height="278"></a></p> <p>但在ie8+以及chrome、firefox等浏览器中的text-align:center对块状元素无效，只能用表格自有的align属性。</p> <p><strong>5、使用display:table-cell来居中</strong></p> <p>对于那些不是表格的元素，我们可以通过display:table-cell 来把它模拟成一个表格单元格，这样就可以利用表格那很方便的居中特性了。例如：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171706-c909059d599a4d7bac56c5c19fe0d1f7.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171707-cf7a39a969e74ae69f9e1e87ff1dbc5c.png" width="883" height="53"></a></p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171707-4b8ab1cb98e54633bd5a63e2f5861886.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171707-793b70047a424ec29487b85b8f7f483c.png" width="233" height="253"></a></p> <p>但是，这种方法只能在IE8+、谷歌、火狐等浏览器上使用，IE6、IE7都无效。</p> <p>&nbsp;</p> <p>那面所说的都是很基础的方法，自然不能称之为奇淫巧计，下面就来说一些需要使用一些技巧的居中方法。</p> <p><strong>6、使用绝对定位来进行居中</strong></p> <p>此法只适用于那些我们已经知道它们的宽度或高度的元素。</p> <p>绝对定位进行居中的原理是通过把这个绝对定位元素的left或top的属性设为50%,这个时候元素并不是居中的，而是比居中的位置向右或向左偏了这个元素宽度或高度的一半的距离，所以需要使用一个负的margin-left或margin-top的值来把它拉回到居中的位置，这个负的margin值就取元素宽度或高度的一半。</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171708-298bfbe469f540989b97a2da4907ba2c.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171708-266c44999e164e9f9e1e3efeeb736a87.png" width="549" height="258"></a></p> <p>运行效果：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171708-18390dbccea6478b85a4d13e34648fb1.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171709-ee9a9ceaf411442ca958cdeb164c4886.png" width="250" height="287"></a></p> <p>如果只想实现一个方向的居中，则可以只使用left , margin-left 来实现水平居中，使用top , margin-top来实现垂直居中。</p> <p>&nbsp;</p> <p><strong>7、另一种使用绝对定位来居中的方法</strong></p> <p>此法同样只适用于那些我们已经知道它们的宽度或高度的元素，并且遗憾的是它只支持IE9+,谷歌，火狐等符合w3c标准的现代浏览器。</p> <p>下面用一段代码来了解这种方法：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171709-bbe4bd7ad1af4171b4be67d452743748.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171710-5b31367eba804b19b0a5170f94ba75bc.png" width="733" height="277"></a></p> <p>运行效果：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171710-b685e779b7ec4109abe9e67022c007e9.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171710-bef16fdab7bf4aa5aa99d80c53e80b50.png" width="238" height="265"></a></p> <p>这里如果不定义元素的宽和高的话，那么他的宽就会由left,right的值来决定，高会由top,bottom的值来决定，所以必须要设置元素的高和宽。同时如果改变left，right , top , bottom的值还能让元素向某个方向偏移，大家可以自己去尝试。</p> <p>&nbsp;</p> <p><strong>8、使用浮动配合相对定位来进行水平居中</strong></p> <p>此方法也是关于浮动元素怎么水平居中的解决方法，并且我们不需要知道需要居中的元素的宽度。</p> <p>浮动居中的原理是：把浮动元素相对定位到父元素宽度50%的地方，但这个时候元素还不是居中的，而是比居中的那个位置多出了自身一半的宽度，这时就需要他里面的子元素再用一个相对定位，把那多出的自身一半的宽度拉回来，而因为相对定位正是相对于自身来定位的，所以自身一半的宽度只要把left 或 right 设为50%就可以得到了，因而不用知道自身的实际宽度是多少。</p> <p>这种使用浮动配合相对定位来居中的方法，优点是不用知道要居中的元素的宽度，即使这个宽度是不断变化的也行；缺点是需要一个多余的元素来包裹要居中的元素。</p> <p>看下代码：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171711-ae736e6c8a0b4b069aca4363d987344d.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171711-a28d15febf2a4adaabb5e0861ffe650e.png" width="594" height="454"></a></p> <p>&nbsp;</p> <p>运行效果：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171712-99fd09e3f075418b98fd8c6b50bbb202.png"><img title="QQ截图20130925155722" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20130925155722" src="http://images.cnitblog.com/blog/130623/201310/28171712-1885d4fa00474c8cacdcb9f14fc5112f.png" width="324" height="256"></a></p> <p>&nbsp;</p> <p><strong>9、利用font-size来实现垂直居中</strong></p> <p>如果父元素高度是已知的，要把它里面的子元素进行水平垂直居中，则可以使用这种方法，且子元素的宽度或高度都不必知道。</p> <p>该方法只对IE6和IE7有效。</p> <p>该方法的要点是给父元素设一个合适的font-size的值，这个值的取值为该父元素的高度除以1.14得到的值，并且子元素必须 是一个inline或inline-block元素，需要加上vertical-align:middle属性。</p> <p>至于为什么是除以1.14而不是其他的数，还真没有人知道，你只需要记住1.14这个数就行了。</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171713-8500b560dfc543bc9727be5d45ec7389.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171713-3f7f8bf7e29442a68b55426c130a6e18.png" width="901" height="322"></a></p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171713-023973e5b7ce46b0a85392a2c28f8351.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171714-56e123af82034251a2253d9d6b4618ab.png" width="232" height="267"></a></p> <p>在方法5中说过在IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居中，而这里的font-size的方法则适用于IE6和IE7，所以把这两种方法结合起来就能兼容所有浏览器了：</p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171714-ce734177d0a645bfb676b05be4df5bb3.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171714-dc6838c0b518438cbc81dbeccb8c86e6.png" width="644" height="322"></a></p> <p><a href="http://images.cnitblog.com/blog/130623/201310/28171715-13accc6c29c44ad1a935cca5a7d0d3e0.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171715-b85396f1f81c4df0b7548ede39934027.png" width="222" height="244"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://images.cnitblog.com/blog/130623/201310/28171716-bd3a8ef0327e4eb48e7891df3fb8f284.png"><img title="QQ截图20131014161356" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="QQ截图20131014161356" src="http://images.cnitblog.com/blog/130623/201310/28171716-536bef0bf8b64b2cb6fc1c500d6fd899.png" width="225" height="244"></a></p> <p>上面的例子中因为要居中的元素是一个块状元素，所以我们还需要把他变成行内元素，如果要居中的元素是图片等行内元素，则可以省略此步。</p> <p>另外，如果 vertical-align:middle 是写在父元素中而不是子元素中，这样也是可以的，只不过计算font-size时使用的&nbsp; 1.14 这个 数值要变成大约 1.5 这个值。</p> <p>&nbsp;</p> <p>以上就是一些常见的居中方法了，如有疏漏或错误之处，敬请指正！</p> <p>&nbsp;</p> <h4><a href="http://www.cnblogs.com/2050/archive/2012/07/30/2614852.html">CSS布局奇淫技巧之-宽度自适应</a></h4> <h4><a href="http://www.cnblogs.com/2050/archive/2012/07/30/2615260.html">CSS布局奇淫技巧之-高度自适应</a></h4> <h4><a href="http://www.cnblogs.com/2050/archive/2012/07/31/2616460.html">CSS布局奇淫技巧之-多列等高</a></h4></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2013-10-28 17:17</span> <a href='http://www.cnblogs.com/2050/'>无双</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=3392803" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3392803);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=70308,cb_entryId=3392803,cb_blogApp=currentBlogApp,cb_blogUserGuid='8c3fc9fe-9856-df11-ba8f-001cf0cd104b',cb_entryCreatedDate='2013/10/28 17:17:00';loadViewCount(cb_entryId);</script>
+	
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/"><font face="Verdana">博客园</font></a>
+	<br />
+	Copyright &copy; 无双
+</p>
+</body>
+</html>

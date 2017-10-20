@@ -6,7 +6,7 @@ let fn_resume_show = async (ctx, next) => {
 };
 
 let fn_oresume_show = async (ctx, next) => {
-    let sourcePdf = fs.readFileSync(path.join(__dirname, 'public', 'pdf', 'original_resume.pdf'));
+    let sourcePdf = fs.readFileSync(path.join(process.cwd(), 'public', 'pdf', 'original_resume.pdf'));
     ctx.response.type = 'application/pdf';
     ctx.body = sourcePdf;
 };
