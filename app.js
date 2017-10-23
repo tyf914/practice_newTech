@@ -38,5 +38,5 @@ app.use(async (ctx, next) => {
    ctx.body = '<h1>404 Not Found</h1>'
 });
 
-app.listen(process.env.port || 3000);
+app.listen(process.env.PORT || 3000);
 console.log('app started on port 3000...');
