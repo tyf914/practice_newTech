@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Plan: node.js+^es5+koa+mongoDB+sass+vue.js+iview",
   "main": "app.js",
+  "engines": {
+    "node": "8.5.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass --watch public/sass:public/css",
