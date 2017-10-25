@@ -9,7 +9,8 @@ let fn_interview_questions_show = async(ctx, next) => {
     let sourceMdFile = fs.readFileSync(path.join(process.cwd(), 'public', 'md', 'interview_questions.md')).toString();
 
     await ctx.render('interview_questions.hbs', {
-        markedFile: mark.render(sourceMdFile)
+        markedFile: mark.render(sourceMdFile),
+        title: '前端面试题整理'
     });
 
 }

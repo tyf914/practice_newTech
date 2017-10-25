@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>汤一飞的技术练习网站</title>
+    {{>head}}
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
+
 <a href="/resume" target="_blank">简历</a>
 <a href="/oresume" target="_blank">原简历</a>
 <a href="/interview_questions" target="_blank">面试题备忘</a>
+<a href="/ideasBoard" target="_blank">金点子</a>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            visible: false
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+            }
+        }
+    })
+</script>
+
 </body>
 </html>

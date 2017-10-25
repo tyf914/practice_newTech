@@ -1,0 +1,24 @@
+@import "layout";
+
+$bg-color: #DDF0ED;
+
+body {
+  margin: 0 auto;
+  background: {
+    color: $bg-color;
+  };
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  background-color: #005cc5;
+  color: white;
+  text-align: center;
+  margin: 0 30px;
+}

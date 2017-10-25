@@ -15,15 +15,14 @@ app.use(views(path.join(__dirname, 'views'),
         extension: 'hbs',
         map : {
             hbs: 'handlebars'
-        }
-    },
-    {
-        helpers: {
-
         },
+        options: {
+            helpers: {
 
-        partials: {
-
+            },
+            partials: {
+                head: './partials/head'
+            }
         }
     }
 ));
