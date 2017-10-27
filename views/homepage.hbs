@@ -6,23 +6,55 @@
 </head>
 <body>
 
-<a href="/resume" target="_blank">简历</a>
-<a href="/oresume" target="_blank">原简历</a>
-<a href="/interview_questions" target="_blank">面试题备忘</a>
-<a href="/ideasBoard" target="_blank">金点子</a>
+
+
+<div id="magnets">
+    <magnet-item
+        v-for="magnet in magnets"
+        :magnet="magnet"
+        :key="magnet.id">
+    </magnet-item>
+</div>
 
 <script>
-    var app = new Vue({
-        el: '#app',
+    Vue.component('magnet-item', {
+        // todo-item 组件现在接受一个
+        // "prop"，类似于一个自定义属性
+        // 这个属性名为 todo。
+        props: ['magnet'],
+        template:
+        '<div class="magnet" :id="\'magnet-\'+magnet.id">' +
+            '<a :href="magnet.url" target="_blank">\{{ magnet.title }}</a>'+
+        '</div>'
+    });
+
+    var magents = new Vue({
+        el: "#magnets",
         data: {
-            visible: false
-        },
-        methods: {
-            show: function () {
-                this.visible = true;
-            }
+            magnets: [
+                {
+                    id: 0,
+                    title: '简历',
+                    url: '/resume'
+                },
+                {
+                    id: 1,
+                    title: '原简历',
+                    url: '/oresume'
+                },
+                {
+                    id: 2,
+                    title: '面试题',
+                    url: '/interview_questions'
+                },
+                {
+                    id: 3,
+                    title: '金点子',
+                    url: '/ideasBoard'
+                }
+            ]
         }
-    })
+    });
 </script>
 
 </body>
