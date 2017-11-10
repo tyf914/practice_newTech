@@ -6,29 +6,24 @@
 </head>
 <body>
 
-
-
 <div id="magnets">
     <magnet-item
         v-for="magnet in magnets"
-        :magnet="magnet"
-        :key="magnet.id">
+        v-bind="magnet"
+        ref="magnets">
     </magnet-item>
 </div>
 
 <script>
     Vue.component('magnet-item', {
-        // todo-item 组件现在接受一个
-        // "prop"，类似于一个自定义属性
-        // 这个属性名为 todo。
-        props: ['magnet'],
+        props: ['id', 'url', 'title'],
         template:
-        '<div class="magnet" :id="\'magnet-\'+magnet.id">' +
-            '<a :href="magnet.url" target="_blank">\{{ magnet.title }}</a>'+
-        '</div>'
+        `<div class="magnet" :id="\'magnet-\'+ id">
+            <a :href="url" target="_blank">\{{ title }}</a>
+        </div>`
     });
 
-    var magents = new Vue({
+    var magnets = new Vue({
         el: "#magnets",
         data: {
             magnets: [
@@ -51,10 +46,21 @@
                     id: 3,
                     title: '金点子',
                     url: '/ideasBoard'
+                },
+                {
+                    id: 4,
+                    title: 'Vue学习笔记',
+                    url: '/Vue_study_notes'
+                },
+                {
+                    id: 5,
+                    title: '代码测试',
+                    url: '/test'
                 }
             ]
         }
     });
+
 </script>
 
 </body>
