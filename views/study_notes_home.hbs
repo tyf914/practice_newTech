@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{>head}}
+    <link rel="stylesheet" href="/public/css/homepage.css">
+</head>
+<body>
+
+<div id="magnets">
+    <magnet-item
+            v-for="magnet in magnets"
+            v-bind="magnet"
+            ref="magnets">
+    </magnet-item>
+</div>
+
+<script>
+    Vue.component('magnet-item', {
+        props: ['id', 'url', 'title'],
+        template:
+                `<div class="magnet" :id="\'magnet-\'+ id">
+            <a :href="url" target="_blank">\{{ title }}</a>
+        </div>`
+    });
+
+    var magnets = new Vue({
+        el: "#magnets",
+        data: {
+            magnets: [
+                {
+                    id: 0,
+                    title: 'Vue',
+                    url: '/study_notes/Vue'
+                }
+            ]
+        }
+    });
+
+</script>
+
+</body>
+</html>

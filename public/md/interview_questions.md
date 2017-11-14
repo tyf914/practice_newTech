@@ -23,29 +23,28 @@
 
 ### 技术类
 
-```
-0.html类
 
-1.css类
-
-2.js类
-
-3.ajax
-
-4.网络类
-
-5.算法类
-
-6.通用类
-
-7.概念类
-
-8.工程类
-
-9.安全类
-
-10.其他
-```
+> 0. html类
+>
+> 1. css类
+>
+> 2. js类
+>
+> 3. ajax
+>
+> 4. 网络类
+>
+> 5. 算法类
+>
+> 6. 通用类
+>
+> 7. 概念类
+>
+> 8. 工程类
+>
+> 9. 安全类
+>
+> 10. 其他
 
 
 
@@ -365,19 +364,19 @@
 
 10. **实现sum(2,3);sum(2,3,4);sum(2,3,4,5);sum里面的参数不确定；重新设计一下这个函数，让它直接拥有数组的方法**
 
-  > 答：
-  >
-  > 1.常规方法：
-  >
-  > ​	函数中循环arguments求和
-  >
-  > ​    高端方法：
-  >
-  > ​         用ES6的Array.from(arguments) 或rest，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
-  >
-  > 2.var arg = Array.prototype.slice.call(arguments);
-  >
-  > 一般用这个，实际上就是[伪数组转数组方法（原生4种）](http://www.cnblogs.com/NTWang/p/6280447.html)，这里我再添加一个方法`Object.setPrototypeOf(arguments, Array.prototype);`
+    > 答：
+    >
+    > 1.常规方法：
+    >
+    > ​	函数中循环arguments求和
+    >
+    > ​    高端方法：
+    >
+    > ​         用ES6的Array.from(arguments) 或rest，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
+    >
+    > 2.var arg = Array.prototype.slice.call(arguments);
+    >
+    > 一般用这个，实际上就是[伪数组转数组方法（原生4种）](http://www.cnblogs.com/NTWang/p/6280447.html)，这里我再添加一个方法`Object.setPrototypeOf(arguments, Array.prototype);`
 
 11. **各种文本框，复选框之类的值怎么获取**
 
@@ -418,7 +417,7 @@
     ​
 
 
-###**AJAX类**
+### **AJAX类**
 
 1. **手写ajax**
 
@@ -513,7 +512,7 @@
 
 
 
-###**算法类**
+### **算法类**
 
 1. **排序**
 
@@ -762,7 +761,7 @@
 
 ### **安全类**
 
-1. **常见web安全及防护原理 **
+1. **常见web安全及防护原理**
 
    > 1. **sql注入**  
    >
