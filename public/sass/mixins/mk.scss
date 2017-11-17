@@ -1,4 +1,4 @@
-$mk-h1-size: 40px;
+$mk-h1-size: 2rem;
 
 .mk-h1, .mk-h2, .mk-h3, .mk-h4 {
   font-weight: bolder;
@@ -6,23 +6,23 @@ $mk-h1-size: 40px;
 
 .mk-h1 {
   font-size: $mk-h1-size;
-  line-height: $mk-h1-size + 20;
-  margin-bottom: 15px;
+  line-height: $mk-h1-size + 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .mk-h2 {
-  font-size: $mk-h1-size - 10;
-  line-height: $mk-h1-size + 10;
+  font-size: $mk-h1-size - 0.5rem;
+  line-height: $mk-h1-size + 0.5rem;
 }
 
 .mk-h3 {
-  font-size: $mk-h1-size - 18;
-  line-height: $mk-h1-size + 2;
+  font-size: $mk-h1-size - 0.9rem;
+  line-height: $mk-h1-size + 0.1rem;
 }
 
 .mk-h4 {
-  font-size: $mk-h1-size - 23;
-  line-height: $mk-h1-size + 3;
+  font-size: $mk-h1-size - 1.15rem;
+  line-height: $mk-h1-size + 0.15rem;
 }
 
 .mk-hr {
@@ -33,7 +33,7 @@ $mk-h1-size: 40px;
     content: "";
     display: block;
     width: 60%;
-    height: 5px;
+    height: 0.25rem;
     background-color: #DEDEDC;
   }
 }

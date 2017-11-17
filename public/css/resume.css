@@ -1,27 +1,31 @@
+html {
+  font-size: 20px; }
+
 body {
   margin: 0;
   padding: 0;
+  font-size: 0.8rem;
   font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif; }
 
 .mk-h1, .mk-h2, .mk-h3, .mk-h4 {
   font-weight: bolder; }
 
 .mk-h1 {
-  font-size: 40px;
-  line-height: 60px;
-  margin-bottom: 15px; }
+  font-size: 2rem;
+  line-height: 3rem;
+  margin-bottom: 0.75rem; }
 
 .mk-h2 {
-  font-size: 30px;
-  line-height: 50px; }
+  font-size: 1.5rem;
+  line-height: 2.5rem; }
 
 .mk-h3 {
-  font-size: 22px;
-  line-height: 42px; }
+  font-size: 1.1rem;
+  line-height: 2.1rem; }
 
 .mk-h4 {
-  font-size: 17px;
-  line-height: 43px; }
+  font-size: 0.85rem;
+  line-height: 2.15rem; }
 
 .mk-hr {
   display: flex;
@@ -31,7 +35,7 @@ body {
     content: "";
     display: block;
     width: 60%;
-    height: 5px;
+    height: 0.25rem;
     background-color: #DEDEDC; }
 
 body {
@@ -45,67 +49,55 @@ a {
   word-wrap: break-word;
   word-break: break-all;
   margin: 0 auto;
-  padding: 50px 60px;
-  width: 810px;
+  padding: 2.5rem 3rem;
+  width: 35rem;
+  transform-origin: left top;
   background-color: white; }
   .container > div:not(:last-of-type) {
-    margin-bottom: 80px; }
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 20vh;
-  text-align: right;
-  width: 100px;
-  padding: 40px 20px;
-  color: white;
-  background-color: dimgray; }
-  .sidebar > a {
-    text-decoration: none;
-    color: white; }
+    margin-bottom: 4rem; }
 
 .topNav {
   background-color: #303538;
   width: 100%;
-  min-height: 250px;
+  min-height: 12.5rem;
   display: flex;
   justify-content: center;
   align-items: center; }
   .topNav ~ div {
-    padding: 20px; }
+    padding: 1rem; }
 
 .topNav_text {
-  font-size: 35px;
+  font-size: 1.75rem;
   font-weight: 900;
-  line-height: 50px;
+  line-height: 2.5rem;
   color: white;
   text-align: center; }
 
 ul, ol {
-  margin-left: -20px;
+  margin-left: -1rem;
   margin-top: 0;
   margin-bottom: 0; }
 
 #contact > ul {
   list-style-type: square;
-  font-size: 22px; }
+  font-size: 1.1rem; }
   #contact > ul > li {
-    line-height: 35px; }
+    line-height: 1.75rem; }
 
 #info table {
   width: 100%;
-  border: 1px solid gainsboro; }
+  border: 0.05rem solid gainsboro; }
 #info tr {
   width: 100%; }
 
 #info li {
-  font-size: 22px; }
+  font-size: 1.1rem; }
 
 td {
-  padding: 10px; }
+  padding: 0.5rem; }
 
 img#portrait {
-  width: 150px; }
+  width: 7.5rem; }
 
 #thanks {
   text-align: right; }

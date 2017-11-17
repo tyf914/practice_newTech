@@ -5,15 +5,7 @@
     <link rel="stylesheet" href="/public/css/resume.css">
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <a href="#contact">联系方式</a><br>
-            <a href="#info">个人信息</a><br>
-            <a href="#employment_exp">工作经历</a><br>
-            <a href="#open_source_project">开源项目</a><br>
-            <a href="#skills">技能清单</a><br>
-            <a href="#summary">总结</a><br>
-        </div>
+    <div class="container" id="container" v-show="show" ref="container">
         <div class="topNav">
             <div class="topNav_text">
                 <span>汤一飞——西南大学计信院17届应届生</span>
@@ -38,7 +30,7 @@
             <table>
                 <tr>
                     <td>
-                        <img src="images/portrait.jpg" id="portrait" alt="portrait">
+                        <img src="/public/images/portrait.jpg" id="portrait" alt="portrait">
                     </td>
                     <td>
                         <ul>
@@ -232,6 +224,66 @@
             <div class="mk-h4">感谢您花时间阅读我的简历，期待能有机会和您共事。</div>
         </div>
     </div>
+    <script>
 
+        var vm = new Vue({
+            el: '#container',
+            data: {
+                show: false,
+                ratio: 1
+            },
+            methods: {
+                varyScale: function () {
+                    var bodyWidth = document.documentElement.clientWidth;
+                    if (bodyWidth < 820) {
+                        scaleRatio = bodyWidth/820;
+                    } else {
+                        scaleRatio = 1;
+                    }
+                    this.ratio = scaleRatio;
+                    this.$refs.container.style.transform = `scale(${scaleRatio})`;
+                    document.getElementsByTagName('body')[0].style.height = Math.floor(document.documentElement.scrollHeight * scaleRatio) + 'px';
+                }
+            },
+            mounted: function () {
+                this.varyScale();
+                var that = this;
+                window.onresize = function () {
+                    setInterval(function () { that.varyScale(); }, 20);
+                }
+                this.show = 'ture';
+            }
+        })
+//        var scaleRatio = 1;
+//        var bodyWidth = 0;
+//
+//        function getScaleRatio() {
+//            bodyWidth = $('body').width();
+//            if (bodyWidth < 820) {
+//                scaleRatio = bodyWidth/820;
+//            } else {
+//                scaleRatio = 1;
+//            }
+//            return scaleRatio;
+//        }
+//
+//        function varyScale(scaleRatio) {
+//            $('.container').css({
+//                '-ms-transform': `scale(${scaleRatio})`,
+//                '-webkit-transform': `scale(${scaleRatio})`,
+//                '-moz-transform': `scale(${scaleRatio})`,
+//                '-o-transform': `scale(${scaleRatio})`,
+//                'transform': `scale(${scaleRatio})`,
+//            });
+//
+//        }
+//
+//        $(function () {
+//            setInterval(function () {
+//                varyScale(getScaleRatio());
+//            }, 20);
+//            $('.container').fadeIn();
+//        });
+    </script>
 </body>
 </html>

@@ -18,28 +18,14 @@ a {
 .container {
   @include wrapText;
   margin: 0 auto;
-  padding: 50px 60px;
-  width: 810px;
+  padding: 2.5rem 3rem;
+  width: 35rem;
+  transform-origin:left top;
   background: {
     color: white;
   };
   >div:not(:last-of-type) {
-    margin-bottom: 80px;
-  }
-}
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 20vh;
-  text-align: right;
-  width: 100px;
-  padding: 40px 20px;
-  color: white;
-  background-color: dimgray;
-  >a {
-    text-decoration: none;
-    color: white;
+    margin-bottom: 4rem;
   }
 }
 
@@ -48,28 +34,28 @@ a {
     color: $nav-bgColor;
   };
   width: 100%;
-  min-height: 250px;
+  min-height: 12.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   ~div {
-    padding: 20px;
+    padding: 1rem;
   }
 }
 
 .topNav_text {
   font: {
-    size: 35px;
+    size: 1.75rem;
     weight: 900;
   }
-  line-height: 50px;
+  line-height: 2.5rem;
   color: white;
   text-align: center;
 }
 
 ul, ol {
   margin: {
-    left: -20px;
+    left: -1rem;
     top: 0;
     bottom: 0;
   };
@@ -80,18 +66,18 @@ ul, ol {
     type: square;
   };
   font: {
-    size: 22px;
+    size: 1.1rem;
   };
 
   >li {
-    line-height: 35px;
+    line-height: 1.75rem;
   }
 }
 
 #info {
   table {
     width: 100%;
-    border: 1px solid gainsboro;
+    border: 0.05rem solid gainsboro;
   }
   tr {
     width: 100%;
@@ -100,16 +86,16 @@ ul, ol {
 
 #info li {
   font: {
-    size: 22px;
+    size: 1.1rem;
   };
 }
 
 td {
-  padding: 10px;
+  padding: 0.5rem;
 }
 
 img#portrait {
-  width: 150px;
+  width: 7.5rem;
 }
 
 #thanks {
