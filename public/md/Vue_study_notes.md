@@ -25,13 +25,21 @@
    >
    >    ```javascript
    >    var vm = new Vue({
-   >        el: '#id',	//绑定元素
-   >      	data: object,	//传入数据对象，在渲染时取其中的值，可以通过“vue实例名(这里就是vm).数据对象的键名”直接访问值。
-   >        computed: object,  //计算属性，object的键值对是“计算属性名称：其getter函数”，用于对data中的属性值进行复杂逻辑运算
-   >      	methods: object,  //方法，object的键值对是“方法名称：函数”，可通过“vue实例名.methods中的方法名(参数)”直接调用
-   >      	watch: object,	//侦听属性，object的键值对是“属性名称：函数”，属性名称是data中的属性，当属性发生变化时传入变化后的属性到函数并执行
-   >      	created等系列生命周期相关: function,	//暂时理解为类似Ajax中的状态回调函数
-   >      	components: object	//局部注册在本实例的组件，仅在本实例作用域内可用，“组件名：组件选项对象”
+   >      	el: '#id',	// 绑定元素，必有
+   >      
+   >      	data: object,	// 传入数据对象，在渲染时取其中的值，可以通过“vue实例名(这里就是vm).数据对象的键名”直接访问值。
+   >      
+   >    	computed: object,  // 计算属性，object的键值对是“计算属性名称：其getter函数”，用于对data中的属性值进行复杂逻辑运算
+   >      
+   >    	methods: object,  // 方法，object的键值对是“方法名称：函数”，可通过“vue实例名.methods中的方法名(参数)”直接调用
+   >      
+   >    	watch: object,	// 侦听属性，object的键值对是“属性名称：函数”，属性名称是data中的属性，当属性发生变化时传入变化后的属性到函数并执行
+   >      
+   >    	created等系列生命周期相关: function,	// 暂时理解为类似Ajax中的状态回调函数
+   >      
+   >    	components: object	// 局部注册在本实例的组件，仅在本实例作用域内可用，“组件名：组件选项对象”
+   >      
+   >    	mixins: array   // 加载多个混合
    >    })
    >    ```
    >
@@ -39,7 +47,7 @@
    >      - 不管data数据对象是以字面量创建还是导入外部Object，Vue实例被创建后，data中的属性都会变成响应式属性，即属性的变化会同步到视图，外部Object（如果有的话，同时外部Object更改属性值也会同步到其余两者）
    >      - 但是创建后往vm实例或外部Object上再添加属性，是不会加入响应式系统的，**只有当实例被创建时 `data` 中存在的属性是响应式的**。
    >    - 在选项属性或回调（经常是下面的生命周期有关的回调）上不要使用箭头函数，因为箭头函数和普通函数的this指向机制不同
-   >    - vm实例可以通过vm.\$data,vm.\$el这种加\$前缀的形式暴露一些实例方法和属性，具体见[API 参考](https://cn.vuejs.org/v2/api/#实例属性)
+   >    - vm实例可以通过`vm.\$data`，`vm.\$el`这种加\$前缀的形式暴露一些实例方法和属性，具体见[API 参考](https://cn.vuejs.org/v2/api/#实例属性)
    >
    > 2. #### 实例生命周期
    >
@@ -53,11 +61,13 @@
    >
    >      - Mustache语法，即使用{{}}的文本插值：
    >
-   >      `<span>{{ msg }}</span>`
+   >      ```html
+   >      <span>{{ msg }}</span>
+   >      ```
    >
-   >      msg会被替换为data数据对象上msg属性的值，同样是响应式的属性，此时msg中如果有HTML代码，将会作为普通文本输出
+   >      msg会被替换为vm实例的msg属性的值，此时msg中如果有HTML代码，将会作为普通文本输出。
    >
-   >      - 可以在标签中使用插值，但是不能用在标签属性上，具体见下面的“特性”
+   >      - 插值语法不能用在标签属性上
    >
    >      - 使用`v-text`指令可以更新文本内容，下例：
    >
@@ -67,13 +77,15 @@
    >        <span>{{msg}}</span>
    >        ```
    >
-   >      - 可以通过v-once指令执行一次性插值，不会动态更新，但会影响到该节点上所有的数据绑定：
+   >      - 可以通过`v-once`指令执行一次性插值，不会动态更新，但会影响到该节点上所有的数据绑定：
    >
-   >        `<span v-once>这个将不会改变： {{ msg }}</span>`
+   >        ```html
+   >        <span v-once>这个将不会改变： {{ msg }}</span>
+   >        ```
    >
    >    - **原始HTML：**
    >
-   >      - 使用v-html指令，将div内容替换为data中的`rawHtml`属性的值，并以HTML代码而非普通文本输出：
+   >      - 使用`v-html`指令，将div内容替换为data中的`rawHtml`属性的值，并以HTML代码而非普通文本输出：
    >
    >        ```html
    >        <div v-html="rawHtml"></html>
@@ -83,33 +95,42 @@
    >
    >    - **特性：**
    >
-   >      - 插值语法不能作用在HTML特性上，需要使用v-bind指令在特性上使用data数据对象上的属性值：
+   >      - 插值语法不能作用在HTML特性上，需要使用`v-bind`指令在特性上使用data数据对象上的属性值：
    >
-   >        `<div v-bind:id="dynamicId"></div>`
+   >        ```html
+   >        <div v-bind:id="dynamicId"></div>
+   >        ```
    >
    >      - 若要绑定的特性为Boolean类型，若求值结果为falsy（简而言之就是可以强制类型转化为false的那些值），则该特性被删除：
    >
-   >        `<button v-bind:disabled="isButtonDisabled">Button</button>`
+   >        ```html
+   >        // 因为disabled的值为Boolean对象，所以若此时绑定的属性求值结果为falsy，则这个button元素上不会有disabled特性
+   >        <button v-bind:disabled="isButtonDisabled">Button</button>
+   >        ```
    >
    >      - 额外提示：
    >
    >        - 在学习中我使用handleBars模板引擎，它也使用{{}}进行插值，和Vue冲突，解决办法：[vue的符号{{}}和handlebars的符号冲突问题解决](http://blog.csdn.net/u013836242/article/details/78338170)
    >
-   >        - 使用自定义的Vue组件（现在不知道不影响）批量生产div时，生成批量的id时出现错误，没能照预想地方式插值进去，解决办法：使用\转义'
+   >        - 使用自定义的Vue组件（现在不知道不影响）批量生产div时，生成批量的id时出现错误，没能照预想地方式插值进去，解决办法：使用\转义`
    >
-   >          `<div v-bind:id="\'div-\'+vm.id"></div>`
+   >          ```html
+   >          <div v-bind:id="\'div-\'+vm.id"></div>
+   >          ```
    >
    >    - **JavaScript表达式：**
    >
    >      - 数据绑定时，不仅可以简单地绑定属性值，也可以绑定JavaScript表达式，可以访问JS的部分全局变量，如`Math`和`Date`，不包括用户自定义的全局变量：
    >
-   >        `{{ number + 1 }}`
+   >        ```html
+   >        {{ number + 1 }}
    >
-   >        `{{ ok ? 'YES' : 'NO' }}`
+   >        {{ ok ? 'YES' : 'NO' }}
    >
-   >        `{{ message.split('').reverse().join('') }}`
+   >        {{ message.split('').reverse().join('') }}
    >
-   >        `<div v-bind:id="'list-' + id"></div>`
+   >        <div v-bind:id="'list-' + id"></div>
+   >        ```
    >
    >      - 每个绑定都只能包含**单个表达式**
    >
@@ -1075,14 +1096,19 @@
    >      ```js
    >      // 必须在初始化根实例之前注册组件
    >      Vue.component('my-component', {
-   >         //目前看到的例子是function返回数据对象给组件调用
-   >         data: function,
-   >         //跟data类似，接收HTML中组件标签上使用的属性，两者都可以“实例.属性名”调用
-   >         //需要对props进行验证时，props的值要从数组改成object
-   >         props: ['attrName'],
-   >         //模板，注意，模板只能有一个根元素
-   >         //另外据我代码实践，好像不能里面有<template>元素，这里可能是将template解析为HTML5的<template>元素而不是之前用到的方便分组渲染的元素
-   >         template: '<div>A custom component</div>'
+   >         data: function,   // function返回数据对象给组件调用
+   >        
+   >         props: ['attrName'],   // 跟data数据对象类似，接收HTML中组件标签上使用的属性，两者都可以“实例.属性名”调用
+   >         // 需要对props进行验证时（也就是指定变量类型，是否required之类的），props的值要从数组改成object
+   >        
+   >         template: '<div>A custom component</div>',   // 模板，注意，模板只能有一个根元素
+   >         // 另外据我代码实践，好像不能里面有<template>元素，这里可能是将template解析为HTML5的<template>元素而不是之前用到的方便分组渲染的元素
+   >        
+   >         render: function   // 渲染函数
+   >         functional: true   // 标记组件为函数式组件
+   >         filters: object	// 对象内键值对为“过滤器名: function (value)”
+   >         
+   >        // 其余的选项和Vue实例的基本一致
    >      });
    >
    >      // 创建根实例
@@ -1635,6 +1661,12 @@
    >
    >        这里官网的例子不懂，自己看吧：[作用域插槽](https://cn.vuejs.org/v2/guide/components.html#作用域插槽)
    >
+   >    - **如果没有插槽**：
+   >
+   >      组件中如果没有slot，则内容会被放进`$slots.default`，它是一个数组，里面装着内容对象。注意，要调用的话`this.$slots.default`的`this`指的是组件自身。
+   >
+   >      ![QQ图片20171120105029](C:\Users\yifei.tang\Desktop\QQ图片20171120105029.png)
+   >
    >    - ​
    >
    > 6. #### 动态组件
@@ -2071,14 +2103,201 @@
 
 3. ### 渲染函数&JSX
 
-   > ​
+   > ```html
+   > <anchored-heading :level="1">Hello world!</anchored-heading>
+   > ```
+   >
+   > ```javascript
+   > Vue.component('anchored-heading', {
+   >   render: function (createElement) {
+   >     return createElement(	// createNodeDescription，它所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，及其子节点。这样的节点描述为“虚拟节点 (Virtual Node)”，简写为“VNode”
+   >       'h' + this.level,   // tag name 标签名称
+   >       this.$slots.default // 子组件中的阵列
+   >     )
+   >   },
+   >   props: {
+   >     level: {
+   >       type: Number,
+   >       required: true
+   >     }
+   >   }
+   > })
+   > ```
+   >
+   > 1. #### createElement参数
+   >
+   >    1. **必要参数**：HTML标签字符串/组件选项对象/或返回值为String/Object的函数，
+   >
+   >    2. **可选参数**：
+   >
+   >       - 数据对象，包含各种模板相关属性，这样可以在template中使用这些属性
+   >       - VNodes子结点，可以是字符串—生成文本节点，可以是数组—包含一系列字符串/新的createElement
+   >
+   >    3. **示例**：
+   >
+   >       ```javascript
+   >       // 仅写VNodes可选参数的数组形式，这个比较有代表性
+   >       [
+   >           '先写一些文字',
+   >           createElement('h1', '一则头条'),
+   >           createElement(MyComponent, {
+   >             props: {
+   >               someProp: 'foobar'
+   >             }
+   >           })
+   >         ]
+   >       ```
+   >
+   >       ​
+   >
+   >    - **深入data对象**：
+   >
+   >      [深入 data 对象](https://cn.vuejs.org/v2/guide/render-function.html#深入-data-对象)
+   >
+   >    - **完整示例**：
+   >
+   >      [完整示例](https://cn.vuejs.org/v2/guide/render-function.html#完整示例)
+   >
+   >    - **约束**：
+   >
+   >      组件树中的所有VNodes必须是唯一的
+   >
+   >    - ​
+   >
+   > 2. #### 使用JavaScript代替模板功能
+   >
+   >    - `v-if`和`v-for`，render函数不提供，直接用js
+   >    - [`v-model`](https://cn.vuejs.org/v2/guide/render-function.html#v-model)，没有，自己实现逻辑，见原文
+   >    - [事件 & 按键修饰符](https://cn.vuejs.org/v2/guide/render-function.html#事件-amp-按键修饰符)，提供部分修饰符的简写形式，其余给出了js的变通方法
+   >    - [插槽](https://cn.vuejs.org/v2/guide/render-function.html#插槽)，通过`this.$slots`获取VNodes列表中的静态内容；`this.$scopedSlots`获取作用域插槽，能做函数用，返回VNodes；要用render函数向子组件传递作用域插槽，可用data对象中的`scopedSlots`域
+   >
+   > 3. #### JSX
+   >
+   >    原生的一层层写VNodes很麻烦，所以用 [Babel 插件](https://github.com/vuejs/babel-plugin-transform-vue-jsx)在 Vue 中使用 JSX 语法，这种更接近模板。具体见原文：[JSX](https://cn.vuejs.org/v2/guide/render-function.html#JSX)
+   >
+   > 4. #### 函数式组件
+   >
+   >    ```javascript
+   >    Vue.component('my-component', {
+   >      // 标记组件为functional，意味着它与之前的anchored-heading不同，是无状态（data），无实例（没有this上下文）的。
+   >      functional: true,
+   >      // 为了弥补缺少的实例，提供context作为上下文
+   >      render: function (createElement, context) {
+   >        // this.$slots.default 更新为 context.children
+   >        // this.level 更新为 context.props.level。
+   >        
+   >        //组件需要的一切都是通过上下文传递，包括：
+   >    // props：提供 props 的对象,2.3.0版本以后可以省略此选项，所有组件上的属性自动解析为props，此前想接受props则必须有此选项。
+   >    // children: VNode 子节点的数组
+   >    // slots: slots 对象，slots().default和children类似，但 slots().name可传递具名段落标签，slots().default只能传递匿名段落标签
+   >    // data：传递给组件的 data 对象
+   >    // parent：对父组件的引用
+   >    // listeners: (2.3.0+) 一个包含了组件上所注册的 v-on 侦听器的对象。这只是一个指向 data.on 的别名。
+   >    // injections: (2.3.0+) 如果使用了 inject 选项，则该对象包含了应当被注入的属性。
+   >      },
+   >      // Props 可选
+   >      props: {
+   >        // ...
+   >      }
+   >    })
+   >    ```
+   >
+   >    函数式组件有点：
+   >
+   >    1. 开销低（然而，对持久化实例的缺乏也意味着函数式组件不会出现在 [Vue devtools](https://github.com/vuejs/vue-devtools) 的组件树里）。
+   >    2. 程序化的在多个组件中选一个。
+   >    3. 在将children，props，data传递给子组件之前操作它们
+   >
+   >    具体应用实例见[`slots()`和`children` 对比](https://cn.vuejs.org/v2/guide/render-function.html#slots-和-children-对比)上面的代码。
+   >
+   > 5. #### 模板编译
+   >
+   >    说Vue的模板实际编译成了render函数，可以用[模板编译](https://cn.vuejs.org/v2/guide/render-function.html#模板编译)中的`Vue.compile`实时编译模板字符串简单demo来观察这个**通常不用关心**的实现细节。
+   >
+   > 6. #### 
 
 4. ### 插件
+
+   > 1. #### 开发插件
+   >
+   >    ```javascript
+   >    // 插件通常会为 Vue 添加全局功能。插件的范围没有限制
+   >    // 插件应有一个公开方法install。第一个参数是Vue构造器，第二个参数是一个可选的选项对象。
+   >    MyPlugin.install = function (Vue, options) {
+   >      // 四大用法，以及提供API以使用一个或多个用法的库
+   >      // 1. 添加全局方法或属性
+   >      Vue.myGlobalMethod = function () {
+   >        // 逻辑...
+   >      }
+   >      // 2. 添加全局资源
+   >      Vue.directive('my-directive', {
+   >        bind (el, binding, vnode, oldVnode) {
+   >          // 逻辑...
+   >        }
+   >        ...
+   >      })
+   >      // 3. 注入组件
+   >      Vue.mixin({
+   >        created: function () {
+   >          // 逻辑...
+   >        }
+   >        ...
+   >      })
+   >      // 4. 添加实例方法
+   >      Vue.prototype.$myMethod = function (methodOptions) {
+   >        // 逻辑...
+   >      }
+   >    }
+   >    ```
+   >
+   > 2. #### 使用插件
+   >
+   >    ```js
+   >    // 通过全局方法Vue.use()使用插件，可选参数——选项对象
+   >    Vue.use(MyPlugin, { someOption: true })
+   >
+   >    // Vue.js的某些官方插件检测到Vue是可访问的全局变量时会自动调用Vue.use()。然而在例如 CommonJS 的模块环境中，官方插件也要显式地调用 Vue.use()
+   >    // Vue.use自动阻止重复注册相同插件。
+   >    ```
+   >
+   >    插件和库资源：[awesome-vue](https://github.com/vuejs/awesome-vue#components--libraries) 
+   >
+   > 3. #### 
 
 5. ### 过滤器
 
 
-
+   > ```js
+   > // 组件选项内定义本地的过滤器
+   > filters: {
+   >   capitalize: function (value) {  // 总接收表达式的值 (之前的操作链的结果) 作为第一个参数
+   >     if (!value) return ''
+   >     value = value.toString()
+   >     return value.charAt(0).toUpperCase() + value.slice(1)
+   >   }
+   > }
+   >
+   > // 全局定义
+   > Vue.filter('capitalize', function (value) {
+   >   if (!value) return ''
+   >   value = value.toString()
+   >   return value.charAt(0).toUpperCase() + value.slice(1)
+   > })
+   > ```
+   >
+   > ```html
+   > <!-- 在双花括号中 -->
+   > {{ message | capitalize }}
+   > <!-- 在 v-bind 中 -->
+   > <div v-bind:id="rawId | formatId"></div>
+   > <!-- 过滤器可以串联 -->
+   > {{ message | filterA | filterB }}
+   > <!-- 过滤器是 JavaScript 函数，因此可以接收参数 -->
+   > <!-- 此时操作链的结果作为第一个参数，普通字符串arg1作为第二个参数，表达式 arg2 的值作为第三个参数。 -->
+   > {{ message | filterA('arg1', arg2) }}
+   > ```
+   >
+   > ​
 
 
 ## 工具
@@ -2089,27 +2308,62 @@
 
 ## 规模化
 
-1. ### 路由
+略，说的东西非常少，自己去看，然后选择性学习页面里的扩展链接
 
-   > d
-   >
-   > 1. #### 官方路由
-   >
-   >    ​
-   >
-   > 2. #### 从零开始简单的路由
-   >
-   > 3. #### 整合第三方路由
-
-2. ### 状态管理
-
-3. ### 服务端渲染
 
 
 
 ## 内在
 
-暂略
+1. ### 深入响应式原理
+
+   > 1. #### 如何追踪变化
+   >
+   >    > 1. 传入JS对象给Vue实例的`data`选项；
+   >    > 2. Vue遍历此对象所有属性，使用 [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 把这些属性全部转为 getter/setter。因为此方法是ES5的一个无法shim的特性，所以Vue不支持IE8及更低版本浏览器；
+   >    > 3. 在内部，getter/setter让Vue追踪以来，在属性变化时通知变化；
+   >    > 4. Vue实例都有相应的watcher实例对象，它在组件渲染过程中将属性记录为依赖。之后每当setter被调用，都会通知watcher重新计算，从而更新与属性关联的组件
+   >
+   > 2. #### 检测变化的注意事项
+   >
+   >    本文最开始提到过，Vue不能检测到对象属性的添加/删除。
+   >
+   >    Vue初始化实例时对属性执行getter/setter转化，所以属性必须在初始化时的`data`对象上存在才会是响应式的，即————
+   >
+   >    **Vue不允许在已创建的实例上动态添加新的根级响应式属性。**
+   >
+   >    - **变通方法**：
+   >
+   >      ```js
+   >      // 这些方法在前面的数组渲染里面讲过
+   >
+   >      // 将响应式属性添加到data对象里嵌套的对象上
+   >      Vue.set(vm.someObject, 'b', 2);
+   >
+   >      // 别名方法vm.$set
+   >      this.$set(this.someObject, 'b', 2);
+   >
+   >      // 添加多个属性
+   >      // 使用 Object.assign() 或 _.extend() 方法来添加的新属性不会触发更新，解决办法是创建一个新的对象，让它包含原对象的属性和新的属性
+   >      this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+   >
+   >      // 另外列表渲染中还讲过一些变动数组相关的响应式检测问题
+   >      ```
+   >
+   > 3. #### 声明响应式属性
+   >
+   >    之前说过：如果初始化实例时要添加的响应式属性的值还不确定，也要先在data对象里声明一个空属性，以后再设置
+   >
+   >    技术原因：
+   >
+   >    1. 更高效
+   >    2. 可维护性好
+   >
+   > 4. #### 异步更新队列
+   >
+   >    Vue异步执行DOM更新：观察到数据变化时Vue开启一个队列，同一个watcher被多次触发，只会推一次到队列中。然后下一个时间循环“tick"中Vue刷新队列并执行实际（已去重）工作。（异步队列原理方法见原文：[异步更新队列](https://cn.vuejs.org/v2/guide/reactivity.html#异步更新队列)）
+   >
+   >    这样一来，当data属性发生变化时，组件不会立即重新渲染，而是在刷新队列机制中队列清空的下一个“tick”更新。如果想在DOM状态更新后立即操作，可以在数据变化后立即使用`Vue.nextTick(callback)`。这样callback就会在DOM更新完成后调用，组件内可以使用`this.$nextTick(callback)`，具体例子见原文。
 
 
 

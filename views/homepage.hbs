@@ -18,9 +18,18 @@
     Vue.component('magnet-item', {
         props: ['id', 'url', 'title'],
         template:
-        `<div class="magnet" :id="\'magnet-\'+ id">
+        `<div class="magnet" @click="onClick" style="cursor:pointer" :id="\'magnet-\'+ id">
             <a :href="url" target="_blank">\{{ title }}</a>
-        </div>`
+        </div>`,
+        methods: {
+            onClick: function (event) {
+                if (event) {
+                    if (event.target.tagName === 'DIV' ) {
+                        event.target.childNodes[0].click();
+                    }
+                }
+            }
+        }
     });
 
     var magnets = new Vue({
@@ -56,6 +65,11 @@
                     id: 5,
                     title: '代码测试',
                     url: '/test'
+                },
+                {
+                    id: 6,
+                    title: 'Vue单页应用',
+                    url: '/spa'
                 }
             ]
         }
