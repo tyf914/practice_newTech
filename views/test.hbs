@@ -6,28 +6,33 @@
 <body>
 
 <div id="test">
-    <anchored-heading :level="1">Hello world!</anchored-heading>
+    <my-awesome-list :items="items">
+        <li slot="item" slot-scope="props">
+            \{{ props.text }}
+        </li>
+    </my-awesome-list>
 </div>
 
 <script>
-    Vue.component('anchored-heading', {
-        render: function (createElement) {
-            return createElement(
-                    'h' + this.level,   // tag name 标签名称
-                    this.$slots.default // 子组件中的阵列
-            )
-        },
-        props: {
-            level: {
-                type: Number,
-                required: true
-            }
-        }
-    })
+    Vue.component('my-awesome-list', {
+        props: ['items'],
+        template: `
+<ul>
+    <slot name="item" v-for="item in items" :text="item.text">
+        暂无数据
+    </slot>
+</ul>
+       `
+    });
 
     var vm = new Vue({
-        el: '#test'
-    })
+        el: '#test',
+        data: {
+            items: [{
+                a: 'a'
+            }]
+        }
+    });
 
 </script>
 
