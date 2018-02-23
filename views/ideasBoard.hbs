@@ -12,7 +12,7 @@
             <br>
             <b>详情：</b><span v-html="idea.desc"></span>
             <br>
-            <span v-if="idea.notes"><b>备注：</b> \{{ idea.notes }}</span>
+            <span v-if="idea.notes"><b>备注：</b> <span v-html="idea.notes"></span></span>
             <br>
             <br>
         </li>
@@ -92,6 +92,11 @@
                     title: '租房平台',
                     desc: '以职业人群为卖点，最开始可以做一个北京程序员租房平台',
                     notes: '还不完善，以后再说'
+                },
+                {
+                    title: '博客名称：香谣',
+                    desc: '过去人生的二十余年，记忆里某些人的芬芳是假的，生活中的快乐是假的，感官被蒙蔽，思想积了灰，但如果虚假的香味一直持续下去，也许大家都会快乐吧',
+                    notes: '每个页面背景里一副漂亮的花，比如在<a href="http://www.51yuansu.com/">觅元素</a>里搜丁香，其中的某些图片的风格'
                 }
             ]
         }
