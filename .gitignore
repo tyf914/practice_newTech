@@ -58,4 +58,4 @@ typings/
 .env
 
 .idea
-views/test.hbs
+/views/test.hbs
