@@ -43,7 +43,10 @@ body {
   background-color: #303538; }
 
 a {
+  color: #2d8cf0;
   text-decoration: none; }
+  a:hover {
+    color: #005cc5; }
 
 .container {
   word-wrap: break-word;

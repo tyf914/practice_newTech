@@ -12,6 +12,10 @@ body {
 }
 
 a {
+  color: #2d8cf0;
+  &:hover {
+    color: #005cc5;
+  }
   text-decoration: none;
 }
 
