@@ -11,21 +11,21 @@ body {
   font-weight: bolder; }
 
 .mk-h1 {
-  font-size: 2rem;
-  line-height: 3rem;
+  font-size: 1.9rem;
+  line-height: 2.9rem;
   margin-bottom: 0.75rem; }
 
 .mk-h2 {
-  font-size: 1.5rem;
-  line-height: 2.5rem; }
+  font-size: 1.4rem;
+  line-height: 2.4rem; }
 
 .mk-h3 {
-  font-size: 1.1rem;
-  line-height: 2.1rem; }
+  font-size: 1rem;
+  line-height: 2rem; }
 
 .mk-h4 {
-  font-size: 0.85rem;
-  line-height: 2.15rem; }
+  font-size: 0.75rem;
+  line-height: 2.05rem; }
 
 .mk-hr {
   display: flex;
@@ -57,7 +57,7 @@ a {
   transform-origin: left top;
   background-color: white; }
   .container > div:not(:last-of-type) {
-    margin-bottom: 4rem; }
+    margin-bottom: 3rem; }
 
 .topNav {
   background-color: #303538;
