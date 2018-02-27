@@ -52,6 +52,8 @@
 
 1. **<!DOCTYPE> 声明**
 
+   > **解释**
+   >
    > <!DOCTYPE> 声明位于文档中的最前面，处于 <html> 标签之前。告知浏览器以何种模式来渲染文档。
    >
    > 严格模式的排版和 JS 运作模式是以该浏览器支持的最高标准运行。
@@ -62,7 +64,7 @@
    >
    > ​
    >
-   > 你知道多少种Doctype文档类型？
+   > **你知道多少种Doctype文档类型？**
    >
    > 该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档。
    >
@@ -74,42 +76,61 @@
 
 2. **HTML5的了解**
 
-   > 新的HTML标准，
+   > 新的HTML标准。
    >
-   > 标签的增改废，新的api，语义化，多媒体，canvas，svg，本地存储，支持跨域，移动优先。
+   > 标签的增改废，语义化，多媒体，canvas，svg，本地存储，跨平台，移动优先，Geolocation，Workers多线程处理。
+   >
+   > ​
+   >
+   > HTML5 中的一些有趣的新特性：
+   >
+   > - 用于绘画的 canvas 元素
+   > - 用于媒介回放的 video 和 audio 元素
+   > - 对本地离线存储的更好的支持
+   > - 新的特殊内容元素，比如 article、footer、header、nav、section
+   > - 新的表单控件，比如 calendar、date、time、email、url、search
 
 3. **语义化**
 
-   > 1. 去掉或者丢失样式的时候能够让页面呈现出清晰的结构
-   > 2. 有利于SEO:和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重；
-   > 3. 方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页；
-   > 4. 便于团队开发和维护，语义化更具可读性，是下一步吧网页的重要动向，遵循W3C标准的团队都遵循这个标准，可以减少差异化。
+   > 1. 语义化更具可读性，便于团队开发和维护，减少差异化。
+   > 2. 去掉或者丢失样式的时，能够让页面呈现出清晰的结构
+   > 2. 有利于SEO；
+   > 4. 方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）；
 
 4. **HTML5本地存储**
 
-   > 1. 浏览器本地存储
+   > 1. **浏览器本地存储**
    >
    >    在较高版本的浏览器中，js提供了sessionStorage和globalStorage。在HTML5中提供了localStorage来取代globalStorage。
    >
-   > 2. html5中的Web Storage包括了两种存储方式：sessionStorage和localStorage。
+   > 2. **html5中的Web Storage包括sessionStorage和localStorage。**
    >
-   >    sessionStorage用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。
+   >    **sessionStorage**：
    >
-   >    而localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。
+   >    用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。
+   >
+   >    **localStorage**：
+   >
+   >    用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。
+   >
+   >    ​
    >
    >    localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等
    >
-   > 3. web storage和cookie的区别
+   > 3. **web storage和cookie的区别**
    >
-   >    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。
+   >    Web Storage和cookie概念相似，但
    >
-   >    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。
+   >    1. 前者是为了更大容量存储设计的。而Cookie大小受限（不同浏览器情况不同）；
+   >    2. Cookie每次你请求一个新的页面的时候Cookie都会被发送过去，浪费了带宽；
+   >    3. cookie还需要指定作用域，不可以跨域调用；
+   >    4. Web Storage拥有setItem,getItem,removeItem,clear等方法，cookie需要前端开发者自己封装setCookie，getCookie。
    >
-   >    但是cookie也是不可以或缺的：cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生
+   >    但cookie也是不可或缺的：cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生
    >
-   > 4. 浏览器的支持
+   > 4. **浏览器的支持**
    >
-   >    除了IE7及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，值得一提的是IE总是办好事，例如IE7、IE6中的userData其实就是javascript本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持web storage。
+   >    除了IE7及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，通过代码封装可以统一到所有的浏览器都支持web storage。
    >
    > ​
 
@@ -121,37 +142,35 @@
 
 ### **CSS类**
 
+总复习：[学习CSS布局](http://zh.learnlayout.com/)
+
 1. **盒模型**
 
-   > **含义**
-
-   ```
-   一个元素盒模型的层次从内到外分别为：内边距、边框和外边距   
-   ```
-
+   > **含义**：
+   >
+   > 一个元素盒模型的层次从内到外分别为：内边距padding、边框border和外边距margin   
+   >
    > **延伸**：
-
-   ```
-   盒子模型分为两类：W3C标准盒子模型和IE盒子模型   
-   W3C盒子模型——属性高和属性宽不包含padding和border，即box-sizing的默认属性content-box
-   IE盒子模型——属性高和宽包含padding和border，即border-box。
-   我们在编写页面代码的时候应该尽量使用标准的W3C盒子模型（需要在页面中声明DOCTYPE类型），避免多个浏览器对同一页面的不兼容。
-   因为如果不声明DOCTYPE类型，IE会将盒子模型解释为IE盒子模型，FireFox等会将其解释为W3C盒子模型；
-   而如果在页面中声明了DOCTYPE模型，所有的浏览器都会把盒子模型解释为W3C盒子模型。
-   ```
+   >
+   > 盒子模型分为两类：
+   > W3C盒子模型：属性height和属性width不包含padding和border，即box-sizing的默认属性content-box
+   > IE盒子模型：即border-box。
+   >
+   > 若不声明DOCTYPE类型，IE会将盒子模型解释为IE盒子模型，FireFox等会将其解释为W3C盒子模型；
+   > 若声明了DOCTYPE模型，所有浏览器都会解释为W3C盒子模型。
 
 2. **position**
 
    > [CSS中position属性介绍(新增sticky)](http://www.cnblogs.com/s1nker/p/4835079.html)
 
-   | 属性       | 释义                                       |
-   | -------- | ---------------------------------------- |
-   | static   | 默认值。没有定位，元素出现在正常的流中                      |
+   | 属性     | 释义                                                         |
+   | -------- | ------------------------------------------------------------ |
+   | static   | 默认值。没有定位，元素出现在正常的流中                       |
    | inherit  | 继承父元素的position属性，IE8以及往前的版本都不支持inherit属性。 |
-   | relative | 生成相对定位的元素，相对于其在普通流中的位置进行定位。              |
-   | absolute | 生成绝对定位的元素， 相对于position:relative/absolute的父级元素定位，如果没有，就相对于body定位，但是没设置left/right/top/bottom中的某一项时，显示效果和没设置absolute一样。 |
+   | relative | 生成相对定位的元素，相对于其在普通流中的位置进行定位。       |
+   | absolute | 生成绝对定位的元素， 相对于`position:relative/absolute`的父级元素定位，如果没有，就相对于body定位，但是没设置`left/right/top/bottom`中的某一项时，显示效果和没设置absolute一样。 |
    | fixed    | 生成固定定位的元素，通常相对于浏览器窗口或 frame 进行定位。（老版本IE不支持） |
-   | sticky   | 生成粘性定位的元素，容器的位置根据正常文档流计算得出，具体见上面的链接      |
+   | sticky   | 生成粘性定位的元素，容器的位置根据正常文档流计算得出，目前并不是W3C推荐标准。具体见上面的链接 |
 
 3. **浮动和清除浮动**
 
@@ -169,10 +188,16 @@
    >
    > **解决方法**：  
    >
-   > 使用CSS中的clear:both;属性来清除元素的浮动可解决2、3问题，对于问题1，添加如下样式，给父元素添加clearfix样式：
+   > 使用CSS的`clear:both;`来清除元素的浮动可解决2、3问题，对于问题1，添加如下样式，给父元素添加clearfix样式：
    >
    > ```css
-   > .clearfix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+   > .clearfix:after{
+   >     content: ".";
+   >     display: block;
+   >     height: 0;
+   >     clear: both;
+   >     visibility: hidden;
+   > }
    > .clearfix{display: inline-block;} /* for IE/Mac */
    > ```
    >
@@ -199,6 +224,73 @@
 4. **伪类**
 
    > [css3选择器——伪类选择器](http://www.w3cplus.com/css3/pseudo-class-selector)
+   >
+   > **伪类语法的两种表达方式**：
+   >
+   > ```css
+   > a:link {color: red;}
+   > a.className:hover {color: blue;}
+   > ```
+   >
+   > 1. 动态伪类
+   >
+   >    ```css
+   >    a:link /* 未被访问时 */
+   >    a:visited /* 链接被访问过后  */
+   >    a:hover /* 鼠标悬浮时 */
+   >    a:active /* 鼠标点中激活链接时 */
+   >    /* 应遵守先后顺序 Link--visited--hover--active */
+   >
+   >    :focus /* 用于元素成为焦点时，常用于表单元素 */
+   >    ```
+   >
+   > 2. UI 元素状态伪类
+   >
+   >    `:enabled`,`:disabled`,`:checked`，主要针对表单元素
+   >
+   > 3. CSS3的`:nth`选择器
+   >
+   >    ```css
+   >    :first-child /* 选择某个元素的第一个子元素 */ 
+   >    :last-child /* 选择某个元素的最后一个子元素 */
+   >    :nth-child() /* 选择某个元素的一个或多个特定的子元素 */
+   >    :nth-last-child() /* 选择某个元素的一个或多个特定的子元素，从这个元素的最后一个子元素开始算 */
+   >    :nth-of-type() /* 选择指定的元素 */
+   >    :nth-last-of-type() /* 选择指定的元素，从元素的最后一个开始计算 */
+   >    :first-of-type /* 选择一个上级元素下的第一个同类子元素 */
+   >    :last-of-type /* 选择一个上级元素的最后一个同类子元素 */
+   >    :only-child选 /* 择的元素是它的父元素的唯一一个了元素 */
+   >    :only-of-type /* 选择一个元素是它的上级元素的唯一一个相同类型的子元素 */
+   >    :empty /* 选择的元素里面没有任何内容 */
+   >    ```
+   >
+   >
+   >    /* :nth-child()较为常用 */
+   >    :nth-child(length); /* 参数是具体数字 */
+   >    :nth-child(n); /* 参数是n,n从0开始计算,不能用负值。若直接用字母n,将选中所有子元素 */
+   >    :nth-child(n*length) /* n的倍数选择，n从0开始算，字母只能用n */
+   >    :nth-child(n+length); /* 选择大于length后面的元素 */
+   >    :nth-child(-n+length) /* 选择小于length前面的元素 */
+   >    :nth-child(n*length+1); /* 表示隔几选一 */
+   >    ```
+   >
+   > 4. 否定选择器`:not`
+   >
+   >    ```css
+   >    /* 与jQuery的:not选择器用法相同 */
+   >    input:not([type="submit"]) {border: 1px solid red;}
+   >    ```
+   >
+   > 5. **伪元素**
+   >
+   >    CSS3中为伪元素多加了个`:`，用来区分伪类和伪元素，目前两种写法皆可。
+   >
+   >    ```css
+   >    p::first-line {} /* 选择元素的第一行 */
+   >    p::first-letter {} /* 选择文本块的第一个字母 */
+   >    ::before和::after /* 用来给元素的前面或后面插入内容，常用"content"配合使用，见过最多的就是清除浮动 */
+   >    ::selection /* CSS3新增，用来改变浏览网页选中文本的background和color */
+   >    ```
 
 
 5. **css选择器优先级**
@@ -209,13 +301,91 @@
 
 6. **link标签和@import**
 
-   > [css link和@import区别用法](http://www.divcss5.com/rumen/r431.shtml)
+   > `<link>`:
+   >
+   > ```html
+   > <link href="CSSurl路径" rel="stylesheet" type="text/css" />
+   > ```
+   >
+   > `@import`:
+   >
+   > ```html
+   > <!-- 1.在HTML中使用 -->
+   > <style type="text/css">
+   > 	@import url(CSS文件路径地址);
+   > </style>
+   >
+   > <!-- 2.在CSS中直接使用 -->
+   > ```
+   >
+   > 区别与选择：
+   >
+   > `<link>`是HTML标签，只能放入HTML代码中使用，`@import`可看做CSS样式，作用是引入CSS样式
 
 7. **定位**
 
-   > 文档普通流、position定位、浮动
+   > 1. **文档流**
    >
-   > 元素的定位属性：position以及相关的top/right/bottom/left，clip，vertical-align，overflow，z-index
+   >    将窗体自上而下分成一行一行,并在每行中按从左至右的挨次排放元素,即为普通流/文档流。
+   >
+   >    补充：内联元素为行内元素，非浮动块级元素都另起一行, 浮动元素则按规则浮在行的一端。若当时行容不下, 则另起新行再浮动。浮动元素的定位照样基于正常的文档流**浮动元素不占任何正常文档流空间**，当一个元素脱离正常文档流后，文档流中的其他元素将忽略该元素并填补其原先的空间
+   >
+   > 2. **文本流**
+   >
+   >    文档流相对于盒子模型，文本流相对于文字段落。
+   >
+   >    **元素浮动后**，跳出文档流。其他元素无视它所占据的区域直接在它身下布局，但文字不会无视，文字会围绕它布局，即**没有脱离文本流**。
+   >
+   >    绝对定位后，文字会脱离文本流，后面元素的文本不再认同它的位置区域，不再环绕。
+   >
+   > 3. **position定位**
+   >
+   >    | **属性值** | **文档流**           | **注释**                                                     |
+   >    | ---------- | -------------------- | ------------------------------------------------------------ |
+   >    | absolute   | 完全离开文档流       | 绝对定位；使用left，right，top，bottom等属性相对于其最接近的一个具有定位设置（即position值不为默认值static）的父对象进行绝对定位。如果不存在这样的父对象，则依据body对象。而其层叠通过z-index属性定义。当对象定位在浏览器窗口以外，浏览器因此显示滚动条 |
+   >    | relative   | 原本所占的空间仍保留 | 相对定位；对象不可层叠，但将依据left，right，top，bottom等属性在正常文档流中偏移位置。当对象定位在浏览器窗口以外，浏览器因此显示滚动条。 |
+   >    | fixed      | 完全离开文档流       | 固定定位； 对象定位遵从绝对(absolute)方式，但是要遵守一些规范。当对象定位在浏览器窗口以外，浏览器不会因此显示滚动条，而当滚动条滚动时，对象始终固定在原来位置，即相关于视区进行偏移。 |
+   >    | static     | 正常文档流           | 默认情况； 元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。 |
+   >    | inherit    | 视情况               | 继承值，对象将继承其父对象相应的值。                         |
+   >
+   > 4. **浮动**
+   >
+   >    见上文；
+   >
+   > 5. **元素的定位属性**
+   >
+   >    1. position以及相关的top/right/bottom/left
+   >
+   >    2. clip
+   >
+   >       ```css
+   >       /* 这个属性用于给绝对定位元素定义一个裁切矩形，超出矩形区域的部分按overflow值进行处理
+   >        */
+   >       img{
+   >           position:absolute;
+   >           clip:rect(0px,60px,200px,0px);
+   >       }
+   >       ```
+   >
+   >    3. vertical-align
+   >
+   >       次元素影响**inline-level元素和table-cell元素**垂直方向上的布局。根据[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)描述，vertical-align对::first-letter和::first-line同样适用。
+   >
+   >    4. overflow
+   >
+   >       overflow属性指定如果内容溢出一个元素的框，会发生什么。（还有overflow-x和overflow-y）
+   >
+   >       | 值      | 描述                                                     |
+   >       | ------- | -------------------------------------------------------- |
+   >       | visible | 默认值。内容不会被修剪，会呈现在元素框之外。             |
+   >       | hidden  | 内容会被修剪，并且其余内容是不可见的。                   |
+   >       | scroll  | 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。 |
+   >       | auto    | 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。 |
+   >       | inherit | 规定应该从父元素继承 overflow 属性的值。                 |
+   >
+   >    5. z-index
+   >
+   >       z-index属性指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面）。属性值可为负数，属性值更大的元素显示在前。
 
 
 7. **实现阴影有哪些方式**
@@ -230,20 +400,71 @@
 10. **display的几种值**
     > 1. inherit
     > 2. none
-    > 3. inline&inline开头的
+    > 3. inline&inline开头的（常见：inline、inline-block）
     > 4. block
     > 5. flex
     > 6. ruby&ruby开头的
-    > 7. table&table开头的
+    > 7. table&table开头的（常见：table、table-cell）
     > 8. list-item
     > 9. run-in
     > 10. compact
 
 11. **响应式布局**
 
-    > 目前接触到的就是rem，em和媒体查询，听过过手机端的ratio，viewport之类的，没用过
+    > 目前接触到的：
     >
-    > 一般用Chrome浏览器的调试工具观察效果
+    > 1. rem/em
+    >
+    >    em：1em = 父元素的`font-size`大小；
+    >
+    >    rem: 1rem = 根元素的`font-size`大小；
+    >
+    > 2. `calc()`
+    >
+    >    ```css
+    >    width: calc(100% - 50px);
+    >    /* 用于动态计算长度值。四则运算，运算符前后都需要保留一个空格 */
+    >    ```
+    >
+    > 3. 媒体查询
+    >
+    >    ```css
+    >    @media [not|only] mediatype and (expressions) {
+    >        CSS code;
+    >    }
+    >    /* 常见mediaType:all、screen，通过在expressions中设置断点来为不同大小的屏幕匹配不同的样式 */
+    >    ```
+    >    ```html
+    >    <!-- 也可以针对不同的媒体使用不同stylesheets -->
+    >    <link rel="stylesheet" media="mediatype and|not|only (media feature)" href="mystylesheet.css">
+    >    ```
+    >
+    > 4. viewport
+    >
+    >    ```HTML
+    >    <!-- 简单来说就是显示网页的区域，若视口宽度大于设备宽度，出现横向滚动条 -->
+    >    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    >    ```
+    >
+    > 5. devicePixelRatio
+    >
+    >    和ViewPort一样常见于移动端开发，window.devicePixelRatio = 物理像素 / 独立像素，比如在Retina屏的iphone上，devicePixelRatio = 2，1个css像素相当于2个物理像素。
+    >
+    >    这时会导致1px被渲染成2px，解决办法：
+    >
+    >    ```
+    >    1 局部处理
+    >        mate标签中的 viewport属性 ，initial-scale 设置为 1 
+    >        rem 按照设计稿标准走，外加利用transfrome 的scale(0.5) 缩小一倍即可；
+    >
+    >    2 全局处理
+    >        mate标签中的 viewport属性 ，initial-scale 设置为 0.5
+    >        rem 按照设计稿标准走即可
+    >    ```
+    >
+    > 6. ​
+    >
+    > 我一般用Chrome浏览器的调试工具观察效果
 
 12. **图片轮播**
 
@@ -253,6 +474,57 @@
 
 13. **实现各种水平/垂直/水平垂直居中效果**
 
+    > 1. 盒子水平垂直居中：
+    >
+    >    > 1. 定位 + 盒子宽高已知
+    >    >
+    >    >    ```css
+    >    >    position: absolute; 
+    >    >    left: 50%; 
+    >    >    top: 50%; 
+    >    >    margin-left:-自身一半宽度; 
+    >    >    margin-top: -自身一半高度;
+    >    >    ```
+    >    >
+    >    > 2. table-cell布局 
+    >    >
+    >    >    ```css
+    >    >    /* 父级 */
+    >    >    display: table-cell;
+    >    >    vertical-align: middle;
+    >    >
+    >    >    /* 子级 */
+    >    >    margin: 0 auto;
+    >    >    ```
+    >    >
+    >    > 3. 定位 + transform + 子盒子宽高不定
+    >    >
+    >    >    ```css
+    >    >    position: relative/absolute;
+    >    >    top: 50%;
+    >    >    left: 50%;
+    >    >    transform: translate(-50%, -50%);
+    >    >    ```
+    >    >
+    >    > 4. flex布局
+    >    >
+    >    >    ```css
+    >    >    /* 父级 */
+    >    >    display: flex;
+    >    >    /*实现垂直居中*/
+    >    >    align-items: center;
+    >    >    /*实现水平居中*/
+    >    >    justify-content: center;
+    >    >    ```
+    >    >
+    >    > 5. ​
+    >
+    > 2. 文字的水平垂直居中
+    >
+    >    > ​
+    >
+    > 3. ​
+    >
     > [超简单的图片水平垂直居中](http://blog.csdn.net/u013836242/article/details/77747790)
     >
     > [用css让一个容器水平垂直居中](http://www.cnblogs.com/xianyulaodi/p/5863305.html)
@@ -298,6 +570,34 @@
 21. **DOM和BOM**
 
     > [DOM&BOM知识点](./resource/DOM&BOM知识点.xmind)
+
+22. **文本溢出**
+
+    > 1. 单行文本
+    >
+    >    ```css
+    >    overflow: hidden;
+    >    text-overflow:ellipsis;
+    >    white-space: nowrap;
+    >    /* 当然还需要加宽度width属来兼容部分浏览*/
+    >    ```
+    >
+    > 2. 多行文本
+    >
+    >    ```css
+    >    display: -webkit-box;
+    >    -webkit-box-orient: vertical;
+    >    -webkit-line-clamp: 行数;
+    >    overflow: hidden;
+    >    ```
+    >
+    >    ​
+    >
+    > 3. 后续优化
+    >
+    >    暂略
+
+23. ​
 
     ​
 
@@ -727,6 +1027,45 @@
    > 压缩
    >
    > css sprites，以及类似的各种自动化工具打包合并文件以减少请求次数
+   >
+   > ​
+   >
+   >     渲染优化：
+   >     1.禁止使用iframe（阻塞父文档onload事件）；
+   >         *iframe会阻塞主页面的Onload事件；
+   >         *搜索引擎的检索程序无法解读这种页面，不利于SEO;
+   >         *iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+   >     
+   >         使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript
+   >         动态给iframe添加src属性值，这样可以绕开以上两个问题。
+   >     
+   >     2.禁止使用gif图片实现loading效果（降低CPU消耗，提升渲染性能）；
+   >     3、使用CSS3代码代替JS动画（尽可能避免重绘重排以及回流）；
+   >     4、对于一些小图标，可以使用base64位编码，以减少网络请求。但不建议大图使用，比较耗费CPU；
+   >             小图标优势在于：
+   >                 1.减少HTTP请求；
+   >                 2.避免文件跨域；
+   >                 3.修改及时生效；
+   >     
+   >     5、页面头部的<style></style> 会阻塞页面；（因为 Renderer进程中 JS线程和渲染线程是互斥的）；
+   >     6、页面头部<script</script> 会阻塞页面；（因为 Renderer进程中 JS线程和渲染线程是互斥的）；
+   >     7、页面中空的 href 和 src 会阻塞页面其他资源的加载 (阻塞下载进程)；
+   >     
+   >     8、网页Gzip，CDN托管，data缓存 ，图片服务器；
+   >     9、前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+   >     10、用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+   >     11、当需要设置的样式很多时设置className而不是直接操作style。
+   >     12、少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+   >     13、避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+   >     14、图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+   >     
+   >     15、 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。
+   >         对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。
+   >             向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，
+   >             能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，
+   >             本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。
+   >             减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），
+   >             减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。
 
 2. **模块化，依赖关系**
 
@@ -746,11 +1085,12 @@
 
 3. **gulp怎么用，用过啥**
 
-   > 没用过，用过grunt，跟着网上的课程学的时候学了一点点，知道是干啥的，没看过文档
+   > 用过grunt和webpack。
+   >
+   > grunt只是自己练习技术照着教程打包，webpack是学了一点但没实践忘了。
 
 4. **webpack和为什么要打包**
 
-   > 1. 同上
    > 2. 这三个都是自动化工具，就是为了减少重复劳动（压缩，编译，单元测试，代码检查），提高效率的，无论是工作效率还是访问效率。
 
 5. ​
@@ -826,4 +1166,5 @@
     [2]: http://www.nowcoder.com/discuss/5168
     [3]: https://mdluo.github.io/blog/about-front-end-interview/
     [4]: https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers   （高端向，还没看先存着）
-  
+    [5]: https://segmentfault.com/a/1190000013331105?utm_source=channel-newest
+
