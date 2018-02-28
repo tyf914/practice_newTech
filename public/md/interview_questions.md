@@ -388,7 +388,11 @@
    >       z-index属性指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面）。属性值可为负数，属性值更大的元素显示在前。
 
 
-7. **实现阴影有哪些方式**
+7. **CSS3**
+
+   > ​
+
+8. **实现阴影有哪些方式**
 
    > box-shadow,text-shadow等等，用的不多，一般要用到再查
 
@@ -462,7 +466,9 @@
     >        rem 按照设计稿标准走即可
     >    ```
     >
-    > 6. ​
+    > 6. zoom缩放
+    >
+    > 7. ​
     >
     > 我一般用Chrome浏览器的调试工具观察效果
 
@@ -517,13 +523,122 @@
     >    >    justify-content: center;
     >    >    ```
     >    >
-    >    > 5. ​
+    >    > 5. 浮动 + 相对定位 实现 **未知宽度浮动元素水平居中**
+    >    >
+    >    >    ```css
+    >    >    /* 父级 */
+    >    >    .parent {
+    >    >        width: 300px;
+    >    >        height: 200px;
+    >    >    }
+    >    >
+    >    >    /* 浮动的是这个包裹元素 */
+    >    >    .wraper {
+    >    >        float: left;  /* 浮动，让它自适应内容的宽度 */
+    >    >        position: relative;
+    >    >        left: 50%;  /* 相对定位到父元素宽度一半的地方 */
+    >    >        clear: both;
+    >    >    }
+    >    >
+    >    >    /* 被包裹的真正需要居中的元素 */
+    >    >    .child {
+    >    >        position: relative;
+    >    >        left: -50%;	/* 相对于包裹元素再次进行相对定位，偏移一半宽度，居中 */
+    >    >    }
+    >    >    ```
+    >    >
+    >    > 6. inline-level的**水平居中**
+    >    >
+    >    >    ```css
+    >    >    text-align: center;
+    >    >    ```
+    >    >
+    >    > 7. **水平居中**
+    >    >
+    >    >    ```css
+    >    >    margin: 0 auto;
+    >    >    /* 对浮动元素和绝对定位元素无效 */
+    >    >    ```
+    >    >
+    >    > 8. ​
     >
-    > 2. 文字的水平垂直居中
+    > 2. 单行文字垂直居中
+    >
+    >    > ```css
+    >    > line-height: 文字父容器的height；
+    >    > ```
+    >
+    > 3. 多行文字垂直居中
+    >
+    >    > ```css
+    >    > /* 核心思想：把文字当成图片处理，用处理图片垂直居中的方式 */
+    >    >
+    >    > /* 父级，采用table-cell居中法 */
+    >    > div {
+    >    >     dispaly: table-cell;
+    >    >     vertical-align: middle;
+    >    >     ......
+    >    > }
+    >    > /* 子级 */
+    >    > span { /* 用一个span标签封装文字 */
+    >    >     display: inline-block;
+    >    > }
+    >    > ```
+    >
+    > 4. 大小不固定的图片，水平垂直居中
     >
     >    > ​
     >
-    > 3. ​
+    > 5. 未知宽高的图片垂直居中
+    >
+    >    > 1. vertiacl-align + after伪元素
+    >    >
+    >    >    ```html
+    >    >    <style type="text/css">
+    >    >    .pic_box{
+    >    >    	...
+    >    >    }
+    >    >    .pic_box::after{
+    >    >        content: "";
+    >    >        height: 100%;
+    >    >        display: inline-block;
+    >    >        vertical-align: middle;
+    >    >    }
+    >    >    img{
+    >    >        vertical-align: middle;
+    >    >    }
+    >    >    </style>
+    >    >
+    >    >    <div class="pic_box">
+    >    >        <img src="img/sheep.png" />
+    >    >    </div>
+    >    >    ```
+    >    >
+    >    > 2. table-cell
+    >    >
+    >    >    ```html
+    >    >    <style type="text/css">
+    >    >    .pic_box{
+    >    >        display: table;
+    >    >        ...
+    >    >    }
+    >    >    .pic_box a{
+    >    >        display: table-cell;
+    >    >        vertical-align: middle;
+    >    >        width: 300px;
+    >    >        height: 300px;
+    >    >    }
+    >    >    </style>
+    >    >
+    >    >    <div class="pic_box">
+    >    >        <!-- img外嵌套一层<span>或者<a>标签 -->
+    >    >        <a href="#">
+    >    >            <img src="img/sheep.png" />
+    >    >        </a>
+    >    >    </div>
+    >    >    ```
+    >
+    > 6. ​
     >
     > [超简单的图片水平垂直居中](http://blog.csdn.net/u013836242/article/details/77747790)
     >
@@ -535,6 +650,63 @@
 
 14. **一边固定宽度一边自适应**
 
+    > 1. 固定宽度区浮动，自适应区不设宽度设置margin；
+    >
+    >    ```html
+    >    <style>
+    >        #sidebar {
+    >            float: right;
+    >            width: 300px;
+    >        }
+    >        #content {
+    >            margin-right: 310px;
+    >        }
+    >        #footer {
+    >            clear: both;
+    >        }
+    >    </style>
+    >
+    >    <div>
+    >        <div id="sidebar">
+    >            固定栏在前面，不然因为浮动会导致它在content下另起一行
+    >        </div>
+    >        <div id="content">
+    >            自适应宽度区
+    >        </div>
+    >    </div>
+    >    ```
+    >
+    > 2. 全部使用float
+    >
+    >    ```html
+    >    <style>
+    >        #sidebar {
+    >            float: right;
+    >            width: 300px;
+    >        }
+    >        #content {
+    >            float: left;
+    >            box-sizing: border-box;
+    >            width: 100%;
+    >            margin-left: -310px;
+    >            padding-left: 310px;
+    >        }
+    >        #footer {
+    >            clear: both;
+    >        }
+    >    </style>
+    >
+    >    <!-- 此时就可以在HTM中把content这个主要内容放在sidebar前面了 -->
+    >    ```
+    >
+    > 3. 使用table-cell
+    >
+    >    1. 把wrap设为display:table并指定宽度100%；
+    >    2. 然后把content+sidebar设为display:table-cell;
+    >    3. 只给sidebar指定一个宽度，那么content的宽度就变成自适应了。
+    >
+    > 4. ​
+    >
     > [固定宽度边栏另一边自适应的布局（自己加了个改善）](http://blog.csdn.net/u013836242/article/details/77748300)
 
 15. **Flex**
@@ -549,11 +721,17 @@
 
     > [CSS之BFC详解](http://www.html-js.com/article/1866)
 
-18. **hack**
+18. **css hack**
 
-    > [CSS hack 百度百科](https://baike.baidu.com/item/css%20hack/7026361?fr=aladdin)
-    >
     > [史上最全的CSS hack方式一览](http://blog.csdn.net/freshlover/article/details/12132801)
+    >
+    > **含义**：因为浏览器的差异性，为了在不同浏览器（或同一浏览器的不同版本）统一页面展示效果，针对不同浏览器/版本写相应css code。
+    >
+    > **分类**：
+    >
+    > - 属性前缀法(即类内部Hack)：例如 IE6能识别下划线"\_"和星号" * "，IE7能识别星号" * "，但不能识别下划线"_"，IE6~IE10都认识"\9"，但firefox前述三个都不能认识。
+    > - 选择器前缀法(即选择器Hack)：例如 IE6能识别\*html .class{}，IE7能识别\*+html .class{}或者*:first-child+html .class{}。
+    > - IE条件注释法(即HTML条件注释Hack)：针对所有IE(注：IE10+已经不再支持条件注释)： <!--[if IE]>IE浏览器显示的内容 <![endif]-->，针对IE6及以下版本： <!--[if lt IE 6]>只在IE6-显示的内容 <![endif]-->。这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都会生效。
 
 19. **浏览器兼容性**
 
@@ -562,10 +740,6 @@
     > JS: JS的一些方法不同，比如事件机制相关的方法和属性，Ajax
     >
     > 浏览器: 比如HTTP/1.0时代某些浏览器为协议添加Connection:keep-alive实现
-
-20. **冒泡和捕获**
-
-    > 意思 & addEventListener的最后一个Boolean参数
 
 21. **DOM和BOM**
 
@@ -591,13 +765,15 @@
     >    overflow: hidden;
     >    ```
     >
-    >    ​
-    >
     > 3. 后续优化
     >
     >    暂略
 
-23. ​
+23. **Chrome字体最小12px的解决办法**
+
+23. **\<p\>文字自动换行**
+
+24. ​
 
     ​
 
@@ -610,39 +786,161 @@
 
 ### **JS类**
 
-1. **prototype**
+1. **JS面向对象**
+
+   > 面向对象编程将真实事物抽象为一个个对象，对象具有明确分工，可以完成各种任务。对象可以复用，通过继承机制还可以定制。因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发。比起由一系列函数或指令组成的传统的过程式编程更适合多人合作的大型软件项目。
+   >
+   > - **对象是单个实物的抽象。**
+   > - **对象是一个容器，封装了属性（property）和方法（method）。**
+   > - **js面向对象基于构造函数（constructor）和原型链（prototype）**
+   >
+   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#绑定this)
+   >
+   > 链接包括：
+   >
+   > - 构造函数
+   > - new
+   > - this
+   > - 对象与继承，结合[廖雪峰老师JS教程读书笔记（一）：JS继承](http://blog.csdn.net/u013836242/article/details/77839375)
+   > - prototype
+
+2. **prototype**
 
    > [真正理解prototype](http://blog.csdn.net/u013836242/article/details/77775924)
 
-2. **new**
-
-   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#new)
-
-3. **this，怎么传入this**
-
-   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#绑定this)
-
-4. **原型链和作用域链**
+3. **原型链和作用域链**
 
    > 作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到window对象即被终止，作用域链向下访问变量是不被允许的。
 
-5. **闭包**
+4. **new**
+
+   > ​
+
+5. **拷贝数组和对象**
+
+   [javascript 数组以及对象的深拷贝（复制数组或复制对象）的方法](http://blog.csdn.net/fungleo/article/details/54931379)
+
+   > 1. 软拷贝
+   >
+   >    > 直接用`=`号复制，原数组（/对象）的修改会影响到新数组，指向同一内存地址。
+   >
+   > 2. 深拷贝
+   >
+   >    - 数组
+   >
+   >      > 1. 直接for循环复制
+   >      > 2. 用`slice()`方法，`var arr2 = arr.slice(0);`
+   >      > 3. `concat()`方法，直接`var arr2 = arr.concat();`
+   >      > 4. ES6扩展运算符`...`，`var arr2 = [...arr];`
+   >
+   >    - 对象
+
+7. **this，怎么传入this**
+
+   > this总是返回属性或方法当前所在的对象，this指向可人为改变，函数在全局环境下运行时，this指向顶层对象window。 
+   >
+   > | 方法                                                 | 用法                                                         |
+   > | ---------------------------------------------------- | ------------------------------------------------------------ |
+   > | `function.prototype.call(obj[,arg1,arg2,...])`       | f内部的this指向obj，若参数为空、null、undefined，默认传入全局对象，若参数是一个原始值（如5等），则这个原始值自动转成对应的包装对象（如Number的实例）,**可以在覆盖掉继承的方法后，用call来调用对象的原生方法** |
+   > | `function.prototype.apply(obj[, [arg1, arg2, ...]])` | 与call类似，但是——如果要传入参数，必须以数组形式传入，应用见 [原文地址](http://javascript.ruanyifeng.com/oop/this.html)，**一定要见！** |
+   > | `function.prototype.bind(obj[,arg1,arg2,...])`       | 比call和apply更进一步，不仅可以绑定this，还可以绑定原函数的参数，每一次运行都会返回一个新函数，这些话不懂的话见原文，注意事项也要见原文，**一定要见！** |
+   >
+   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#绑定this)
+
+7. ​
+
+9. **闭包**
 
    > [深入理解javascript原型和闭包（15）——闭包](http://www.cnblogs.com/wangfupeng1988/p/3994065.html)
 
-6. **数组去重**
+10. **冒泡和捕获**
 
-   > [超方便的数组去重](http://blog.csdn.net/u013836242/article/details/77750061)
-
-7. **传入函数的参数列表**
-
-   > es5:arguments
+   > 事件的三个阶段：
    >
-   > es6:rest
+   > 捕获阶段 ---> 目标阶段 ---> 冒泡阶段
+   >
+   > document   ---> target目标 ----> document
+   >
+   > ​
+   >
+   > addEventListener的第三个参数设置为true和false（默认）：
+   >
+   > true表示该元素在事件的“捕获阶段”（由外往内传递时）响应事件；
+   >
+   > false表示该元素在事件的“冒泡阶段”（由内向外传递时）响应事件。
 
-8. **伪数组**
+11. **事件委托**
 
-   > 类数组对象，具有length属性且不具有数组的方法。例如：参数列表arguments，节点列表nodelist
+    > 在父元素上监听事件。事件监听器分析从子元素冒泡上来的事件，根据event.target找到触发事件的子元素，再相应地进行事件处理，不需要进行。
+
+12. **数组排序**
+
+    > 1. sort()
+    >
+    >    [[js中sort函数的底层实现机制？](https://segmentfault.com/q/1010000007133473)](https://segmentfault.com/q/1010000007133473?_ea=1247880)
+    >
+    >    > 1. **原理**：
+    >    >
+    >    >    不同浏览器引擎的实现方式不同，V8：：数组length <= 22 时用插入排序，否则用快速排序
+    >    >
+    >    > 2. **写法**：
+    >    >
+    >    >    ```js
+    >    >    // 返回值为数组的引用，直接改变原数组
+    >    >    arr.sort(func);
+    >    >
+    >    >    // 若不使用参数，将按字符编码顺序进行排序
+    >    >
+    >    >    // 提供参数，则需要提供的比较函数返回一个值，若a<b，则返回负数，排序后的数组中a应该在b前面，以此类推
+    >    >    function NumAscSort(a,b){
+    >    >        return a - b;
+    >    >    }
+    >    >    function NumDescSort(a,b){
+    >    >        return b - a;
+    >    >    }
+    >    >    ```
+    >    >
+    >    > 3. ​
+    >
+    > 2. 参见下面的 算法类--->排序
+
+12. **数组去重**
+
+    > 1. **Set方法（es6）**
+    >
+    >   原理: 运用ES6的新数据类型Set，利用其去掉重复key的特性解构快速去重
+    >
+    >   ```js
+    >   'use strict';
+    >   [...(new Set([1, 2, 2, 3]))];  // 此处还运用了扩展运算符
+    >   ```
+    >
+    > 2. **filter()方法**
+    >
+    >   原理：filter()方法根据返回值来确认是否抛弃元素。而对于数组重复项，indexOf()方法只会返回第一个匹配到的元素的index，当筛选到重复项时，当前重复项的id自然不等于indexOf的返回值
+    >
+    >   ```js
+    >   arr.filter(function(element,index,array){
+    >       return array.indexOf(element) === index;
+    >   })
+    >   ```
+    >
+    > 3. **indexOf法**
+    >
+    > 4. **对象属性不重复法**
+    >
+    > [超方便的数组去重](http://blog.csdn.net/u013836242/article/details/77750061)
+
+14. **传入函数的参数列表**
+
+    > es5:arguments----es6:...rest
+    >
+
+15. **伪数组**
+
+    > 类数组对象，具有length属性且不具有数组的方法。例如：参数列表arguments，节点列表nodelist；
+    >
+    > ES6可以通过Array.from()转换伪数组为数组；
 
 9. **实现一个querySelectorAll的功能**
 
@@ -672,7 +970,7 @@
     >
     > ​    高端方法：
     >
-    > ​         用ES6的Array.from(arguments) 或rest，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
+    > ​         用ES6的`Array.from(arguments)` 或`...rest`，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
     >
     > 2.var arg = Array.prototype.slice.call(arguments);
     >
@@ -684,31 +982,120 @@
     >
     > 原生:innerHTML，innerText，value。
 
-12. **ES6**
+18. **严格模式**
 
-    > [30分钟掌握ES6/ES2015核心内容](http://www.jianshu.com/p/ebfeb687eb70)
+    > ​
 
-13. **Promise及相关异步操作**
+19. **ES6**
+
+    > [30分钟掌握ES6/ES2015核心内容（上）](https://segmentfault.com/a/1190000004365693)
+    >
+    > [30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)
+    >
+    > [Map和Set](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345007434430758e3ac6e1b44b1865178e7aff9082e000)
+    >
+    > [iterable](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143450082788640f82a480be8481a8ce8272951a40970000)
+    >
+    > ES6扩展运算符
+    >
+    > 异步相关
+
+20. **for循环**
+
+    > 1. **forEach()**
+    >
+    >    > `forEach()`接收一个函数，每次迭代就自动回调该函数
+    >    >
+    >    > ```js
+    >    > 'use strict';
+    >    > var a = ['A', 'B', 'C'];
+    >    > a.forEach(function (element, index, array) {
+    >    >     // element: 指向当前元素的值
+    >    >     // index: 指向当前索引
+    >    >     // array: 指向Array对象本身
+    >    >     console.log(element + ', index = ' + index);
+    >    > });
+    >    > ```
+    >
+    > 2. **for...in**
+    >
+    >    > `for...in`遍历的实际上是对象的属性名称。
+    >    >
+    >    > 问题：`Array`数组也是对象，每个元素的索引被视为一个属性。手动给`Array`对象添加了额外的属性(比如name)后，`for ... in`循环将把`name`包括在内，但`Array`的`length`属性却不包括在内。
+    >
+    > 3. **for...of**
+    >
+    >    > `for ... of`只循环集合本身的元素。
+
+21. **同步和异步**
+
+    > ​
+
+22. **Promise及相关异步操作**
 
     > [Promise](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345008539155e93fc16046d4bb7854943814c4f9dc2000)
 
-14. **JavaScript垃圾回收方法**
+23. **JavaScript垃圾回收方法**
 
-    > 1. 标记清除（mark and sweep）
+    > 1. **标记清除**（mark and sweep）
     >
     >    这是JavaScript最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开环境”。垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了
     >
-    > 2. 引用计数(reference counting)
+    > 2. **引用计数**(reference counting)
     >
     >    在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
     >
     >    ​
     >
     >    在IE中虽然JavaScript对象通过标记清除的方式进行垃圾回收，但BOM与DOM对象却是通过引用计数回收垃圾的， 也就是说只要涉及BOM及DOM就会出现循环引用问题。
+    >
+    > 3. **ES6中是如何解决引用计数导致的内存泄漏的**
+    >
+    > 4. ​
 
-15. **Cookie读写**
+24. **Cookie读写**
 
     > document.cookie进行读写
+
+25. **typeof 和 instanceof()**
+
+    > ​
+
+26. **正则**
+
+    > ​
+
+27. **变量提升**
+
+    > ​
+
+28. **jQuery_attr()和prop()**
+
+    > 1. **区别**
+    >
+    >    > `prop()`：设置/获取指定DOM元素(JS对象，Element类型)上的属性(property)；
+    >    >
+    >    > `attr()`:设置或获取指定DOM元素所对应的文档节点（node节点）上的属性(attribute)。
+    >
+    > 2. **元素和节点**
+    >
+    >    > - 元素，即html文档中所有标签都为元素，<p>、<tr>等，也就是说元素是个统称，一个文档里面有很多的元素。
+    >    > - 节点，是js为了对html文档进行操作而开发的，即DOM文档对象模型。每个元素都可以称之为一个节点，节点是唯一的。
+    >    > - 比方来说<p>标签，肯定是一个p标签元素，那如果通过js对它进行样式控制的时候，就必须获取（找到）到这个元素，称之为节点，如果有好多元素，可以获得第1个、第2个或者第n个。元素是统称，节点是具有唯一性的。
+    >    > - ​
+    >
+    > 3. **注意事项**
+    >
+    >    > - prop()依赖的是JS原生的`element[property]` 和 `element[property] = value`;
+    >    > - attr()依赖的是Element对象的`element.getAttribute(attribute) `和 `element.setAttribute(attribute, value)`。
+    >    > - 通过它设置的属性值只能是string类型（输入类型不对则调用输入类型的`toString()`）;
+    >    > - jQuery1.6以后获取表单元素的“checked”等属性也不再返回Boolean类型，而是直接返回“checked”等string类型或undefined，而且在某些版本中即使通过attr()改了这些元素的选中状态，对应的属性值也不改变，因为jQuery认为：attribute的checked、selected、disabled就是表示该属性初始状态的值，property的checked、selected、disabled才表示该属性实时状态的值(值为true或false)。
+    >    >
+    >    > 因此，**请使用`prop()`函数来设置或获取`checked`、`selected`、`disabled`等属性。对于其它能够用`prop()`实现的操作，也尽量使用`prop()`函数。**
+    >
+    > 4. ​
+
+29. ​
 
     ​
 
@@ -722,14 +1109,95 @@
 1. **手写ajax**
 
    > [廖雪峰老师JS教程读书笔记（二）：原生AJAX与跨域总结](http://blog.csdn.net/u013836242/article/details/77838304)
+   >
+   > ```js
+   > //创建一个XMLHttpRequest对象
+   > var request=new XMLHttpRequest();
+   >
+   > //readystate发生change时会执行的回调函数
+   > request.onreadystatechange=function(){
+   >     if(request.readystate===4){  //请求完成
+   >         if(request.status===200){
+   >             //请求成功要执行的代码，通过responseText取请求回来的数据
+   >         }else{
+   >             //请求失败要执行的代码，通过status判断失败原因
+   >         }
+   >     }else{
+   >         //还在请求中 
+   >     }
+   > }
+   >
+   > //规定请求的配置,method为请求方法，url为请求路径，async为是否异步，不带此参数默认为true，
+   > request.open(method,url,async)；
+   >
+   > //此时真正发送请求，data为发送的附带数据，没有要发的可以发送null，浏览器兼容好像会好一些。
+   > request.send(data || null)
+   >
+   > /*
+   > //如果不支持XMLHttpRequest对象，则需要创建ActiveXObject对象
+   > var request;
+   > if(window.XMLHttpRequest){
+   >     request=new XMLHttpRequest();
+   > }else{
+   >     request=new AcitveXObject(Microsoft XMLHTTP);
+   > }
+   > */
+   > ```
 
-2. **跨域相关**
+2. **JSON**
 
-   > 同上
+   > ​
 
 3. **jQuery的Ajax**
 
-   > ​
+   > **同源策略**：同源是指"协议+域名+端口"三者相同
+   >
+
+4. **跨域相关**
+
+   > [前端常见跨域解决方案（全）](https://segmentfault.com/a/1190000011145364)
+   >
+   > 1. **JSONP**
+   >
+   >    利用浏览器可以引用外域的JavaScript资源这个特性，在script标签中发送请求，接受回调，这种方法只能发送GET请求，且要求返回JavaScript，通常以函数调用的方式返回 
+   >    **具体实现：**
+   >
+   >    ```JS
+   >    var script = document.createElement('script');
+   >    script.type = 'text/javascript';
+   >
+   >    // 传参并指定回调执行函数为onBack
+   >    script.src = 'http://www.domain2.com:8080/login?user=admin&callback=onBack';
+   >    document.head.appendChild(script);
+   >
+   >    // 回调执行函数
+   >    function onBack(res) {
+   >        alert(JSON.stringify(res));
+   >    }
+   >    ```
+   >
+   > 2. **flash**
+   >
+   >    通过Flash插件发送请求，绕过浏览器安全限制；必须安装Flash并和Flash交互，而且现在Flash用的越来越少了。
+   >
+   > 3. **服务器代理**
+   >
+   >    `'/proxy?url=http://www.sina.com.cn'` 
+   >    在同源域名下架设代理服务器转发请求，js发送请求到这个代理服务器，代理服务器再把结果返回，麻烦在于需要在服务器端额外处理
+   >
+   > 4. **CORS**
+   >
+   >    全称Cross-Origin Resource Sharing，是HTML5规范定义的如何跨域访问资源。 
+   >    Origin为当前发送请求的页面所在的域，当它向外域发送请求时，外域发回的响应头中有一个`Access-Control-Allow-Origin`字段，如果这个字段有请求页面的Origin，或者为*(所有页面都能请求)，那么请求成功，否则失败。 
+   >    **关键**在于对方服务器是否愿意给你设置正确的`Access-Control-Allow-Origin`字段
+   >
+   > 5. **iframe系列**
+   >
+   > 6. **nodejs中间件代理**
+   >
+   > 7. **webSocket协议**
+   >
+   > 8. **postMessage跨域**
 
 4. ​
 
@@ -744,29 +1212,52 @@
 
    > [阮一峰老师网络协议相关博客读后总结_图解](http://blog.csdn.net/u013836242/article/details/77882631)
 
-2. **HTTP请求，请求和响应的头，返回的码**
+2. **HTTP请求，请求和响应的头**
 
    > 请求响应结构结构：
    >
    > 返回码：
 
-3. **https**
+3. **状态码**
 
-   >HTTP和HTTPS:
+   > - 1xx：指示信息–表示请求已接收，继续处理。
+   > - 2xx：成功–表示请求已被成功接收、理解、接受。
+   > - 3xx：重定向–要完成请求必须进行更进一步的操作。
+   > - 4xx：客户端错误–请求有语法错误或请求无法实现。
+   > - 5xx：服务器端错误–服务器未能实现合法的请求。
    >
-   >HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。
+   > ​
    >
-   >默认HTTP的端口号为80，HTTPS的端口号为443。
+   > 常见状态码：
    >
-   >为什么HTTPS安全
+   > | 状态码 | 含义                                                         | 状态码 | 含义                                                         |
+   > | ------ | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
+   > | 200    | OK，请求成功                                                 | 401    | Unauthorized， 请求要求用户的身份认证                        |
+   > | 204    | No Content， 无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档 | 403    | Forbidden， 服务器理解请求客户端的请求，但是拒绝执行此请求   |
+   > | 301    | Moved Permanently， 永久重定向。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替 | 404    | Not Found， 服务器无法根据客户端的请求找到资源（网页）。     |
+   > | 302    | Found ，临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI | 422    | 从当前客户端所在的IP地址到服务器的连接数超过了服务器许可的最大范围。通常，这里的IP地址指的是从服务器上看到的客户端地址（比如用户的网关或者代理服务器地址）。在这种情况下，连接数的计算可能涉及到不止一个终端用户。 |
+   > | 304    | Not Modified，未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源 | 500    | Internal Server Error， 服务器内部错误，无法完成请求         |
+   > | 400    | Bad Request， 客户端请求的语法错误，服务器无法理解           | 503    | Bad Gateway， 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。 |
    >
-   >因为网络请求需要中间有很多的服务器路由器的转发。中间的节点都可能篡改信息，而如果使用HTTPS，密钥在你和终点站才有。https之所以比http安全，是因为他利用ssl/tls协议传输。它包含证书，卸载，流量转发，负载均衡，页面适配，浏览器适配，refer传递等。保障了传输过程的安全性
+   > ​
 
-4. **TCP和UDP**
+4. **https**
 
-   > TCP（Transmission Control Protocol，传输控制协议）是基于连接的协议，也就是说，在正式收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“对话”才能建立起来
+   >- **HTTP和HTTPS**:
    >
-   > UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是面向非连接的协议，它不与对方建立连接，而是直接就把数据包发送过去！ UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。
+   >  HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。
+   >
+   >  默认HTTP的端口号为80，HTTPS的端口号为443。
+   >
+   >
+   >- **为什么HTTPS安全**
+   >
+   >  因为网络请求需要中间有很多的服务器路由器的转发。中间的节点都可能篡改信息，而如果使用HTTPS，密钥在你和终点站才有。https之所以比http安全，是因为他利用ssl/tls协议传输。它包含证书，卸载，流量转发，负载均衡，页面适配，浏览器适配，refer传递等。保障了传输过程的安全性
+
+5. **TCP和UDP**
+
+   > - TCP（Transmission Control Protocol，传输控制协议）是基于连接的协议，也就是说，在正式收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“对话”才能建立起来
+   > - UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是面向非连接的协议，它不与对方建立连接，而是直接就把数据包发送过去！ UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。
 
 5. **TCP握手**
 
@@ -786,26 +1277,153 @@
    >
    > 第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。
 
-6. **http2**
+7. **http2**
 
    >可参考[阮一峰老师网络协议相关博客读后总结_图解](http://blog.csdn.net/u013836242/article/details/77882631)
    >
-   >HTTP/2引入了“服务端推（server push）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。
-   >
-   >HTTP/2提供更多的加密支持  
-   >
-   >HTTP/2使用多路技术，允许多个消息在一个连接上同时交差。  
-   >
-   >它增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的header都只会占用很小比例的带宽。
+   >- HTTP/2引入了“服务端推（server push）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。
+   >- HTTP/2提供更多的加密支持  
+   >- HTTP/2使用多路技术，允许多个消息在一个连接上同时交差。  
+   >- 增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的header都只会占用很小比例的带宽。
 
 7. **WebSocket**
 
-   > WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。
+   > WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。它还支持跨域。
 
 8. **Get和Post的区别**
 
-    > ​
+  > - *GET* - 从指定的资源请求数据。
+  > - *POST* - 向指定的资源提交要被处理的数据
+  >
+  > |                  | GET                                                          | POST                                                         |
+  > | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+  > | 后退按钮/刷新    | 无害                                                         | 数据会被重新提交（不幂等）。                                 |
+  > | 书签             | 可收藏为书签                                                 | 不可收藏为书签                                               |
+  > | 缓存             | 能被缓存                                                     | 不能缓存                                                     |
+  > | 编码类型         | application/x-www-form-urlencoded                            | application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。 |
+  > | 历史             | 参数保留在浏览器历史中。                                     | 参数不会保存在浏览器历史中。                                 |
+  > | 对数据长度的限制 | GET 方法发送数据时向 URL 添加数据；URL 长度受浏览器限制。    | 无限制。                                                     |
+  > | 对数据类型的限制 | 只允许 ASCII 字符。                                          | 没有限制。也允许二进制数据。                                 |
+  > | 安全性           | 与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。在发送密码或其他敏感信息时绝不要使用 GET ！ | POST 相对于GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。 |
+  > | 可见性           | 数据在 URL 中对所有人都是可见的。                            | 数据不会显示在 URL 中。                                      |
 
+10. **从输入url到看到网页发生了什么**
+
+  > 1. **网络通信**
+  >
+  >    > 1. **浏览器输入URL**(简)
+  >    > 2. **应用层DNS解析域名**(简)
+  >    > 3. **应用层客户端发送HTTP请求**(简)
+  >    > 4. **传输层TCP传输报文**
+  >    > 5. **网络层IP协议查询MAC地址**
+  >    > 6. **数据到达数据链路层**
+  >    > 7. **服务器接收数据**(简)
+  >    > 8. **服务器响应请求**(简)
+  >    > 9. **服务器返回相应文件**(简)
+  >
+  > 2. **页面渲染**(简)
+  >
+  >    > 1. 解析HTML以构建DOM树 –> 构建渲染树 –> 布局渲染树 –> 绘制渲染树。
+  >    > 2. 在浏览器还没接收到完整的HTML文件时，它就开始渲染页面了，在遇到外部链入的脚本标签或样式标签或图片时，会再次发送HTTP请求重复上述的步骤。在收到CSS文件后会对已经渲染的页面重新渲染，加入它们应有的样式，图片文件加载完立刻显示在相应位置。在这一过程中可能会触发页面的重绘或重排。
+  >
+  > 3. ​
+  >
+  > 初级：
+  >
+  > 中级：[当你输入一个网址的时候，实际会发生什么?](http://blog.csdn.net/ygyangguang/article/details/5327278)   /   [从输入URL到浏览器显示页面的详细过程](http://blog.csdn.net/liu2011zhijie/article/details/52593887)
+  >
+  > 高级：[前端经典面试题: 从输入URL到页面加载发生了什么](https://segmentfault.com/a/1190000006879700)
+
+10. **Restful API**
+
+11. **为什么说HTTP协议是无状态的**
+
+   > ​
+
+12. **cookie和session**
+
+   [认识HTTP----Cookie和Session篇](https://zhuanlan.zhihu.com/p/27669892)
+
+   > 1. **Cookie**
+   >
+   >    > **需求**：HTTP 是无状态协议，无法根据之前的状态进行本次的请求处理。Cookie 技术通过在请求和响应报文中写入Cookie 信息来控制客户端的状态。
+   >    >
+   >    > **原理**：
+   >    >
+   >    > 1. 客户端发送请求，此时第一次访问网页，请求报文不带cookie信息；
+   >    > 2. 服务器端发送响应报文，其首部字段中含有Set-Cookie字段，通知客户端保存cookie；
+   >    > 3. 之后客户端再次访问，自动发送保存着的cookie信息（请求报文首部字段有cookie字段）。
+   >    >
+   >    > **字段属性**：
+   >    >
+   >    > ```http
+   >    > Set-Cookie: status=enable; secure; HttpOnly; expires=Tue, 05 Jul 2011 07:26:31 GMT; path=/; domain=.hackr.jp;
+   >    > ```
+   >    >
+   >    > | **属性**     | **说明**                                                     |
+   >    > | ------------ | ------------------------------------------------------------ |
+   >    > | NAME=VALUE   | 赋予Cookie的名称和值（必需项）                               |
+   >    > | expires=DATE | Cookie的有效期（不指定则默认为浏览器关闭为止），另外，服务器端无法显示删除已发送到客户端的cookie，但可以覆盖已过期的cookie来实质性删除客户端cookie |
+   >    > | path=PATH    | 将服务器上的文件目录做为Cookie的适用对象（不指定则默认为文档所在的文件目录） |
+   >    > | domain=域名  | 做为Cookie适用对象的域名（不指定则默认为创建Cookie的服务器的域名 |
+   >    > | secure       | 限制Web 页面仅在HTTPS 安全连接时，才可以发送Cookie。         |
+   >    > | HttpOnly     | 使js脚本无法document.cookie获得cookie信息，主要目的为防止XSS窃取cookie信息 |
+   >    >
+   >    > **优点**：极高的扩展性和可用性
+   >    >
+   >    > 1. 通过良好的编程，控制保存在cookie中的session对象的大小。
+   >    > 2. 通过加密和安全传输技术（SSL），减少cookie被破解的可能性。
+   >    > 3. 只在cookie中存放不敏感数据，即使被盗也不会有重大损失。
+   >    > 4. 控制cookie的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的cookie。
+   >    >
+   >    > **缺点**：
+   >    >
+   >    > 1. Cookie数量和长度的限制。每个domain最多只能有20条cookie，每个cookie长度不能超过4KB，否则会被截掉.
+   >    > 2. 安全性问题。如果cookie被人拦截了，那人就可以取得所有的session信息。即使加密也与事无补，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。
+   >    > 3. 有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用
+   >    >
+   >    > ​
+   >
+   > 2. **Session**
+   >
+   >    > **需求**：Session 对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的 Web 页之间跳转时，存储在 Session 对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。
+   >    >
+   >    > **原理**：
+   >    >
+   >    > session本身是一个抽象概念，开发者为实现中断和继续操作，将客户端与服务器一对一的交互抽象为“会话”，由此衍生出“会话状态”即session;
+   >    >
+   >    > 而此处的原理是指：session的常见实现——借助cookie发送sessionID;
+   >    >
+   >    > 1. 客户端把用户ID 和密码等登录信息放入报文的实体部分，通常是以POST 方法把请求发送给服务器；
+   >    > 2. 如果该用户还没有会话，则 Web 服务器将自动创建一个 Session 对象。通过验证从客户端发送过来的登录信息进行身份认证，然后把用户的认证状态与Session ID 绑定后记录在服务器端。当会话过期或被放弃后，服务器将终止该会话；
+   >    > 3. 服务器会发放用以识别用户的Session ID：向客户端返回响应时，会在首部字段Set-Cookie 内写入Session ID（如PHPSESSID=028a8c…）。
+   >    > 4. 客户端接收到从服务器端发来的Session ID 后，会将其作为Cookie 保存在本地。下次向服务器发送请求时，浏览器会自动发送Cookie，所以Session ID 也随之发送到服务器。服务器端可通过验证接收到的Session ID 识别用户和其认证状态。
+   >
+   > 3. **区别**
+   >
+   >    > 1. cookie数据存放在客户的浏览器上，session数据放在服务器上。
+   >    >
+   >    > 2. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，考虑到安全应当使用session。
+   >    >
+   >    > 3. session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用COOKIE。
+   >    >
+   >    > 4. 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
+   >    >
+   >    > 5. 所以个人建议：
+   >    >
+   >    >    将登陆信息等重要信息存放为SESSION
+   >    >
+   >    >    其他信息如果需要保留，可以放在COOKIE中
+   >
+   > 4. **如果客户端的浏览器禁用了 Cookie 怎么办？**
+   >
+   >    > 一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
+   >
+   > 5. ​
+   >
+   > ​
+
+13. ​
    ​
 
 ---
@@ -816,7 +1434,9 @@
 
 1. **排序**
 
-   > 1. 快速排序
+   [js实现数组排序](https://www.cnblogs.com/real-me/p/7103375.html)
+
+   > 1. **快速排序**
    >
    >    ```javascript
    >    //快速排序
@@ -877,17 +1497,29 @@
    >    }
    >    ```
    >
-   >    ​
-   >
-   > 2. 选择排序
+   > 2. **选择排序**
    >
    >    ```javascript
-   >
+   >    // 选择排序
+   >    function selectSort(arr){ 
+   >        var len = arr.length; 
+   >        var index,temp; 
+   >        for(var i = 0; i < len-1 ;i++){ 
+   >            index = i; 
+   >            for(var j = i + 1 ; j<len; j++){ 
+   >                if(arr[j] < arr[index]){ //寻找最小的数 
+   >                    index = j; //保存最小数的索引 
+   >                } 
+   >            }
+   >            temp = arr[i];
+   >            arr[i] = arr[index];
+   >            arr[index] = temp;
+   >        }
+   >        return arr; 
+   >    }
    >    ```
    >
-   >    ​
-   >
-   > 3. 冒泡排序
+   > 3. **冒泡排序**
    >
    >    ```javascript
    >    //冒泡排序
@@ -904,9 +1536,7 @@
    >    }
    >    ```
    >
-   >    ​
-   >
-   > 4. 桶排序
+   > 4. **桶排序**
    >
    >    ```javascript
    >    //桶排序
@@ -957,38 +1587,10 @@
 
 
 
+
 ### **通用类**
 
-1. ### **cookie和session**
-
-   > 优点：极高的扩展性和可用性
-   >
-   > 1. 通过良好的编程，控制保存在cookie中的session对象的大小。
-   > 2. 通过加密和安全传输技术（SSL），减少cookie被破解的可能性。
-   > 3. 只在cookie中存放不敏感数据，即使被盗也不会有重大损失。
-   > 4. 控制cookie的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的cookie。
-   >
-   > 缺点：
-   >
-   > 1. `Cookie`数量和长度的限制。每个domain最多只能有20条cookie，每个cookie长度不能超过4KB，否则会被截掉.
-   > 2. 安全性问题。如果cookie被人拦截了，那人就可以取得所有的session信息。即使加密也与事无补，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。
-   > 3. 有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用
-   >
-   > cookie 和session 的区别：
-   >
-   >  1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
-   >
-   >  2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗
-   >
-   > 考虑到安全应当使用session。
-   >  3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能
-   >  考虑到减轻服务器性能方面，应当使用COOKIE。
-   >  4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
-   >  5、所以个人建议：
-   > 将登陆信息等重要信息存放为SESSION
-   > 其他信息如果需要保留，可以放在COOKIE中
-
-2. 绝对路径和相对路径
+1. **绝对路径和相对路径**
 
    > 绝对路径:从盘符开始
    >
@@ -1003,7 +1605,9 @@
 
 1. **前后端分离**
 
-   > 不是很清楚，
+   > 不是很清楚
+   >
+   > 含义：前后端只通过 JSON 来交流，组件化、工程化不需要依赖后端去实现。
 
 2. **前端整体架构**
 
@@ -1018,15 +1622,14 @@
 
 1. **性能优化**
 
-   > 不了解  
+   > 不太了解
    >
-   > 少用全局变量之类的  
-   >
-   > 尽量用缓存，CDN  
-   >
-   > 压缩
-   >
-   > css sprites，以及类似的各种自动化工具打包合并文件以减少请求次数
+   > 1. 合理使用缓存（减少网络请求资源次数）
+   > 2. css sprites（把网页中一些背景图片整合到一张图片文件中，再利用CSS的background系列属性进行背景定位取图片，减少请求次数从而提高了速度）
+   > 3. DNS优化，CDN负载均衡
+   > 4. 少用全局变量，减少开销，降低内存泄漏风险
+   > 5. 自动化工具打包，压缩资源，即降低了请求资源的体积，又降低了请求次数
+   > 6. 减少重绘次数，渲染优化
    >
    > ​
    >
@@ -1091,9 +1694,17 @@
 
 4. **webpack和为什么要打包**
 
-   > 2. 这三个都是自动化工具，就是为了减少重复劳动（压缩，编译，单元测试，代码检查），提高效率的，无论是工作效率还是访问效率。
+   > 自动化工具，就是为了减少重复劳动（压缩，编译，单元测试，代码检查），提高工作效率和访问效率。
 
-5. ​
+5. **渐进增强与优雅降级**
+
+   > ​
+
+6. **Git**
+
+   > [Git常用命令整理备忘](http://blog.csdn.net/u013836242/article/details/74361453)
+
+7. ​
 
 ---
 
@@ -1142,14 +1753,26 @@
    >    服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。  
    >
    >    通过验证码的方法
-   >
-   > 4. **同源策略**
-   >
-   >    协议、域名、端口相同的算一个域，
 
    ​
 
 ---
+
+
+
+### **框架**
+
+1. **MVVM框架**
+
+   > **概念**：
+   >
+   > [Vue.js学习笔记](http://tangyifei.herokuapp.com/study_notes/Vue)
+
+2. ​
+
+------
+
+
 
 
 
