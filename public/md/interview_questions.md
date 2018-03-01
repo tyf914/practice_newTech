@@ -56,11 +56,9 @@
    >
    > <!DOCTYPE> 声明位于文档中的最前面，处于 <html> 标签之前。告知浏览器以何种模式来渲染文档。
    >
-   > 严格模式的排版和 JS 运作模式是以该浏览器支持的最高标准运行。
-   >
-   > 在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。
-   >
    > DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。
+   >
+   > Standards（标准）模式（也就是严格呈现模式）：用于呈现遵循最新标准的网页，而 Quirks（包容）模式（也就是松散呈现模式或者兼容模式）：页面以宽松的向后兼容的方式显示，用于呈现为传统浏览器而设计的网页。
    >
    > ​
    >
@@ -72,9 +70,15 @@
    >
    > XHTML 1.0 规定了三种 XML 文档类型：Strict、Transitional 以及 Frameset。
    >
-   > Standards（标准）模式（也就是严格呈现模式）用于呈现遵循最新标准的网页，而 Quirks（包容）模式（也就是松散呈现模式或者兼容模式）用于呈现为传统浏览器而设计的网页。
 
-2. **HTML5的了解**
+2. **浏览器引擎**
+
+   > - Trident: IE 以Trident 作为内核引擎;　　
+   > - Gecko: Firefox 是基于 Gecko 开发;　　
+   > - WebKit: Safari, Google Chrome基于 Webkit 开发。　　
+   > - Presto: Opera
+
+3. **HTML5的了解**
 
    > 新的HTML标准。
    >
@@ -152,73 +156,12 @@
    > **延伸**：
    >
    > 盒子模型分为两类：
-   > W3C盒子模型：属性height和属性width不包含padding和border，即box-sizing的默认属性content-box
-   > IE盒子模型：即border-box。
+   > **W3C盒子模型**：属性height和属性width不包含padding和border，即box-sizing的默认属性content-box
+   >
+   > **IE盒子模型**：即border-box。
    >
    > 若不声明DOCTYPE类型，IE会将盒子模型解释为IE盒子模型，FireFox等会将其解释为W3C盒子模型；
    > 若声明了DOCTYPE模型，所有浏览器都会解释为W3C盒子模型。
-
-2. **position**
-
-   > [CSS中position属性介绍(新增sticky)](http://www.cnblogs.com/s1nker/p/4835079.html)
-
-   | 属性     | 释义                                                         |
-   | -------- | ------------------------------------------------------------ |
-   | static   | 默认值。没有定位，元素出现在正常的流中                       |
-   | inherit  | 继承父元素的position属性，IE8以及往前的版本都不支持inherit属性。 |
-   | relative | 生成相对定位的元素，相对于其在普通流中的位置进行定位。       |
-   | absolute | 生成绝对定位的元素， 相对于`position:relative/absolute`的父级元素定位，如果没有，就相对于body定位，但是没设置`left/right/top/bottom`中的某一项时，显示效果和没设置absolute一样。 |
-   | fixed    | 生成固定定位的元素，通常相对于浏览器窗口或 frame 进行定位。（老版本IE不支持） |
-   | sticky   | 生成粘性定位的元素，容器的位置根据正常文档流计算得出，目前并不是W3C推荐标准。具体见上面的链接 |
-
-3. **浮动和清除浮动**
-
-   > **原理**：  
-   >
-   > 浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。
-   >
-   > **浮动元素引起的问题**：
-   >
-   > （1）父元素的高度无法被撑开，影响与父元素同级的元素
-   >
-   > （2）与浮动元素同级的非浮动元素（内联元素）会跟随其后
-   >
-   > （3）若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面显示的结构
-   >
-   > **解决方法**：  
-   >
-   > 使用CSS的`clear:both;`来清除元素的浮动可解决2、3问题，对于问题1，添加如下样式，给父元素添加clearfix样式：
-   >
-   > ```css
-   > .clearfix:after{
-   >     content: ".";
-   >     display: block;
-   >     height: 0;
-   >     clear: both;
-   >     visibility: hidden;
-   > }
-   > .clearfix{display: inline-block;} /* for IE/Mac */
-   > ```
-   >
-   > **清除浮动的几种方法**：
-   >
-   > 1. 额外标签法，`<div style="clear:both;"></div>`（缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。）
-   >
-   > 2. 使用after伪类
-   >
-   >    ``` css
-   >    #float:after{
-   >      content:".";
-   >      display:block;
-   >      clear:both;
-   >      height:0;
-   >      visibility:hidden;
-   >    }
-   >    ```
-   >
-   > 3. 浮动外部元素
-   >
-   > 4. 设置overflow为hidden或者auto                    
 
 4. **伪类**
 
@@ -342,6 +285,8 @@
    >
    > 3. **position定位**
    >
+   >    [CSS中position属性介绍(新增sticky)](http://www.cnblogs.com/s1nker/p/4835079.html)
+   >
    >    | **属性值** | **文档流**           | **注释**                                                     |
    >    | ---------- | -------------------- | ------------------------------------------------------------ |
    >    | absolute   | 完全离开文档流       | 绝对定位；使用left，right，top，bottom等属性相对于其最接近的一个具有定位设置（即position值不为默认值static）的父对象进行绝对定位。如果不存在这样的父对象，则依据body对象。而其层叠通过z-index属性定义。当对象定位在浏览器窗口以外，浏览器因此显示滚动条 |
@@ -352,7 +297,52 @@
    >
    > 4. **浮动**
    >
-   >    见上文；
+   >    > **原理**：  
+   >    >
+   >    > 浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。
+   >    >
+   >    > **浮动元素引起的问题**：
+   >    >
+   >    > （1）父元素的高度无法被撑开，影响与父元素同级的元素
+   >    >
+   >    > （2）与浮动元素同级的非浮动元素（内联元素）会跟随其后
+   >    >
+   >    > （3）若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面显示的结构
+   >    >
+   >    > **解决方法**：  
+   >    >
+   >    > 使用CSS的`clear:both;`来清除元素的浮动可解决2、3问题，对于问题1，添加如下样式，给父元素添加clearfix样式：
+   >    >
+   >    > ```css
+   >    > .clearfix:after{
+   >    >     content: ".";
+   >    >     display: block;
+   >    >     height: 0;
+   >    >     clear: both;
+   >    >     visibility: hidden;
+   >    > }
+   >    > .clearfix{display: inline-block;} /* for IE/Mac */
+   >    > ```
+   >    >
+   >    > **清除浮动的几种方法**：
+   >    >
+   >    > 1. 额外标签法，`<div style="clear:both;"></div>`（缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。）
+   >    >
+   >    > 2. 使用after伪类
+   >    >
+   >    >    ```css
+   >    >    #float:after{
+   >    >      content:".";
+   >    >      display:block;
+   >    >      clear:both;
+   >    >      height:0;
+   >    >      visibility:hidden;
+   >    >    }
+   >    >    ```
+   >    >
+   >    > 3. 浮动外部元素
+   >    >
+   >    > 4. 设置overflow为hidden或者auto
    >
    > 5. **元素的定位属性**
    >
@@ -382,10 +372,10 @@
 
 
 10. **display的几种值**
-    > 1. inherit
-    > 2. none
-    > 3. inline&inline开头的（常见：inline、inline-block）
-    > 4. block
+    > 1. **inherit**
+    > 2. **none**
+    > 3. **inline&inline开头的（常见：inline、inline-block）**
+    > 4. **block**
     > 5. flex
     > 6. ruby&ruby开头的
     > 7. table&table开头的（常见：table、table-cell）
@@ -450,9 +440,9 @@
     >
     > 7. **zoom缩放**
     >
-    > 8. **translate**
+    > 8. **transform**
     >
-    > 9. **scale**
+    >   主要是`scale(x,y)`和`translate(x, y)`
     >
     > 10. **Chrome字体最小12px的解决办法**
     >
@@ -476,8 +466,8 @@
     >    >    position: absolute; 
     >    >    left: 50%; 
     >    >    top: 50%; 
-    >    >    margin-left:-自身一半宽度; 
-    >    >    margin-top: -自身一半高度;
+    >    >    margin-left: - 自身一半宽度; 
+    >    >    margin-top:  - 自身一半高度;
     >    >    ```
     >    >
     >    > 2. table-cell布局 
@@ -719,7 +709,7 @@
     >
     > - 属性前缀法(即类内部Hack)：例如 IE6能识别下划线"\_"和星号" * "，IE7能识别星号" * "，但不能识别下划线"_"，IE6~IE10都认识"\9"，但firefox前述三个都不能认识。
     > - 选择器前缀法(即选择器Hack)：例如 IE6能识别\*html .class{}，IE7能识别\*+html .class{}或者*:first-child+html .class{}。
-    > - IE条件注释法(即HTML条件注释Hack)：针对所有IE(注：IE10+已经不再支持条件注释)： <!--[if IE]>IE浏览器显示的内容 <![endif]-->，针对IE6及以下版本： <!--[if lt IE 6]>只在IE6-显示的内容 <![endif]-->。这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都会生效。
+    > - IE条件注释法(即HTML条件注释Hack)：针对所有IE(注：IE10+已经不再支持条件注释)： `<!--[if IE]>IE浏览器显示的内容 <![endif]-->`，针对IE6及以下版本： `<!--[if lt IE 6]>只在IE6-显示的内容 <![endif]-->`。这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都会生效。
 
 19. **浏览器兼容性**
 
@@ -770,11 +760,13 @@
 
 23. **css动画**
 
-    > ​
+    > [@keyframes](http://www.w3school.com.cn/cssref/pr_keyframes.asp)
+    >
+    > [animation](http://www.w3school.com.cn/cssref/pr_animation.asp)
+    >
+    > jquery animate() 方法
 
 24. ​
-
-    ​
 
     ​
 
@@ -880,6 +872,8 @@
    >    >
    >    >    - 注意好上述原则，具体**使用场合**和**使用注意点**见本类顶部链接；但是也有不适用于此法则的：
    >    >
+   >    >      - 构造函数中的this指向要生成的实例
+   >    >
    >    >      - 数组处理方法`map`和`foreach`的参数（为函数）内部的this指向`window`，此时可以使用中间变量固定`this`。另一种方法是将`this`当作`foreach`方法的第二个参数，固定它的运行环境。
    >    >
    >    >      - 回调函数中的`this`往往会改变指向，最好避免使用。例：
@@ -979,8 +973,6 @@
    >
    > 3. **`prototype`**
    >
-   >    > [真正理解prototype](http://blog.csdn.net/u013836242/article/details/77775924)
-   >    >
    >    > 1. **概述**
    >    >
    >    >    1. **构造函数的缺陷**
@@ -999,6 +991,8 @@
    >    >          ```
    >    >
    >    >       2. **原型对象的作用，就是定义所有实例对象共享的属性和方法**，而实例对象可以视作从原型对象衍生出来的子对象。
+   >    >
+   >    >       3. 下方markdown语法的一种图，如果不能正确显示，请看[真正理解prototype](http://blog.csdn.net/u013836242/article/details/77775924)
    >    >
    >    >       3. ```sequence
    >    >
@@ -1320,7 +1314,7 @@
     >
     >    > 1. **原理**：
     >    >
-    >    >    不同浏览器引擎的实现方式不同，V8：：数组length <= 22 时用插入排序，否则用快速排序
+    >    >    不同浏览器引擎的实现方式不同，V8：数组length <= 22 时用插入排序，否则用快速排序
     >    >
     >    > 2. **写法**：
     >    >
@@ -1370,7 +1364,7 @@
    >
    > [超方便的数组去重](http://blog.csdn.net/u013836242/article/details/77750061)
 
-10. **变量提升**
+11. **变量提升**
 
    > ​
 
@@ -1436,7 +1430,7 @@
 
     > - 原生
     >
-    >   innerHTML，innerText，value。
+    >   innerHTML，innerText，textContent，value。
     >
     > - jQuery:
     >
@@ -1487,7 +1481,7 @@
     >
     > 2. **引用计数**(reference counting)
     >
-    >    在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
+    >    在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个变量并将一个引用类型赋值给该变量的时候，这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
     >
     >    ​
     >
@@ -1499,15 +1493,17 @@
 
 24. **Cookie读写**
 
-    > document.cookie进行读写
+    > document.cookie进行读写，需要自己封装函数。
 
 22. **typeof 和 instanceof()**
 
     > ​
 
-28. **jQuery_attr()和prop()**
+24. **jQuery_attr()和prop()**
 
     > 1. **区别**
+    >
+    >    可以看看css大类的DOM&BOM知识点篇。
     >
     >    > `prop()`：设置/获取指定DOM元素(JS对象，Element类型)上的属性(property)；
     >    >
@@ -1518,7 +1514,6 @@
     >    > - 元素，即html文档中所有标签都为元素，<p>、<tr>等，也就是说元素是个统称，一个文档里面有很多的元素。
     >    > - 节点，是js为了对html文档进行操作而开发的，即DOM文档对象模型。每个元素都可以称之为一个节点，节点是唯一的。
     >    > - 比方来说<p>标签，肯定是一个p标签元素，那如果通过js对它进行样式控制的时候，就必须获取（找到）到这个元素，称之为节点，如果有好多元素，可以获得第1个、第2个或者第n个。元素是统称，节点是具有唯一性的。
-    >    > - ​
     >
     > 3. **注意事项**
     >
@@ -1541,7 +1536,7 @@
 
 27. **进制转换**
 
-    > ​
+    > 1. `Number.prototype.toString()`
 
 28. **escape转码**
 
@@ -1565,6 +1560,13 @@
    > ```js
    > //创建一个XMLHttpRequest对象
    > var request=new XMLHttpRequest();
+   >
+   > // readyState是一个只读属性，表示XMLHttpRequest请求当前所处的状态。
+   > // 0，对应常量UNSENT，表示XMLHttpRequest实例已经生成，但是open()方法还没有被调用。
+   > // 1，对应常量OPENED，表示send()方法还没有被调用，仍然可以使用setRequestHeader()，设定HTTP请求的头信息。
+   > // 2，对应常量HEADERS_RECEIVED，表示send()方法已经执行，并且头信息和状态码已经收到。
+   > // 3，对应常量LOADING，表示正在接收服务器传来的body部分的数据，如果responseType属性是text或者空字符串，responseText就会包含已经收到的部分信息。
+   > // 4，对应常量DONE，表示服务器数据已经完全接收，或者本次接收已经失败了。
    >
    > //readystate发生change时会执行的回调函数
    > request.onreadystatechange=function(){
@@ -1598,7 +1600,18 @@
 
 2. **JSON**
 
-   > ​
+   > JSON 格式（JavaScript Object Notation 的缩写）是一种用于数据交换的文本格式，2001年由 Douglas Crockford 提出，目的是取代繁琐笨重的 XML 格式。
+   >
+   > 每个 JSON 对象就是一个值，可能是一个数组或对象，也可能是一个原始类型的值。总之，只能是一个值，不能是两个或更多的值。
+   >
+   > 1. 复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
+   > 2. 原始类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和`null`（不能使用`NaN`, `Infinity`, `-Infinity`和`undefined`）。
+   > 3. 字符串必须使用双引号表示，不能使用单引号。
+   > 4. 对象的键名必须放在双引号里面。
+   > 5. 数组或对象最后一个成员的后面，不能加逗号。
+   >
+   > - `JSON.stringify`方法用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被`JSON.parse`方法还原。`JSON.stringify`方法还可以接受一个数组，作为第二个参数，指定需要转成字符串的属性。`JSON.stringify`还可以接受第三个参数，用于增加返回的 JSON 字符串的可读性。如果是数字，表示每个属性前面添加的空格（最多不超过10个）；如果是字符串（不超过10个字符），则该字符串会添加在每行前面。
+   > - `JSON.parse`方法用于将 JSON 字符串转换成对应的值。`JSON.parse`方法可以接受一个处理函数，作为第二个参数，用法与`JSON.stringify`方法类似。
 
 3. **jQuery的Ajax**
 
