@@ -78,16 +78,16 @@
 
    > 新的HTML标准。
    >
-   > 标签的增改废，语义化，多媒体，canvas，svg，本地存储，跨平台，移动优先，Geolocation，Workers多线程处理。
+   > 标签的增改废，完全支持 CSS3，语义化，多媒体，canvas，svg，本地 SQL 数据，本地存储，跨平台，移动优先，Geolocation，Workers多线程处理。
    >
    > ​
    >
    > HTML5 中的一些有趣的新特性：
    >
    > - 用于绘画的 canvas 元素
-   > - 用于媒介回放的 video 和 audio 元素
-   > - 对本地离线存储的更好的支持
-   > - 新的特殊内容元素，比如 article、footer、header、nav、section
+   > - 新的多媒体元素， video 和 audio 元素等
+   > - 新的表单元素，datalist等
+   > - 新的语义与结构元素，比如 article、section、aside、footer、header、nav、
    > - 新的表单控件，比如 calendar、date、time、email、url、search
 
 3. **语义化**
@@ -132,7 +132,6 @@
    >
    >    除了IE7及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，通过代码封装可以统一到所有的浏览器都支持web storage。
    >
-   > ​
 
 ​
 
@@ -262,24 +261,24 @@
    >    :only-child选 /* 择的元素是它的父元素的唯一一个了元素 */
    >    :only-of-type /* 选择一个元素是它的上级元素的唯一一个相同类型的子元素 */
    >    :empty /* 选择的元素里面没有任何内容 */
-   >    ```
-   >
-   >
+   >     
    >    /* :nth-child()较为常用 */
    >    :nth-child(length); /* 参数是具体数字 */
    >    :nth-child(n); /* 参数是n,n从0开始计算,不能用负值。若直接用字母n,将选中所有子元素 */
-   >    :nth-child(n*length) /* n的倍数选择，n从0开始算，字母只能用n */
+   >    :nth-child(nlength) /* n的倍数选择，n从0开始算，字母只能用n */
    >    :nth-child(n+length); /* 选择大于length后面的元素 */
    >    :nth-child(-n+length) /* 选择小于length前面的元素 */
-   >    :nth-child(n*length+1); /* 表示隔几选一 */
+   >    :nth-child(nlength+1); /* 表示隔几选一 */
    >    ```
    >
    > 4. 否定选择器`:not`
    >
-   >    ```css
-   >    /* 与jQuery的:not选择器用法相同 */
-   >    input:not([type="submit"]) {border: 1px solid red;}
-   >    ```
+   >       ```css
+   >       /* 与jQuery的:not选择器用法相同 */
+   >       input:not([type="submit"]) {
+   >        border: 1px solid red;
+   >       }
+   >       ```
    >
    > 5. **伪元素**
    >
@@ -291,36 +290,39 @@
    >    ::before和::after /* 用来给元素的前面或后面插入内容，常用"content"配合使用，见过最多的就是清除浮动 */
    >    ::selection /* CSS3新增，用来改变浏览网页选中文本的background和color */
    >    ```
+   >
+   >
 
 
 5. **css选择器优先级**
 
-   > !important > id > class > tag  
+   > !important > 内联 > id > class > tag 
    >
-   > important 比 内联优先级高,但内联比 id 要高
+   > css中级联属性越具有针对性优先级越高；
 
 6. **link标签和@import**
 
-   > `<link>`:
+   > - `<link>`
    >
-   > ```html
-   > <link href="CSSurl路径" rel="stylesheet" type="text/css" />
-   > ```
+   >   ```html
+   >   <link href="CSSurl路径" rel="stylesheet" type="text/css" />
+   >   ```
    >
-   > `@import`:
    >
-   > ```html
-   > <!-- 1.在HTML中使用 -->
-   > <style type="text/css">
-   > 	@import url(CSS文件路径地址);
-   > </style>
+   > - `@import`
    >
-   > <!-- 2.在CSS中直接使用 -->
-   > ```
+   >   ```html
+   >   <!-- 1.在HTML中使用 -->
+   >   <style type="text/css">
+   >   	@import url(CSS文件路径地址);
+   >   </style>
    >
-   > 区别与选择：
+   >   <!-- 2.在CSS中直接使用 -->
+   >   ```
    >
-   > `<link>`是HTML标签，只能放入HTML代码中使用，`@import`可看做CSS样式，作用是引入CSS样式
+   > - 区别与选择：
+   >
+   >   `<link>`是HTML标签，只能放入HTML代码中使用，`@import`可看做CSS样式，作用是引入CSS样式
 
 7. **定位**
 
@@ -354,43 +356,21 @@
    >
    > 5. **元素的定位属性**
    >
-   >    1. position以及相关的top/right/bottom/left
+   >    1. **position以及相关的top/right/bottom/left**
+   >    2. **clip**
    >
-   >    2. clip
-   >
-   >       ```css
-   >       /* 这个属性用于给绝对定位元素定义一个裁切矩形，超出矩形区域的部分按overflow值进行处理
-   >        */
-   >       img{
-   >           position:absolute;
-   >           clip:rect(0px,60px,200px,0px);
-   >       }
-   >       ```
-   >
-   >    3. vertical-align
-   >
-   >       次元素影响**inline-level元素和table-cell元素**垂直方向上的布局。根据[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)描述，vertical-align对::first-letter和::first-line同样适用。
-   >
-   >    4. overflow
-   >
-   >       overflow属性指定如果内容溢出一个元素的框，会发生什么。（还有overflow-x和overflow-y）
-   >
-   >       | 值      | 描述                                                     |
-   >       | ------- | -------------------------------------------------------- |
-   >       | visible | 默认值。内容不会被修剪，会呈现在元素框之外。             |
-   >       | hidden  | 内容会被修剪，并且其余内容是不可见的。                   |
-   >       | scroll  | 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。 |
-   >       | auto    | 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。 |
-   >       | inherit | 规定应该从父元素继承 overflow 属性的值。                 |
-   >
-   >    5. z-index
-   >
-   >       z-index属性指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面）。属性值可为负数，属性值更大的元素显示在前。
 
 
 7. **CSS3**
 
-   > ​
+   > - 选择器
+   > - 盒模型
+   > - 背景和边框
+   > - 文字特效
+   > - 2D/3D转换
+   > - 动画
+   > - 多列布局
+   > - 用户界面
 
 8. **实现阴影有哪些方式**
 
@@ -417,20 +397,22 @@
 
     > 目前接触到的：
     >
-    > 1. rem/em
+    > 1. **rem/em**
     >
     >    em：1em = 父元素的`font-size`大小；
     >
     >    rem: 1rem = 根元素的`font-size`大小；
     >
-    > 2. `calc()`
+    > 2. **vh和vw**
+    >
+    > 3. **`calc()`**
     >
     >    ```css
     >    width: calc(100% - 50px);
     >    /* 用于动态计算长度值。四则运算，运算符前后都需要保留一个空格 */
     >    ```
     >
-    > 3. 媒体查询
+    > 4. **媒体查询**
     >
     >    ```css
     >    @media [not|only] mediatype and (expressions) {
@@ -443,14 +425,14 @@
     >    <link rel="stylesheet" media="mediatype and|not|only (media feature)" href="mystylesheet.css">
     >    ```
     >
-    > 4. viewport
+    > 4. **viewport**
     >
     >    ```HTML
     >    <!-- 简单来说就是显示网页的区域，若视口宽度大于设备宽度，出现横向滚动条 -->
     >    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     >    ```
     >
-    > 5. devicePixelRatio
+    > 5. **devicePixelRatio**
     >
     >    和ViewPort一样常见于移动端开发，window.devicePixelRatio = 物理像素 / 独立像素，比如在Retina屏的iphone上，devicePixelRatio = 2，1个css像素相当于2个物理像素。
     >
@@ -466,9 +448,15 @@
     >        rem 按照设计稿标准走即可
     >    ```
     >
-    > 6. zoom缩放
+    > 7. **zoom缩放**
     >
-    > 7. ​
+    > 8. **translate**
+    >
+    > 9. **scale**
+    >
+    > 10. **Chrome字体最小12px的解决办法**
+    >
+    >    ​
     >
     > 我一般用Chrome浏览器的调试工具观察效果
 
@@ -737,15 +725,15 @@
 
     > CSS: 上面的hack，盒子模型，新属性的兼容性等
     >
-    > JS: JS的一些方法不同，比如事件机制相关的方法和属性，Ajax
+    > JS: JS的一些方法不同，比如事件机制相关的方法和属性，Ajax等
     >
     > 浏览器: 比如HTTP/1.0时代某些浏览器为协议添加Connection:keep-alive实现
 
-21. **DOM和BOM**
+20. **DOM和BOM知识点**
 
-    > [DOM&BOM知识点](./resource/DOM&BOM知识点.xmind)
+    > ![DOM&BOM知识点](https://raw.githubusercontent.com/tyf914/practice_newTech/master/public/images/DOM&BOM知识点.png)
 
-22. **文本溢出**
+21. **文本溢出**
 
     > 1. 单行文本
     >
@@ -769,9 +757,20 @@
     >
     >    暂略
 
-23. **Chrome字体最小12px的解决办法**
+22. **\<p\>文字自动换行**
 
-23. **\<p\>文字自动换行**
+    > ```css
+    > p {
+    >     word-wrap: break-word; /* 在长单词或 URL 地址内部进行换行 */
+    >     word-break: break-all; /* 允许在单词内换行 */
+    > }
+    >
+    > white-space: 指定元素内的空白怎样处理。
+    > ```
+
+23. **css动画**
+
+    > ​
 
 24. ​
 
@@ -786,37 +785,479 @@
 
 ### **JS类**
 
+[JavaScript教程](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)
+
 1. **JS面向对象**
 
-   > 面向对象编程将真实事物抽象为一个个对象，对象具有明确分工，可以完成各种任务。对象可以复用，通过继承机制还可以定制。因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发。比起由一系列函数或指令组成的传统的过程式编程更适合多人合作的大型软件项目。
+   [JavaScript 标准参考教程（alpha)](http://javascript.ruanyifeng.com/#toc3)
+
+   > 1. **概述**
    >
-   > - **对象是单个实物的抽象。**
-   > - **对象是一个容器，封装了属性（property）和方法（method）。**
-   > - **js面向对象基于构造函数（constructor）和原型链（prototype）**
+   >    > **js基于构造函数（`constructor`）和原型链（`prototype`）**
+   >    >
+   >    > 1. **构造函数**
+   >    >
+   >    >    **作用**：提供模板，描述对象的基本结构
+   >    >
+   >    >    ```js
+   >    >    var Vehicle=function(a){
+   >    >    	this.price=a;
+   >    >    }
+   >    >
+   >    >    //1. 函数体内部使用了this
+   >    >    //2. 生成对象时必须使用new命令调用构造函数
+   >    >    //3. 为表示区别，第一个字母通常大写
+   >    >    ```
+   >    >
+   >    > 2. **`new`**
+   >    >
+   >    >    1. **作用**：执行构造函数，返回一个实例对象
+   >    >
+   >    >       ```js
+   >    >       var v=new Vehicle();	//也可不带括号
+   >    >
+   >    >       // new执行时，构造函数内部的this代表新生成的实例对象
+   >    >       ```
+   >    >
+   >    >    2. **忘记使用new命令直接调用构造函数**：
+   >    >
+   >    >       ```js
+   >    >       var v=Vehicle();
+   >    >       v.price        //v变成了undefined
+   >    >       price      //price为全局变量
+   >    >
+   >    >       // 为避免这种情况，可以在构造函数内部第一行加上"use strict"（严格模式下this不能指向全局对象，默认等于undefined，由于不能对undefined添加属性，导致不加new调用会报错）；
+   >    >
+   >    >       // 另外还可以在构造函数内部加一个判断
+   >    >       if(!(this instanceof 构造函数名)){
+   >    >           return new 构造函数调用;
+   >    >       }
+   >    >
+   >    >       // 函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined
+   >    >       if (!new.target) {
+   >    >           throw new Error('请使用 new 命令调用！');
+   >    >       }
+   >    >       ```
+   >    >
+   >    >    3. **原理**：
+   >    >
+   >    >       > 1. 创建一个空对象
+   >    >       > 2. 把空对象的原型指向构造函数的`prototype`属性
+   >    >       > 3. 把空对象赋值给函数内部的`this`关键字
+   >    >       > 4. 开始执行构造函数内部代码
+   >    >       >
+   >    >       > ```js
+   >    >       > // `new`命令简化的内部流程
+   >    >       > function _new(/* 构造函数 */ constructor, /* 构造函数参数 */ params) {
+   >    >       >   // 将 arguments 对象转为数组
+   >    >       >   var args = [].slice.call(arguments);
+   >    >       >   // 取出构造函数
+   >    >       >   var constructor = args.shift();
+   >    >       >   // 创建一个空对象，继承构造函数的 prototype 属性
+   >    >       >   var context = Object.create(constructor.prototype);
+   >    >       >   // 执行构造函数
+   >    >       >   var result = constructor.apply(context, args);
+   >    >       >   // 如果返回结果是对象，就直接返回，否则返回 context 对象
+   >    >       >   return (typeof result === 'object' && result != null) ? result : context;
+   >    >       > }
+   >    >       >
+   >    >       > // 实例
+   >    >       > var actor = _new(Person, '张三', 28);
+   >    >       > ```
+   >    >
+   >    >    4. **注意事项**：
+   >    >
+   >    >       > 1. 如果构造函数内部有`return`语句，而且`return`后面跟着一个对象，`new`命令会返回`return`语句指定的对象；否则，就会不管`return`语句，返回“构造”后的`this`对象；
+   >    >       > 2. 若对普通函数（内部没有`this`关键字）使用`new`命令，会返回一个空对象
    >
-   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#绑定this)
+   > 2. **`this`**
    >
-   > 链接包括：
+   >    > 1. **概述**
+   >    >
+   >    >    - JavaScript 语言之中，一切皆对象，运行环境也是对象，所以函数都是在某个对象之中运行，`this`就是函数运行时所在的对象（环境）
+   >    >
+   >    >    - `this`总是返回属性或方法“当前”所在的对象（比如在setTimeout()的回调函数中使用this会指向它所在的对象window），this指向可人为改变，函数在全局环境下运行时this指向顶层对象window。 
+   >    >
+   >    >    - 注意好上述原则，具体**使用场合**和**使用注意点**见本类顶部链接；但是也有不适用于此法则的：
+   >    >
+   >    >      - 数组处理方法`map`和`foreach`的参数（为函数）内部的this指向`window`，此时可以使用中间变量固定`this`。另一种方法是将`this`当作`foreach`方法的第二个参数，固定它的运行环境。
+   >    >
+   >    >      - 回调函数中的`this`往往会改变指向，最好避免使用。例：
+   >    >
+   >    >        ```js
+   >    >        var o = new Object();
+   >    >        o.f = function () {
+   >    >          console.log(this === o);
+   >    >        }
+   >    >
+   >    >        $('#button').on('click', o.f);
+   >    >
+   >    >        // 点击按钮以后，控制台会显示false。原因是此时this不再指向o对象，而是指向按钮的 DOM 对象，因为f方法是在按钮对象的环境中被调用的。
+   >    >        ```
+   >    >
+   >    > 2. **绑定`this`的方法**
+   >    >
+   >    >    1. **`call`**
+   >    >
+   >    >       ```js
+   >    >       // call的第一个参数obj就是this所要指向的那个对象
+   >    >       // 如果obj是一个原始值，那么这个原始值会自动转成对应的包装对象，然后传入call方法。
+   >    >       func.call(obj, arg1, arg2, ...)
+   >    >                 
+   >    >       // call方法的一个应用是调用对象的原生方法。
+   >    >                 
+   >    >       var obj = {};
+   >    >       obj.hasOwnProperty('toString') // false
+   >    >       // 覆盖掉继承的 hasOwnProperty 方法
+   >    >       obj.hasOwnProperty = function () {
+   >    >         return true;
+   >    >       };
+   >    >       obj.hasOwnProperty('toString') // true
+   >    >       Object.prototype.hasOwnProperty.call(obj, 'toString') // false          
+   >    >       ```
+   >    >
+   >    >    2. **`apply`**
+   >    >
+   >    >       ```js
+   >    >       // 类似call，但它接收一个数组作为函数执行时的参数
+   >    >       func.apply(thisValue, [arg1, arg2, ...]);
+   >    >                              
+   >    >       // 应用
+   >    >       // 1. 找出数组最大元素
+   >    >       Math.max.apply(null, arr)  // 当然也可以直接Math.max(...arr); 
+   >    >
+   >    >       // 2. 将数组的空元素变为undefined(数组的forEach方法会跳过空元素，但是不会跳过undefined)
+   >    >       Array.apply(null, ['a', ,'b'])  // [ 'a', undefined, 'b' ]   
+   >    >
+   >    >       // 3. 转换类数组对象
+   >    >       Array.prototype.slice.apply({0: 1, length: 1}) // [1]
+   >    >       Array.prototype.slice.apply({0: 1}) // []
+   >    >       Array.prototype.slice.apply({0: 1, length: 2}) // [1, undefined]
+   >    >       Array.prototype.slice.apply({length: 1}) // [undefined]       
+   >    >
+   >    >       // 4. 绑定回调函数的对象
+   >    >       ```
+   >    >
+   >    >    3. **`bind`**
+   >    >
+   >    >       ```js
+   >    >       // 用于将函数体内的this绑定到某个对象，然后返回一个新函数
+   >    >       var func2 = func.bind(obj);
+   >    >
+   >    >       // bind还可以接受更多的参数，将这些参数绑定原函数的参数。
+   >    >       var add = function (x, y) {
+   >    >         return x * this.m + y * this.n;
+   >    >       }
+   >    >
+   >    >       var obj = {
+   >    >         m: 2,
+   >    >         n: 2
+   >    >       };
+   >    >
+   >    >       var newAdd = add.bind(obj, 5); // 将add函数的第一个参数x绑定成5
+   >    >       newAdd(5) // 20
+   >    >
+   >    >       // 注意事项
+   >    >       // 1. 每一次返回一个新函数
+   >    >       element.addEventListener('click', o.m.bind(o));
+   >    >       element.removeEventListener('click', o.m.bind(o)); // 无效
+   >    >
+   >    >       // 2. 结合回调函数使用
+   >    >       // 3. 结合call方法使用  看不懂啊。。
+   >    >       var slice = Function.prototype.call.bind(Array.prototype.slice);
+   >    >       slice([1, 2, 3], 0, 1) // [1]
+   >    >
+   >    >       function f() {
+   >    >         console.log(this.v);
+   >    >       }
+   >    >
+   >    >       var o = { v: 123 };
+   >    >       var bind = Function.prototype.call.bind(Function.prototype.bind);
+   >    >       bind(f, o)() // 123
+   >    >       ```
+   >    >
    >
-   > - 构造函数
-   > - new
-   > - this
-   > - 对象与继承，结合[廖雪峰老师JS教程读书笔记（一）：JS继承](http://blog.csdn.net/u013836242/article/details/77839375)
-   > - prototype
+   > 3. **`prototype`**
+   >
+   >    > [真正理解prototype](http://blog.csdn.net/u013836242/article/details/77775924)
+   >    >
+   >    > 1. **概述**
+   >    >
+   >    >    1. **构造函数的缺陷**
+   >    >
+   >    >       同一个构造函数的多个实例之间，无法共享属性，从而造成对系统资源的浪费。(实例对象1.同名方法   不等于   实例对象2.同名方法)；
+   >    >
+   >    >    2. **prototype**
+   >    >
+   >    >       1. JavaScript 规定，每个函数都有一个`prototype`属性，指向一个对象。对于普通函数来说，该属性基本无用。但是，对于构造函数来说，生成实例的时候，该属性会自动成为实例对象的原型。
+   >    >
+   >    >          ```js
+   >    >          // 普通函数的prototype属性
+   >    >          function f(){}
+   >    >          f.prototype; //{constructor: f, __proto__: Object}
+   >    >          f.prototype.__proto__ === Object.prototype // true
+   >    >          ```
+   >    >
+   >    >       2. **原型对象的作用，就是定义所有实例对象共享的属性和方法**，而实例对象可以视作从原型对象衍生出来的子对象。
+   >    >
+   >    >       3. ```sequence
+   >    >
+   >    >          构造函数->实例对象: 创建
+   >    >          实例对象->prototype对象:原型链,对象上未发现请求的属性和方法\n则向prototype上溯寻找
+   >    >          构造函数-->Function.prototype:函数也是对象，所有函数的__proto__都指向Function.prototype\n甚至Function.__proto__ === Function.prototype
+   >    >          Function.prototype-->Object.protoType:Function.prototype也是对象\n它的__proto__指向Object.prototype
+   >    >          prototype对象->Object.protoType:prototype对象也有__proto__属性\n指向它自己的prototype对象
+   >    >          实例对象-->prototype对象:所有对象都有__proto__属性\n指向它的prototype对象
+   >    >          Object.protoType->null:__proto__属性指向null\n说明它往上原型链到头了
+   >    >          构造函数-->>prototype对象:函数有prototype属性指向prototype对象
+   >    >          prototype对象-->构造函数:prototype对象有constructor属性指向构造函数
+   >    >
+   >    >          Note over prototype对象: prototype对象上也可以自定义属性和方法
+   >    >          Note over 构造函数: Array,Object,String等等当然也属于构造函数
+   >    >          Note over 实例对象: 实例对象上定义有自己的属性和方法
+   >    >          ```
+   >    >
+   >    >
+   >    >
+   >    >    3. **原型链**
+   >    >
+   >    >       1. 对象的属性和方法，有可能是定义在自身，也有可能是定义在它的原型对象。由于原型本身也是对象，又有自己的原型，所以形成了一条**原型链**。所有对象的原型最终都可以上溯`Object.prototype`。
+   >    >
+   >    >          ```js
+   >    >          // Object.prototype的原型是null。null没有任何属性和方法，也没有自己的原型。因此，原型链的尽头就是null。
+   >    >          Object.getPrototypeOf(Object.prototype); //null
+   >    >          ```
+   >    >
+   >    >       2. 读取对象的某个属性时，JavaScript 引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的`Object.prototype`还是找不到，则返回`undefined`。
+   >    >
+   >    >       3. 如果对象自身和它的原型，都定义了一个同名属性，那么优先读取对象自身的属性，这叫做“覆盖”（overriding）。
+   >    >
+   >    >       4. 在整个原型链上寻找某个属性，对性能是有影响的。所寻找的属性在越上层的原型对象，对性能的影响越大。如果寻找某个不存在的属性，将会遍历整个原型链。
+   >    >
+   >    >    4. **`constructor`属性**
+   >    >
+   >    >       ```js
+   >    >       // prototype对象有一个constructor属性，默认指向prototype对象所在的构造函数。
+   >    >       function P() {}
+   >    >       P.prototype.constructor === P // true
+   >    >       // 构造函数P的实例对象自身没有constructor属性，但可以读取原型链上面的P.prototype.constructor属性
+   >    >
+   >    >       // 1. constructor属性的作用是，可以得知某个实例对象，到底是哪一个构造函数产生的。
+   >    >       // 2. 有了constructor属性，就可以从一个实例对象新建另一个实例。
+   >    >       function Constr() {}
+   >    >       var x = new Constr();
+   >    >
+   >    >       var y = new x.constructor();
+   >    >       y instanceof Constr // true
+   >    >
+   >    >       // 3. constructor属性表示原型对象与构造函数之间的关联关系，如果修改了原型对象，一般会同时修改constructor属性，防止引用的时候出错。
+   >    >       // 坏的写法
+   >    >       C.prototype = {
+   >    >         method1: function (...) { ... },
+   >    >         // ...
+   >    >       };
+   >    >
+   >    >       // 好的写法
+   >    >       C.prototype = {
+   >    >         constructor: C,
+   >    >         method1: function (...) { ... },
+   >    >         // ...
+   >    >       };
+   >    >
+   >    >       // 更好的写法
+   >    >       C.prototype.method1 = function (...) { ... };
+   >    >                                             
+   >    >       // 4. 通过name属性，从实例得到构造函数的名称。                 function Foo() {}
+   >    >       var f = new Foo();
+   >    >       f.constructor.name // "Foo"                     
+   >    >       ```
+   >    >
+   >    > 5. **`instanceof`运算符**
+   >    >
+   >    >    `instanceof`运算符返回一个布尔值，表示对象是否为某个构造函数的实例。
+   >    >
+   >    >    ```js
+   >    >    v instanceof Vehicle
+   >    >    // 等同于
+   >    >    Vehicle.prototype.isPrototypeOf(v)
+   >    >
+   >    >    // 1. instanceof的原理是检查右边构造函数的prototype属性，是否在左边对象的原型链上。
+   >    >    // 2. 左边对象的原型链上，只有null对象。这时，instanceof判断会失真。
+   >    >    var obj = Object.create(null);
+   >    >    typeof obj // "object"
+   >    >    Object.create(null) instanceof Object // false
+   >    >
+   >    >    // 3. instanceof判断值的类型.
+   >    >    var x = [1, 2, 3];
+   >    >    var y = {};
+   >    >    x instanceof Array // true
+   >    >    y instanceof Object // true
+   >    >
+   >    >    // 4. instanceof判断类型只适用于对象，不适用原始类型的值
+   >    >    // 原始类型：undefined、null、boolean、number 和 string。但是typeof null 返回"Object".
+   >    >    var s = 'hello';
+   >    >    s instanceof String // false
+   >    >
+   >    >    // 5. instanceOf对于undefined和null，instanceOf总是返回false。
+   >    >    undefined instanceof Object // false
+   >    >    null instanceof Object // false
+   >    >    ```
+   >    >
+   >    > 6. **`Object.prototype._proto_`**
+   >    >
+   >    >    - 实例对象的`__proto__`属性（前后各两个下划线），返回该对象的原型。该属性可读写。
+   >    >    - 根据语言标准，`__proto__`属性只有浏览器才需要部署，其他环境可以没有这个属性。它前后的两根下划线，表明它本质是一个内部属性，不应该对使用者暴露。因此，应该**尽量少用**这个属性，而是用`Object.getPrototypeof()`和`Object.setPrototypeOf()`，进行原型对象的读写操作。
+   >    >
+   >    > 7. ​
+   >
+   > 4. **`Object`对象与继承**
+   >
+   >    > [廖雪峰老师JS教程读书笔记（一）：JS继承](http://blog.csdn.net/u013836242/article/details/77839375)
+   >    >
+   >    > 1. JS继承
+   >    >
+   >    >    - 原型继承
+   >    >
+   >    >      ```js
+   >    >      // 核心思想：在子类原型链中加入父类的原型
+   >    >
+   >    >      //继承函数，参数是子/父类构造函数
+   >    >      function inherits(child,parent){
+   >    >          function F(){};
+   >    >          F.prototype=parent.prototype;
+   >    >          child.prototype=new F();
+   >    >          child.prototype.constructor=child;
+   >    >      }
+   >    >
+   >    >      // 为什么要用一个中间函数加入原型链？直接new Student()不行么？ 
+   >    >      // 答：这样的话，子类构造函数创建的实例对象上，会有一堆它并不想继承的父类构造函数上的属性和方法。如果想要继承父类构造函数上的某些属性和方法，直接call父类构造函数。
+   >    >      ```
+   >    >
+   >    >    - ES6继承
+   >    >
+   >    >    - `Objecy.create` 继承：`子类构造函数.prototype = Object.create(父类构造函数.prototype);` ，但是这样会导致子类实例对象的`constructor` 指向父类构造函数
+   >    >
+   >    > 2. `Object`对象上的OOP相关方法
+   >    >
+   >    >    | 方法                                         | 用法                                                         | 备注                                                         |
+   >    >    | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+   >    >    | `Object.getPrototypeOf(obj)`                 | 返回一个对象的原型                                           |                                                              |
+   >    >    | `Object.setPrototypeOf(现有obj，原型对象)`   | 为现有对象设置原型，返回一个新对象                           | 模拟`new`操作：`var f = Object.setPrototypeOf({}, F.prototype); F.call(f);` |
+   >    >    | `Object.create(obj)`                         | 接受一个对象作为参数，然后以它为原型，返回一个实例对象。该实例完全继承原型对象的属性。 | 除了对象的原型，`Object.create`方法还可以接受第二个参数。该参数是一个属性描述对象，它所描述的对象属性，会添加到新对象 |
+   >    >    | `Object.prototype.isPrototypeOf(obj)`        | 对象实例的isPrototypeOf方法，用来判断一个对象是否是另一个对象的原型。 | 只要实例对象处在参数对象的原型链上，`isPrototypeOf`方法都返回`true` |
+   >    >    | ` Object.getOwnPropertyNames(obj)`           | 以**数组**形式返回obj本身的所有属性的键名（不包括继承的属性） |                                                              |
+   >    >    | `Object.keys(obj)`                           | 与上面的类似，但是只返回**可遍历**的属性键名                 |                                                              |
+   >    >    | ` Object.prototype.hasOwnProperty('属性名')` | **对象实例**的`hasOwnProperty`方法返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上。是js中唯一一个处理对象属性时不会遍历原型链的方法 | `Date.hasOwnProperty('length') // true                       |
+   >    >
+   >    > 3. **`Object.create()`**
+   >    >
+   >    >    - **原理**
+   >    >
+   >    >      ```js
+   >    >      // 实质是新建一个空的构造函数F，然后让F.prototype属性指向参数对象obj，最后返回一个F的实例，从而实现让该实例继承obj的属性。
+   >    >
+   >    >      // 替代代码
+   >    >      if (typeof Object.create !== 'function') {
+   >    >        Object.create = function (obj) {
+   >    >          function F() {}
+   >    >          F.prototype = obj;
+   >    >          return new F();
+   >    >        };
+   >    >      }
+   >    >      ```
+   >    >
+   >    >    - **注意事项**
+   >    >
+   >    >      ```js
+   >    >      // 下面三种方式生成的新对象是等价的。
+   >    >      var obj1 = Object.create({});
+   >    >      var obj2 = Object.create(Object.prototype);
+   >    >      var obj3 = new Object();
+   >    >
+   >    >      // 生成一个不继承任何属性（比如没有toString和valueOf方法）的对象
+   >    >      var obj = Object.create(null);
+   >    >
+   >    >      // 参数不能为空，或者不是对象，否则会报错.
+   >    >
+   >    >      // Object.create方法生成的对象，继承了它的原型对象的构造函数。
+   >    >      function A() {}
+   >    >      var a = new A();
+   >    >      var b = Object.create(a);
+   >    >
+   >    >      b.constructor === A // true
+   >    >      b instanceof A // true
+   >    >      ```
+   >    >
+   >    > 4. **in 运算符和 for…in 循环**
+   >    >
+   >    >    - `in`运算符
+   >    >
+   >    >      ```js
+   >    >      // in运算符常用于检查一个属性是否存在。
+   >    >
+   >    >      'length' in Date // true
+   >    >      'toString' in Date // true
+   >    >      ```
+   >    >
+   >    >    - for…in 循环
+   >    >
+   >    >      ```js
+   >    >      // 获得对象的所有可遍历属性（不管是自身的还是继承的
+   >    >      for ( var name in object ) {
+   >    >        if ( object.hasOwnProperty(name) ) {  // 只获得对象自身的属性
+   >    >          /* loop code */
+   >    >        }
+   >    >      }
+   >    >      ```
+   >    >
+   >    > 5. ​
+   >
+   > 5. **面向对象的编程模式**
+   >
+   >    > 暂略
+   >
+   > 6. ​
+   >
 
-2. **prototype**
+2. **闭包**
 
-   > [真正理解prototype](http://blog.csdn.net/u013836242/article/details/77775924)
+   > [深入理解javascript原型和闭包（15）——闭包](http://www.cnblogs.com/wangfupeng1988/p/3994065.html)
 
-3. **原型链和作用域链**
+3. **严格模式**
 
-   > 作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到window对象即被终止，作用域链向下访问变量是不被允许的。
+   > 1. 使用"use strict" ，该指令只允许出现在脚本或函数的开头。
+   > 2. `this`不能指向全局对象，默认等于`undefined`，应用：不加`new`直接调用构造函数会报错。
+   > 3. 不能变量提升
+   > 4. 不能删除变量/对象/函数，不能转义/用八进制，不能
+   > 5. 在作用域 eval() 创建的变量不能被调用
 
-4. **new**
+4. **ES6**
+
+   > [30分钟掌握ES6/ES2015核心内容（上）](https://segmentfault.com/a/1190000004365693)
+   >
+   > [30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)
+   >
+   > [Map和Set](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345007434430758e3ac6e1b44b1865178e7aff9082e000)
+   >
+   > [iterable](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143450082788640f82a480be8481a8ce8272951a40970000)
+   >
+   > ES6扩展运算符
+   >
+   > 异步相关
+
+5. **正则**
 
    > ​
 
-5. **拷贝数组和对象**
+6. **作用域链**
+
+   > 作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到window对象即被终止，作用域链向下访问变量是不被允许的。
+
+7. **执行上下文环境**
+
+   > [深入理解javascript原型和闭包（13）-【作用域】和【上下文环境】](http://www.cnblogs.com/wangfupeng1988/p/3991995.html)
+
+8. **拷贝数组和对象**
 
    [javascript 数组以及对象的深拷贝（复制数组或复制对象）的方法](http://blog.csdn.net/fungleo/article/details/54931379)
 
@@ -834,44 +1275,42 @@
    >      > 4. ES6扩展运算符`...`，`var arr2 = [...arr];`
    >
    >    - 对象
-
-7. **this，怎么传入this**
-
-   > this总是返回属性或方法当前所在的对象，this指向可人为改变，函数在全局环境下运行时，this指向顶层对象window。 
    >
-   > | 方法                                                 | 用法                                                         |
-   > | ---------------------------------------------------- | ------------------------------------------------------------ |
-   > | `function.prototype.call(obj[,arg1,arg2,...])`       | f内部的this指向obj，若参数为空、null、undefined，默认传入全局对象，若参数是一个原始值（如5等），则这个原始值自动转成对应的包装对象（如Number的实例）,**可以在覆盖掉继承的方法后，用call来调用对象的原生方法** |
-   > | `function.prototype.apply(obj[, [arg1, arg2, ...]])` | 与call类似，但是——如果要传入参数，必须以数组形式传入，应用见 [原文地址](http://javascript.ruanyifeng.com/oop/this.html)，**一定要见！** |
-   > | `function.prototype.bind(obj[,arg1,arg2,...])`       | 比call和apply更进一步，不仅可以绑定this，还可以绑定原函数的参数，每一次运行都会返回一个新函数，这些话不懂的话见原文，注意事项也要见原文，**一定要见！** |
+   >      > 1. 直接`for..in`遍历对象属性
+   >      > 2. `var obj2 = JSON.parse(JSON.stringify(obj));`，注意，JSON法会丢失函数信息
+   >      > 3. `var { ...obj2 } = obj;`
    >
-   > [《JavaScript标准参考教程（alpha）》读书笔记一：面向对象编程](http://blog.csdn.net/u013836242/article/details/52932856#绑定this)
-
-7. ​
-
-9. **闭包**
-
-   > [深入理解javascript原型和闭包（15）——闭包](http://www.cnblogs.com/wangfupeng1988/p/3994065.html)
-
-10. **冒泡和捕获**
-
-   > 事件的三个阶段：
+   >    - **更深层次的对象拷贝**
    >
-   > 捕获阶段 ---> 目标阶段 ---> 冒泡阶段
+   >      ```js
+   >      // 1. 确保拷贝后的对象，与原对象具有同样的原型。
+   >      // 2. 确保拷贝后的对象，与原对象具有同样的实例属性。
    >
-   > document   ---> target目标 ----> document
+   >      function copyObject(orig) {
+   >        var copy = Object.create(Object.getPrototypeOf(orig));
+   >        copyOwnPropertiesFrom(copy, orig);
+   >        return copy;
+   >      }
    >
-   > ​
+   >      function copyOwnPropertiesFrom(target, source) {
+   >        Object
+   >          .getOwnPropertyNames(source)
+   >          .forEach(function (propKey) {
+   >            var desc = Object.getOwnPropertyDescriptor(source, propKey);
+   >            Object.defineProperty(target, propKey, desc);
+   >          });
+   >        return target;
+   >      }
    >
-   > addEventListener的第三个参数设置为true和false（默认）：
-   >
-   > true表示该元素在事件的“捕获阶段”（由外往内传递时）响应事件；
-   >
-   > false表示该元素在事件的“冒泡阶段”（由内向外传递时）响应事件。
-
-11. **事件委托**
-
-    > 在父元素上监听事件。事件监听器分析从子元素冒泡上来的事件，根据event.target找到触发事件的子元素，再相应地进行事件处理，不需要进行。
+   >      // 更简便的方法
+   >      // 利用ES2017引入标准的Object.getOwnPropertyDescriptors方法
+   >      function copyObject(orig) {
+   >        return Object.create(
+   >          Object.getPrototypeOf(orig),
+   >          Object.getOwnPropertyDescriptors(orig)
+   >        );
+   >      }
+   >      ```
 
 12. **数组排序**
 
@@ -904,43 +1343,56 @@
     >
     > 2. 参见下面的 算法类--->排序
 
-12. **数组去重**
+9. **数组去重**
 
-    > 1. **Set方法（es6）**
-    >
-    >   原理: 运用ES6的新数据类型Set，利用其去掉重复key的特性解构快速去重
-    >
-    >   ```js
-    >   'use strict';
-    >   [...(new Set([1, 2, 2, 3]))];  // 此处还运用了扩展运算符
-    >   ```
-    >
-    > 2. **filter()方法**
-    >
-    >   原理：filter()方法根据返回值来确认是否抛弃元素。而对于数组重复项，indexOf()方法只会返回第一个匹配到的元素的index，当筛选到重复项时，当前重复项的id自然不等于indexOf的返回值
-    >
-    >   ```js
-    >   arr.filter(function(element,index,array){
-    >       return array.indexOf(element) === index;
-    >   })
-    >   ```
-    >
-    > 3. **indexOf法**
-    >
-    > 4. **对象属性不重复法**
-    >
-    > [超方便的数组去重](http://blog.csdn.net/u013836242/article/details/77750061)
+   > 1. **Set方法（es6）**
+   >
+   >   原理: 运用ES6的新数据类型Set，利用其去掉重复key的特性解构快速去重
+   >
+   >   ```js
+   >   'use strict';
+   >   [...(new Set([1, 2, 2, 3]))];  // 此处还运用了扩展运算符
+   >   ```
+   >
+   > 2. **filter()方法**
+   >
+   >   原理：filter()方法根据返回值来确认是否抛弃元素。而对于数组重复项，indexOf()方法只会返回第一个匹配到的元素的index，当筛选到重复项时，当前重复项的id自然不等于indexOf的返回值
+   >
+   >   ```js
+   >   arr.filter(function(element,index,array){
+   >       return array.indexOf(element) === index;
+   >   })
+   >   ```
+   >
+   > 3. **indexOf法**
+   >
+   > 4. **对象属性不重复法**
+   >
+   > [超方便的数组去重](http://blog.csdn.net/u013836242/article/details/77750061)
 
-14. **传入函数的参数列表**
+10. **变量提升**
 
-    > es5:arguments----es6:...rest
+   > ​
+
+11. **冒泡和捕获**
+
+    > 事件的三个阶段：
     >
-
-15. **伪数组**
-
-    > 类数组对象，具有length属性且不具有数组的方法。例如：参数列表arguments，节点列表nodelist；
+    > 捕获阶段 ---> 目标阶段 ---> 冒泡阶段
     >
-    > ES6可以通过Array.from()转换伪数组为数组；
+    > document   ---> target目标 ----> document
+    >
+    > ​
+    >
+    > addEventListener的第三个参数设置为true和false（默认）：
+    >
+    > true表示该元素在事件的“捕获阶段”（由外往内传递时）响应事件；
+    >
+    > false表示该元素在事件的“冒泡阶段”（由内向外传递时）响应事件。
+
+12. **事件委托**
+
+    > 在父元素上监听事件。事件监听器分析从子元素冒泡上来的事件，根据event.target找到触发事件的子元素，再相应地进行事件处理，不需要进行。
 
 9. **实现一个querySelectorAll的功能**
 
@@ -960,51 +1412,41 @@
     }
    ```
 
-10. **实现sum(2,3);sum(2,3,4);sum(2,3,4,5);sum里面的参数不确定；重新设计一下这个函数，让它直接拥有数组的方法**
+14. **伪数组**
 
-    > 答：
+    > 类数组对象，**具有length属性**且不具有数组的方法。例如：参数列表arguments，节点列表nodelist；
     >
-    > 1.常规方法：
+    > ES6可以通过Array.from()转换伪数组为数组；
+
+15. **实现sum(2,3);sum(2,3,4);sum(2,3,4,5);sum里面的参数不确定；重新设计一下这个函数，让它直接拥有数组的方法**
+
+    > 1. 常规方法：
     >
-    > ​	函数中循环arguments求和
+    > 		函数中循环arguments求和
     >
     > ​    高端方法：
     >
     > ​         用ES6的`Array.from(arguments)` 或`...rest`，再用[reduce](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001435119854495d29b9b3d7028477a96ed74db95032675000##reduce)累加
     >
-    > 2.var arg = Array.prototype.slice.call(arguments);
+    > 2. `var arg = Array.prototype.slice.call(arguments);`
     >
     > 一般用这个，实际上就是[伪数组转数组方法（原生4种）](http://www.cnblogs.com/NTWang/p/6280447.html)，这里我再添加一个方法`Object.setPrototypeOf(arguments, Array.prototype);`
 
-11. **各种文本框，复选框之类的值怎么获取**
+16. **各种文本框，复选框之类的值怎么获取**
 
-    > jQuery: html()修改/获取html内容，text()修改/获取文本内容，val()修改/获取表单元素的值；
+    > - 原生
     >
-    > 原生:innerHTML，innerText，value。
-
-18. **严格模式**
-
-    > ​
-
-19. **ES6**
-
-    > [30分钟掌握ES6/ES2015核心内容（上）](https://segmentfault.com/a/1190000004365693)
+    >   innerHTML，innerText，value。
     >
-    > [30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)
+    > - jQuery:
     >
-    > [Map和Set](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345007434430758e3ac6e1b44b1865178e7aff9082e000)
-    >
-    > [iterable](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143450082788640f82a480be8481a8ce8272951a40970000)
-    >
-    > ES6扩展运算符
-    >
-    > 异步相关
+    >   html()修改/获取html内容，text()修改/获取文本内容，val()修改/获取表单元素的值；
 
 20. **for循环**
 
     > 1. **forEach()**
     >
-    >    > `forEach()`接收一个函数，每次迭代就自动回调该函数
+    >    > 数组方法，`forEach()`接收一个函数，每次迭代就自动回调该函数
     >    >
     >    > ```js
     >    > 'use strict';
@@ -1027,9 +1469,11 @@
     >
     >    > `for ... of`只循环集合本身的元素。
 
-21. **同步和异步**
+19. **同步和异步**
 
-    > ​
+    > 同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；
+    >
+    > 异步任务指的是，不进入主线程、而进入"任务队列"（task queue）的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。
 
 22. **Promise及相关异步操作**
 
@@ -1057,15 +1501,7 @@
 
     > document.cookie进行读写
 
-25. **typeof 和 instanceof()**
-
-    > ​
-
-26. **正则**
-
-    > ​
-
-27. **变量提升**
+22. **typeof 和 instanceof()**
 
     > ​
 
@@ -1094,6 +1530,22 @@
     >    > 因此，**请使用`prop()`函数来设置或获取`checked`、`selected`、`disabled`等属性。对于其它能够用`prop()`实现的操作，也尽量使用`prop()`函数。**
     >
     > 4. ​
+
+25. **定时器**
+
+    > ​
+
+26. **IIFE**
+
+    > ​
+
+27. **进制转换**
+
+    > ​
+
+28. **escape转码**
+
+    > ​
 
 29. ​
 
@@ -1152,6 +1604,7 @@
 
    > **同源策略**：同源是指"协议+域名+端口"三者相同
    >
+   > ​
 
 4. **跨域相关**
 
@@ -1208,15 +1661,72 @@
 
 ### **网络类**
 
-1. **点击链接后发生的事情**
+[阮一峰老师网络协议相关博客读后总结_图解](http://blog.csdn.net/u013836242/article/details/77882631)
 
-   > [阮一峰老师网络协议相关博客读后总结_图解](http://blog.csdn.net/u013836242/article/details/77882631)
+1. **从输入url到看到网页发生了什么**
+
+   > 1. **网络通信**
+   >
+   >    > 1. **浏览器输入URL**(简)
+   >    > 2. **应用层DNS解析域名**(简)
+   >    > 3. **应用层客户端发送HTTP请求**(简)
+   >    > 4. **传输层TCP传输报文**
+   >    > 5. **网络层IP协议查询MAC地址**
+   >    > 6. **数据到达数据链路层**
+   >    > 7. **服务器接收数据**(简)
+   >    > 8. **服务器响应请求**(简)
+   >    > 9. **服务器返回相应文件**(简)
+   >
+   > 2. **页面渲染**(简)
+   >
+   >    > 1. 解析HTML以构建DOM树 –> 构建渲染树 –> 布局渲染树 –> 绘制渲染树。
+   >    > 2. 在浏览器还没接收到完整的HTML文件时，它就开始渲染页面了，在遇到外部链入的脚本标签或样式标签或图片时，会再次发送HTTP请求重复上述的步骤。在收到CSS文件后会对已经渲染的页面重新渲染，加入它们应有的样式，图片文件加载完立刻显示在相应位置。在这一过程中可能会触发页面的重绘或重排。
+   >
+   > 3. ​
+   >
+   > 初级：标有`(简)` 的部分；
+   >
+   > 中级：[当你输入一个网址的时候，实际会发生什么?](http://blog.csdn.net/ygyangguang/article/details/5327278)   /   [从输入URL到浏览器显示页面的详细过程](http://blog.csdn.net/liu2011zhijie/article/details/52593887)
+   >
+   > 高级：[前端经典面试题: 从输入URL到页面加载发生了什么](https://segmentfault.com/a/1190000006879700)
 
 2. **HTTP请求，请求和响应的头**
 
-   > 请求响应结构结构：
+   > 1. 请求报文结构：
    >
-   > 返回码：
+   >    1. 请求行
+   >
+   >       ```http
+   >       GET /data/info.html HTTP/1.1
+   >       请求方法字段 URL字段 HTTP协议版本字段
+   >       ```
+   >
+   >    2. 请求头部
+   >
+   >       >  一系列可选的请求头字段
+   >
+   >    3. 空行
+   >
+   >       > 告诉服务器请求头部到此为止
+   >
+   >    4. 请求数据
+   >
+   > 2. 响应报文结构
+   >
+   >    1. 响应行
+   >
+   >       ```http
+   >       HTTP/1.1 200 OK
+   >       协议版本 状态码 状态码的描述
+   >       ```
+   >
+   >    2. 响应头
+   >
+   >       > 用于描述服务器的基本信息，以及数据的描述，服务器通过这些数据的描述信息，可以通知客户端如何处理等一会儿它回送的数据。
+   >
+   >    3. 响应体
+   >
+   >       > 响应的消息体
 
 3. **状态码**
 
@@ -1239,7 +1749,6 @@
    > | 304    | Not Modified，未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源 | 500    | Internal Server Error， 服务器内部错误，无法完成请求         |
    > | 400    | Bad Request， 客户端请求的语法错误，服务器无法理解           | 503    | Bad Gateway， 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。 |
    >
-   > ​
 
 4. **https**
 
@@ -1259,23 +1768,23 @@
    > - TCP（Transmission Control Protocol，传输控制协议）是基于连接的协议，也就是说，在正式收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“对话”才能建立起来
    > - UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是面向非连接的协议，它不与对方建立连接，而是直接就把数据包发送过去！ UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。
 
-5. **TCP握手**
+6. **TCP握手** 
 
-   > 这个学过，印象不怎么深，在看面试题的时候回顾了，印象是这样的：  
+   > - **发起链接的三次握手**
    >
-   > 为了准确无误地把数据送达目标处，TCP协议采用了三次握手策略。用TCP协议把数据包送出去后，TCP不会对传送 后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中使用了TCP的标志：SYN和ACK。
+   >   为了准确无误地把数据送达目标处，TCP协议采用了三次握手策略。用TCP协议把数据包送出去后，TCP不会对传送 后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中使用了TCP的标志：SYN和ACK。
    >
-   > 发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。 最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。 若在握手过程中某个阶段莫名中断，TCP协议会再次以相同的顺序发送相同的数据包。
+   >   1. 发送端首先发送一个带SYN标志的数据包给对方。
+   >   2. 接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。
+   >   3. 最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。
+   >   4. 若在握手过程中某个阶段莫名中断，TCP协议会再次以相同的顺序发送相同的数据包。
    >
-   > 断开一个TCP连接则需要“四次握手”：
+   > - **断开连接的四次挥手**
    >
-   > 第一次挥手：主动关闭方发送一个FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不 会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，主动关闭方依然会重发这些数据)，但是，此时主动关闭方还可 以接受数据。
-   >
-   > 第二次挥手：被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号）。
-   >
-   > 第三次挥手：被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。
-   >
-   > 第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。
+   >   1. 第一次挥手：主动关闭方发送一个FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，主动关闭方依然会重发这些数据)，但是，此时主动关闭方还可 以接受数据。
+   >   2. 第二次挥手：被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号）。
+   >   3. 第三次挥手：被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。
+   >   4. 第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。
 
 7. **http2**
 
@@ -1288,9 +1797,9 @@
 
 7. **WebSocket**
 
-   > WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。它还支持跨域。
+   > WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。
 
-8. **Get和Post的区别**
+9. **Get和Post的区别**
 
   > - *GET* - 从指定的资源请求数据。
   > - *POST* - 向指定的资源提交要被处理的数据
@@ -1307,38 +1816,16 @@
   > | 安全性           | 与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。在发送密码或其他敏感信息时绝不要使用 GET ！ | POST 相对于GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。 |
   > | 可见性           | 数据在 URL 中对所有人都是可见的。                            | 数据不会显示在 URL 中。                                      |
 
-10. **从输入url到看到网页发生了什么**
-
-  > 1. **网络通信**
-  >
-  >    > 1. **浏览器输入URL**(简)
-  >    > 2. **应用层DNS解析域名**(简)
-  >    > 3. **应用层客户端发送HTTP请求**(简)
-  >    > 4. **传输层TCP传输报文**
-  >    > 5. **网络层IP协议查询MAC地址**
-  >    > 6. **数据到达数据链路层**
-  >    > 7. **服务器接收数据**(简)
-  >    > 8. **服务器响应请求**(简)
-  >    > 9. **服务器返回相应文件**(简)
-  >
-  > 2. **页面渲染**(简)
-  >
-  >    > 1. 解析HTML以构建DOM树 –> 构建渲染树 –> 布局渲染树 –> 绘制渲染树。
-  >    > 2. 在浏览器还没接收到完整的HTML文件时，它就开始渲染页面了，在遇到外部链入的脚本标签或样式标签或图片时，会再次发送HTTP请求重复上述的步骤。在收到CSS文件后会对已经渲染的页面重新渲染，加入它们应有的样式，图片文件加载完立刻显示在相应位置。在这一过程中可能会触发页面的重绘或重排。
-  >
-  > 3. ​
-  >
-  > 初级：
-  >
-  > 中级：[当你输入一个网址的时候，实际会发生什么?](http://blog.csdn.net/ygyangguang/article/details/5327278)   /   [从输入URL到浏览器显示页面的详细过程](http://blog.csdn.net/liu2011zhijie/article/details/52593887)
-  >
-  > 高级：[前端经典面试题: 从输入URL到页面加载发生了什么](https://segmentfault.com/a/1190000006879700)
-
 10. **Restful API**
 
-11. **为什么说HTTP协议是无状态的**
+  > REST就是一种设计API的模式。定义了资源的通用访问格式.
+  >
+  > 其余不了解了。
 
-   > ​
+11. **为什么说HTTP协议是无连接无状态的**
+
+   > - 无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。
+   > - 无状态：是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
 
 12. **cookie和session**
 
@@ -1382,7 +1869,6 @@
    >    > 2. 安全性问题。如果cookie被人拦截了，那人就可以取得所有的session信息。即使加密也与事无补，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。
    >    > 3. 有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用
    >    >
-   >    > ​
    >
    > 2. **Session**
    >
@@ -1421,7 +1907,6 @@
    >
    > 5. ​
    >
-   > ​
 
 13. ​
    ​
@@ -1603,7 +2088,32 @@
 
 ### **概念类**
 
-1. **前后端分离**
+1. **面向对象**
+
+   > **面向对象** ：面向对象编程将真实事物抽象为一个个对象，对象具有明确分工，可以完成各种任务。对象可以复用，通过继承机制还可以定制。因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发。比起由一系列函数或指令组成的传统的过程式编程更适合多人合作的大型软件项目。
+   >
+   > - **对象是单个实物的抽象。**
+   >
+   > - **对象是一个容器，封装了属性（property）和方法（method）。**
+   > - **js面向对象基于构造函数（constructor）和原型链（prototype）**
+
+2. **MVC，MVVM等**
+
+   > [MVC，MVP 和 MVVM 的图示](http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html)
+   >
+   > - MVC
+   >
+   >   1）最上面的一层，是直接面向最终用户的"视图层"（View）。它是提供给用户的操作界面，是程序的外壳。
+   >
+   >   2）最底下的一层，是核心的"数据层"（Model），也就是程序需要操作的数据或信息。
+   >
+   >   3）中间的一层，就是"控制层"（Controller），它负责根据用户从"视图层"输入的指令，选取"数据层"中的数据，然后对其进行相应的操作，产生最终结果。
+   >
+   > - MVVM
+   >
+   >   ​
+
+2. **前后端分离**
 
    > 不是很清楚
    >
@@ -1674,6 +2184,8 @@
 
    > [浅析JS模块规范：AMD，CMD，CommonJS](http://www.jianshu.com/p/09ffac7a3b2c)
    >
+   > [30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)
+   >
    > Node.js遵循CommonJS规范。
    >
    > AMD 是 RequireJS 的，先定义所有依赖，再在回调函数中使用依赖。
@@ -1698,7 +2210,9 @@
 
 5. **渐进增强与优雅降级**
 
-   > ​
+   > **渐进增强（Progressive Enhancement）**：一开始就针对低版本浏览器进行构建页面，完成基本的功能，然后再针对高级浏览器进行效果、交互、追加功能达到更好的体验。
+   >
+   > **优雅降级（Graceful Degradation）**：一开始就构建站点的完整功能，然后针对浏览器测试和修复。比如一开始使用 CSS3 的特性构建了一个应用，然后逐步针对各大浏览器进行 hack 使其可以在低版本浏览器上正常浏览。
 
 6. **Git**
 
