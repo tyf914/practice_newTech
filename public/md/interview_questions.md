@@ -48,6 +48,10 @@
 
 
 
+-----
+
+
+
 ### **HTML类**
 
 1. **<!DOCTYPE> 声明**
@@ -58,7 +62,9 @@
    >
    > DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。
    >
-   > Standards（标准）模式（也就是严格呈现模式）：用于呈现遵循最新标准的网页，而 Quirks（包容）模式（也就是松散呈现模式或者兼容模式）：页面以宽松的向后兼容的方式显示，用于呈现为传统浏览器而设计的网页。
+   > Standards（标准）模式（严格呈现模式）：用于呈现遵循最新标准的网页； 
+   >
+   > Quirks（包容）模式（松散呈现模式/兼容模式）：页面以宽松的向后兼容的方式显示，用于呈现为传统浏览器而设计的网页。
    >
    > ​
    >
@@ -147,7 +153,19 @@
 
 总复习：[学习CSS布局](http://zh.learnlayout.com/)
 
-1. **盒模型**
+1. **css元素分类**
+
+   > **块级元素**、**行内元素**、**内联块状元素**
+   >
+   > 举例：div,p  **/**  span,a  **/**  image,button
+   >
+   > 区别：
+   >
+   > - **块级元素**新开启一行（即使是设置了width属性也是独占一行）、尽可能撑满父级元素的宽度，可以设置width和height属性；一般默认`display: block`（**table元素浏览器默认的display属性为table**）。
+   > - **行内元素**相邻的行内元素不换行，宽度即为内容的宽度、padding的4个方向都有效（从span标签可以看出）、margin只有水平方向有效、不可以设置width和height属性，一般默认`display: inline`。
+   > - **行内块元素**表现和行内元素一样，但可以设置width和height属性，`display: inline-block`。
+
+2. **盒模型**
 
    > **含义**：
    >
@@ -1113,7 +1131,9 @@
    >    >    - 原型继承
    >    >
    >    >      ```js
-   >    >      // 核心思想：在子类原型链中加入父类的原型
+   >    >      // 核心思想：
+   >    >      // 1. 在子类构造函数内部用call调用父类构造函数并绑定this
+   >    >      // 2. 在子类原型链中加入父类的原型
    >    >
    >    >      //继承函数，参数是子/父类构造函数
    >    >      function inherits(child,parent){
@@ -1123,13 +1143,14 @@
    >    >          child.prototype.constructor=child;
    >    >      }
    >    >
-   >    >      // 为什么要用一个中间函数加入原型链？直接new Student()不行么？ 
+   >    >      // 为什么要用一个中间函数加入原型链？直接调用父类构造函数new Student()不行么？ 
    >    >      // 答：这样的话，子类构造函数创建的实例对象上，会有一堆它并不想继承的父类构造函数上的属性和方法。如果想要继承父类构造函数上的某些属性和方法，直接call父类构造函数。
+   >    >      // 另外，如果Student()里执行了某些全局有关的操作，直接用new可能造成某些影响
    >    >      ```
    >    >
-   >    >    - ES6继承
+   >    >    - `Objecy.create` 继承：`子类构造函数.prototype = Object.create(父类构造函数.prototype);` ，但是这样会导致子类实例对象的`constructor` 指向父类构造函数，如果两者不一致，需要自己手动改
    >    >
-   >    >    - `Objecy.create` 继承：`子类构造函数.prototype = Object.create(父类构造函数.prototype);` ，但是这样会导致子类实例对象的`constructor` 指向父类构造函数
+   >    >    - ES6继承
    >    >
    >    > 2. `Object`对象上的OOP相关方法
    >    >
@@ -1216,34 +1237,168 @@
 2. **闭包**
 
    > [深入理解javascript原型和闭包（15）——闭包](http://www.cnblogs.com/wangfupeng1988/p/3994065.html)
+   >
+   > 闭包：函数返回一个引用它的参数和局部变量的内部函数。
+   >
+   > 作用：闭包携带了局部变量，并且，从外部代码根本无法访问到。换句话说，闭包就是携带状态的函数，并且它的状态可以完全对外隐藏起来。
 
 3. **严格模式**
 
    > 1. 使用"use strict" ，该指令只允许出现在脚本或函数的开头。
-   > 2. `this`不能指向全局对象，默认等于`undefined`，应用：不加`new`直接调用构造函数会报错。
-   > 3. 不能变量提升
-   > 4. 不能删除变量/对象/函数，不能转义/用八进制，不能
-   > 5. 在作用域 eval() 创建的变量不能被调用
+   > 2. 强制要求用`var`申明变量。
+   > 3. `this`不能指向全局对象，默认等于`undefined`，应用：不加`new`直接调用构造函数会报错。
+   > 4. 在作用域 eval() 创建的变量不能被调用
+   > 5. 主要就这些，还有其他限制
 
 4. **ES6**
 
-   > [30分钟掌握ES6/ES2015核心内容（上）](https://segmentfault.com/a/1190000004365693)
+   > 1. 先看[30分钟掌握ES6/ES2015核心内容（上）](https://segmentfault.com/a/1190000004365693)和[30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)；
    >
-   > [30分钟掌握ES6/ES2015核心内容（下）](https://segmentfault.com/a/1190000004368132)
+   > 2. **Map和Set**
    >
-   > [Map和Set](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345007434430758e3ac6e1b44b1865178e7aff9082e000)
+   >    - Map
    >
-   > [iterable](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143450082788640f82a480be8481a8ce8272951a40970000)
+   >      ```js
+   >      // Map是一组键值对的结构，具有极快的查找速度。
+   >      // Object的key只能为字符串，Map可以为其他数据类型
+   >      var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
+   >      m.get('Michael'); // 95
    >
-   > ES6扩展运算符
+   >      var m = new Map(); // 空Map
+   >      m.set('Adam', 67); // 添加新的key-value
+   >      m.set('Adam', 88); // 冲掉前面的值
+   >      m.has('Adam'); // 是否存在key 'Adam': true
+   >      m.get('Adam'); // 88
+   >      m.delete('Adam'); // 删除key 'Adam'
+   >      m.get('Adam'); // undefined
+   >      ```
    >
-   > 异步相关
+   >    - Set
+   >
+   >      ```js
+   >      // 一组key的集合，但不存储value。，在Set中，没有重复的key。
+   >      var s1 = new Set(); // 空Set
+   >      var s = new Set([1, 2, 3, 3, '3']); // Set {1, 2, 3, "3"}，重复元素在Set中自动被过滤
+   >      s.add(4); // 添加元素到set中，重复添加无效
+   >      s.delete(3); //删除元素
+   >      ```
+   >
+   > 3. [解构赋值详解](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344993159773a464f34e1724700a6d5dd9e235ceb7c000##-E8-A7-A3-E6-9E-84-E8-B5-8B-E5-80-BC)
+   >
+   > 4. ES6扩展运算符
+   >
+   > 5. generato生成器
+   >
+   >    ```js
+   >    // generator（生成器）是ES6标准引入的新的数据类型。一个generator看上去像一个函数，但可以返回多次。
+   >    function* foo(x) {
+   >        yield x + 1;
+   >        yield x + 2;
+   >        return x + 3;
+   >    }
+   >    // 作用：因为generator可以在执行过程中多次返回，所以它看上去就像一个可以记住执行状态的函数，时刻牢记yield可以保存状态并返回值
+   >
+   >    foo(5); // 直接调用一个generator和调用函数不一样，foo(5)仅仅是创建了一个generator对象，还没有去执行它。
+   >
+   >    // 执行方法1，使用next()方法
+   >    var f = foo(5);
+   >    f.next(); // {value: 6, done: false}
+   >    f.next(); // {value: 7, done: false}
+   >    f.next(); // {value: 8, done: true}
+   >    f.next(); // {value: undefined, done: true}
+   >    // next()方法会执行generator的代码，然后，每次遇到yield x;就返回一个对象{value: x, done: true/false}，然后“暂停”。返回的value就是yield的返回值，done表示这个generator是否已经执行结束了。如果done为true，则value就是return的返回值。
+   >
+   >    // 执行方法2， for ... of 循环迭代generator对象，这种方式不需要自己判断done
+   >    for (var x of fib(5)) {
+   >        console.log(x); // 依次输出6,7  注意，这里不会像上一种方法一样输出return x+3;的结果
+   >    }
+   >    ```
+   >
+   >    ​
+   >
+   > 6. 异步相关: promise等；
+   >
+   > 7. 中级：[《深入理解ES6》学习笔记完整版](http://link.zhihu.com/?target=https%3A//github.com/hyy1115/ES6-learning)
+   >
+   > 8. 高级：[现代 JavaScript 参考](http://www.css88.com/archives/8244)
+   >
+   > 9. ​
 
-5. **正则**
+5. **正则表达式**
 
+   > - 精确匹配
+   >
+   >   - `\d`可以匹配一个数字
+   >   - `\w`可以匹配一个字母或数字
+   >
+   > - 变长字符匹配
+   >
+   >   - `*`表示任意个字符（包括0个）
+   >   - `+`表示至少一个字符
+   >   - `?`表示0个或1个字符
+   >   - `{n}`表示匹配n次
+   >   - `{n，}`表示至少匹配n次
+   >   - `{n,m}`表示最少匹配n次，最多匹配m次
+   >
+   > - 范围匹配
+   >
+   >   - `[0-9a-zA-Z]`可以匹配一个数字、字母或者下划线，可以单选出每一类匹配或者再加新选项（如加入转义后的下划线`\_`）
+   >   - `A|B`可以匹配A或B，其余类似
+   >   - `^`表示行的开头
+   >   - `$`表示行的结束
+   >
+   > - **分组**
+   >
+   >   `^(\d{3})-(\d{3,8})$`，以`()`表示可提取的分组
+   >
+   > - ​
+
+6. **RegExp**
+
+   > ```js
+   > // js中有两种方式可以创建正则表达式
+   > var re1 = /ABC\-001/;
+   > var re2 = new RegExp('ABC\\-001');
+   >
+   > // js正则表达式的特殊标志符
+   > var r1 = /test/g;  
+   > var r2 = new RegExp('test', 'g');
+   > // g表示全局匹配，i表示忽略大小写，m表示多行匹配
+   >
+   > // RegExp对象的test()方法用于测试给定的字符串是否符合条件。
+   > var re = /^\d{3}\-\d{3,8}$/;
+   > re.test('010-12345'); // true
+   > re.test('010-1234x'); // false
+   >
+   > // 使用正则表达式配合string的split方法切分字符串
+   > 'a,b;; c  d'.split(/[\s\,\;]+/); // ['a', 'b', 'c', 'd']
+   >
+   > // 使用RegExp对象的exec()方法提取分组子串
+   > var re = /(\d{3})-(\d{3,8})/;
+   > re.exec('010-12345  111-11111'); // ['010-12345', '010', '12345']
+   > // 匹配成功后，返回一个Array，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串。（若没有分组，则数组中只有匹配到的字符串）
+   > // exec()方法在匹配失败时返回null。
+   > // 注意，“匹配到的整个字符串”并不是指输入的整个字符串，另外，就此例而言，若分组中有任意一个分组匹配不了，都会返回null
+   >
+   > // 正则匹配默认为贪婪匹配
+   > var re = /^(\d+)(0*)$/;
+   > re.exec('102300'); // ['102300', '102300', '']，此时\d+把后面的0全部匹配了
+   > // 加个?就可以让\d+采用非贪婪匹配
+   > var re = /^(\d+?)(0*)$/;
+   > re.exec('102300'); // ['102300', '1023', '00']
+   >
+   > // 全局匹配
+   > var s = 'JavaScript, VBScript, JScript and ECMAScript';
+   > var re=/[a-zA-Z]+Script/g; // 全局标识符g
+   > re.exec(s); // ['JavaScript'] // 搜索匹配字符串成功，若失败则返回null
+   > re.lastIndex; // 10   指定g标志后，每次运行exec()，正则表达式本身会更新lastIndex属性，表示上次匹配到的最后索引。
+   > re.exec(s); // ['VBScript']
+   > re.lastIndex; // 20
+   > ```
+   >
    > ​
 
-6. **作用域链**
+7. **作用域链**
 
    > 作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到window对象即被终止，作用域链向下访问变量是不被允许的。
 
@@ -1251,7 +1406,7 @@
 
    > [深入理解javascript原型和闭包（13）-【作用域】和【上下文环境】](http://www.cnblogs.com/wangfupeng1988/p/3991995.html)
 
-8. **拷贝数组和对象**
+9. **拷贝数组和对象**
 
    [javascript 数组以及对象的深拷贝（复制数组或复制对象）的方法](http://blog.csdn.net/fungleo/article/details/54931379)
 
@@ -1271,7 +1426,6 @@
    >    - 对象
    >
    >      > 1. 直接`for..in`遍历对象属性
-   >      > 2. `var obj2 = JSON.parse(JSON.stringify(obj));`，注意，JSON法会丢失函数信息
    >      > 3. `var { ...obj2 } = obj;`
    >
    >    - **更深层次的对象拷贝**
@@ -1310,7 +1464,7 @@
 
     > 1. sort()
     >
-    >    [[js中sort函数的底层实现机制？](https://segmentfault.com/q/1010000007133473)](https://segmentfault.com/q/1010000007133473?_ea=1247880)
+    >    [js中sort函数的底层实现机制](https://segmentfault.com/q/1010000007133473)
     >
     >    > 1. **原理**：
     >    >
@@ -1366,9 +1520,39 @@
 
 11. **变量提升**
 
-   > ​
+   > JavaScript的函数定义会先扫描整个函数体的语句，把所有申明的变量“提升”到函数顶部。
+   >
+   > ```js
+   > function foo() {
+   >     var x = 'Hello, ' + y;  // 变量提升相当于在此语句之前再加一句var y;
+   >     console.log(x);
+   >     var y = 'Bob';
+   > }
+   >
+   > foo(); // 'Hello, undefined'
+   > ```
 
-11. **冒泡和捕获**
+12. **名字空间**
+
+    > 全局变量会绑定到`window`上，不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突，并且很难被发现。
+    >
+    > 减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中
+    >
+    > ```js
+    > // 唯一的全局变量MYAPP:
+    > var MYAPP = {};
+    >
+    > // 其他变量:
+    > MYAPP.name = 'myapp';
+    > MYAPP.version = 1.0;
+    >
+    > // 其他函数:
+    > MYAPP.foo = function () {
+    >     return 'foo';
+    > };
+    > ```
+
+13. **冒泡和捕获**
 
     > 事件的三个阶段：
     >
@@ -1436,32 +1620,62 @@
     >
     >   html()修改/获取html内容，text()修改/获取文本内容，val()修改/获取表单元素的值；
 
-20. **for循环**
+19. **for循环遍历**
 
-    > 1. **forEach()**
+    > 遍历`Array`可以采用下标循环，遍历`Map`和`Set`就无法使用下标。为了统一集合类型，ES6标准引入了新的`iterable`类型，`Array`、`Map`和`Set`都属于`iterable`类型。具有`iterable`类型的集合可以通过新的`for ... of`循环来遍历。
     >
-    >    > 数组方法，`forEach()`接收一个函数，每次迭代就自动回调该函数
+    > 1. **for ... of**
+    >
+    >    > `for ... of`只循环集合本身的元素。
+    >    >
+    >    > ```js
+    >    > var a = ['A', 'B', 'C'];
+    >    > var s = new Set(['A', 'B', 'C']);
+    >    > var m = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
+    >    > for (var x of a) { // 遍历Array
+    >    >     console.log(x);
+    >    > }
+    >    > for (var x of s) { // 遍历Set
+    >    >     console.log(x);
+    >    > }
+    >    > for (var x of m) { // 遍历Map
+    >    >     console.log(x[0] + '=' + x[1]);
+    >    > }
+    >    > ```
+    >
+    > 2. **for ... in**
+    >
+    >    > 与`for ... of`的区别：`for...in`遍历的实际上是对象的属性名称。
+    >    >
+    >    > 使用时会出现问题：`Array`数组也是对象，每个元素的索引被视为一个属性。手动给`Array`对象添加了额外的属性(比如name)后，`for ... in`循环将把`name`包括在内，但`Array`的`length`属性却不包括在内。
+    >
+    > 3. **forEach()**
+    >
+    >    > `iterable`内置的`forEach`方法，ES5.1标准引入，它接收一个函数，每次迭代就自动回调该函数。
     >    >
     >    > ```js
     >    > 'use strict';
     >    > var a = ['A', 'B', 'C'];
     >    > a.forEach(function (element, index, array) {
-    >    >     // element: 指向当前元素的值
+    >    >     // element: 指向当前元素的值，一般也可以只获取它
     >    >     // index: 指向当前索引
     >    >     // array: 指向Array对象本身
     >    >     console.log(element + ', index = ' + index);
     >    > });
+    >    >
+    >    > var s = new Set(['A', 'B', 'C']);
+    >    > s.forEach(function (element, sameElement, set) { 
+    >    >     console.log(element); // Set没有索引，因此前两个参数都是元素本身
+    >    > });
+    >    >
+    >    > var m = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
+    >    > m.forEach(function (value, key, map) {
+    >    >     console.log(value);  // Map的回调函数参数依次为value、key和map本身
+    >    > });
     >    > ```
     >
-    > 2. **for...in**
+    > 4. ​
     >
-    >    > `for...in`遍历的实际上是对象的属性名称。
-    >    >
-    >    > 问题：`Array`数组也是对象，每个元素的索引被视为一个属性。手动给`Array`对象添加了额外的属性(比如name)后，`for ... in`循环将把`name`包括在内，但`Array`的`length`属性却不包括在内。
-    >
-    > 3. **for...of**
-    >
-    >    > `for ... of`只循环集合本身的元素。
 
 19. **同步和异步**
 
@@ -1495,11 +1709,91 @@
 
     > document.cookie进行读写，需要自己封装函数。
 
-22. **typeof 和 instanceof()**
+25. **typeof 和 instanceof()**
 
-    > ​
+    > - typeof
+    >
+    >   ```js
+    >   // 五种基本类型返回四种：number，string，boolean，undefined
+    >   // null和array都返回object
+    >   // 函数返回function
+    >   typeof 123; // 'number'
+    >   typeof NaN; // 'number'
+    >   typeof 'str'; // 'string'
+    >   typeof true; // 'boolean'
+    >   typeof undefined; // 'undefined'
+    >   typeof Math.abs; // 'function'
+    >   typeof null; // 'object'
+    >   typeof []; // 'object'
+    >   typeof {}; // 'object'
+    >   ```
+    >
+    > - instanceof
+    >
+    >   见之前的  js面向对象  的  第三点prototype 的  第五点instanceof
 
-24. **jQuery_attr()和prop()**
+26. **包装对象**
+
+    > ```js
+    > // number、boolean和string都有包装对象
+    > var n = new Number(123); // 123,生成了新的包装类型
+    > var b = new Boolean(true); // true,生成了新的包装类型
+    > var s = new String('str'); // 'str',生成了新的包装类型
+    >
+    > // 虽然包装对象看上去和原来的值一模一样，显示出来也是一模一样，但他们的类型已经变为object了！所以，包装对象和原始值用===比较会返回false
+    > typeof new String('str'); // 'object'
+    > new String('str') === 'str'; // false
+    >
+    > // 不加new调用时Number()、Boolean和String()被当做普通函数，把任何类型的数据转换为number、boolean和string类型（注意不是其包装类型）
+    > var n = Number('123'); // 123，相当于parseInt()或parseFloat()
+    > typeof n; // 'number'
+    > ```
+    >
+    > 注意：
+    >
+    > - 用`parseInt()`或`parseFloat()`来转换任意类型到`number`；
+    > - 用`String()`来转换任意类型到`string`，或者直接调用某个对象的`toString()`方法（`null`和`undefined`没有`toString()`方法）；
+    > - 判断`Array`要使用`Array.isArray(arr)`；
+    > - 判断`null`请使用`myVar === null`；
+    > - 判断某个全局变量是否存在用`typeof window.myVar === 'undefined'`；
+    > - 函数内部判断某个变量是否存在用`typeof myVar === 'undefined'`。
+    > - **注意**：number对象直接调用`toString()`会报错，`(123).toString()；`或`123..toString()`方可
+
+27. **Date对象**
+
+    > ```js
+    > var now = new Date(); // 获取系统当前时间
+    > now; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+    > now.getFullYear(); // 2015, 年份
+    > now.getMonth(); // 5, 月份，注意月份范围是0~11，5表示六月
+    > now.getDate(); // 24, 表示24号
+    > now.getDay(); // 3, 表示星期三
+    > now.getHours(); // 19, 24小时制
+    > now.getMinutes(); // 49, 分钟
+    > now.getSeconds(); // 22, 秒
+    > now.getMilliseconds(); // 875, 毫秒数
+    > now.getTime(); // 1435146562875, 以number形式表示的时间戳
+    >
+    >
+    > // 创建指定日期和时间的Date对象
+    > // 第一种
+    > var d = new Date(2018, 2, 5, 20, 1, 1, 123); // Mon Mar 05 2018 20:01:01 GMT+0800 (中国标准时间)
+    >
+    > // 第二种
+    > var d = Date.parse('2018-03-05T20:01:01.123+08:00'); // 1520251261123，返回时间戳，字符个事要求符合ISO 8601格式，字符串中使用实际月份
+    > var d = new Date(1520251261123); // Mon Mar 05 2018 20:01:01 GMT+0800 (中国标准时间)
+    >
+    >
+    > // 时区
+    > d.toLocaleString(); // "2018/3/5 下午8:01:01"，显示本地时间，输出的字符串与操作系统格式有关，同系列有toLocaleDateString()，返回本例返回值的日期部分，toLocaleTimeString()返回本例返回值的时期部分；
+    > d.toUTCString(); // "Mon, 05 Mar 2018 12:01:01 GMT"，UTC时间，差本地时间8小时，与toGMTString()方法效果相同
+    >
+    > // 其他
+    > d.toString(); // "Mon Mar 05 2018 20:01:01 GMT+0800 (中国标准时间)"，同系列有toDateString()，返回本例返回值的日期部分，toTimeString()返回本例返回值的时期部分；
+    > d.toISOString(); //"2018-03-05T12:01:01.123Z"，与toJSON返回值相同，可用Date.parse转换成时间戳
+    > ```
+
+28. **jQuery_attr()和prop()**
 
     > 1. **区别**
     >
@@ -1530,9 +1824,28 @@
 
     > ​
 
-26. **IIFE**
+27. **IIFE**
 
-    > ​
+    > ```js
+    > var a = 'a';
+    >
+    > // IIFE，立即执行函数表达式
+    > // 作用：创建块级（私有）作用域，避免污染全局变量；执行完毕后作用域内定义的变量和函数都被销毁，这样，它既可以像闭包一样锁住变量（for循环的i），又减少了闭包占用的内存问题
+    > (function (){
+    >    if (a == undefined) {  // 此处undefined是因为语句中var a导致变量提升
+    >       var a = 'b';
+    >       //想要证明undefined是因为变量提升而不是“现在本作用域查找，没有则为undefined，再往上查找”，可以去掉var再看输出结果
+    >    }
+    >    console.log(a);   // 'b'
+    > })()
+    > console.log(a);   // 'a'
+    >
+    > // 内部找不到变量a，才会去上层查找变量a
+    > a = 'a';
+    > (function (){
+    >    console.log(a);   // 'a'
+    > })()
+    > ```
 
 27. **进制转换**
 
@@ -1542,7 +1855,97 @@
 
     > ​
 
-29. ​
+30. **jQuery实现选项卡**
+
+    > 主要是看jQuery动画知不知道，hide()/show()就行，复杂的可能面试官反而不中意。
+
+31. **比较运算符**
+
+    > - `==`比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；
+    > - `===`比较，它不会自动转换数据类型，如果数据类型不一致，返回`false`，如果一致，再比较。
+
+35. **字符串方法**
+
+    > ```js
+    > var s = 'hello, world'
+    >
+    > /* 这些方法不会改变原有字符串的内容，而是返回一个新字符串 */
+    > /* 截取 */
+    > s.slice(0, 5); // 从索引0开始到5（不包括5），返回'hello'
+    > // slice其实是数组方法，而且参数可以取负数，表示从后往前算，然后slice和subsring参数越界都返回空（'' or []）
+    > s.substring(0, 5); // 从索引0开始到5（不包括5），返回'hello'
+    > s.substr(1, 5); // 从索引1开始取5个字符，返回'ello,'
+    >
+    > s.substring(7); // 从索引7开始到结束，返回'world'
+    > s.slice(7); // 从索引7开始到结束，返回'world'
+    >
+    > /* 大小写 */
+    > s.toUpperCase(); // 返回'HELLO, WORLD'
+    > s.toLowerCase();
+    >
+    > /* 搜索 */
+    > s.indexOf('world'); // 返回7
+    > s.indexOf('World'); // 没有找到指定的子串，返回-1
+    > ```
+    >
+    > ​
+
+33. **数组方法**
+
+    > ```js
+    > /* 搜索 */
+    > indexOf() //与String类似
+    >
+    > /* 截取 */
+    > var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    > var aCopy = arr.slice(); // 从头到尾截取所有元素，可以用来复制数组
+    >
+    > /* 增删 */
+    > arr.push('A', 'B'); // 向Array的末尾添加若干元素，返回Array新的length
+    > arr.unshift('A', 'B'); // 向Array的头部添加若干元素，其余同
+    > arr.pop(); // 把Array的最后一个元素删除掉，返回被删除的元素，空数组继续pop返回undefined
+    > arr.shift(); // 把Array的第一个元素删除掉，其余同
+    > arr.splice(arr.splice(2, 3, 'Google', 'Facebook'); // 从指定索引(2)开始，删除若干（3）元素，再从该位置添加若干元素。也可控制只删除（不加后续元素）或只添加（删除个数设为0），以数组形式返回删除掉的元素（不删则返回[]）
+    >
+    > /* 反转 */
+    > arr.reverse();  // 翻转Array
+    >
+    > /* 拼接 */
+    > var added = arr.concat([1, 2, 3]); // 接收任意个元素和Array，并自动把Array拆开，然后全部添加到新的Array里，返回新的Array，不改变原Array
+    > arr.join('-'); // 'A-B-C-1-2-3' 把当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
+    >
+    > /* 排序，见之前的数组排序部分 */
+    >
+    > /* map/reduce */
+    > var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    > arr.map(String); // ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    > // map(f)把传入的函数f(x)作用在Array的每一个元素并把结果生成一个新的Array
+    >
+    > var arr = [1, 3, 5, 7, 9];
+    > arr.reduce(function (x, y) {
+    >     return x + y;
+    > }); // 25
+    > // reduce(f)把一个函数f(x, y)作用在这个Array的[x1, x2, x3...]上，这个函数必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算
+    >
+    > /* filter */
+    > // filter()接收一个函数。传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。
+    > var arr = ['A', 'B', 'C'];
+    > var r = arr.filter(function (element, index, self) {
+    >     console.log(element); // 依次打印'A', 'B', 'C'
+    >     console.log(index); // 依次打印0, 1, 2
+    >     console.log(self); // self就是变量arr
+    >     return self.indexOf(element) === index; // 快速去重
+    > });
+    > ```
+
+34. **delete操作符**
+
+    > 1. 删除对象的属性，`delete xiaoming.school;`，属性不存在也不报错
+    > 2. ​
+
+35. **Polyfill**
+
+36. ​
 
     ​
 
@@ -1551,7 +1954,7 @@
     ​
 
 
-### **AJAX类**
+### **Ajax类**
 
 1. **手写ajax**
 
@@ -1600,18 +2003,42 @@
 
 2. **JSON**
 
-   > JSON 格式（JavaScript Object Notation 的缩写）是一种用于数据交换的文本格式，2001年由 Douglas Crockford 提出，目的是取代繁琐笨重的 XML 格式。
+   > JSON 格式（JavaScript Object Notation 的缩写）是一种用于数据交换的文本格式
    >
-   > 每个 JSON 对象就是一个值，可能是一个数组或对象，也可能是一个原始类型的值。总之，只能是一个值，不能是两个或更多的值。
+   > 每个 JSON 对象就是一个值：
    >
-   > 1. 复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
-   > 2. 原始类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和`null`（不能使用`NaN`, `Infinity`, `-Infinity`和`undefined`）。
-   > 3. 字符串必须使用双引号表示，不能使用单引号。
-   > 4. 对象的键名必须放在双引号里面。
+   > 1. 复合类型的值只能是**数组**或**对象**。
+   >
+   > 2. 原始类型的值只能是**字符串**、**数值（必须以十进制表示）**、**布尔值**和**`null`**（不能使用`NaN`, `Infinity`, `-Infinity`和`undefined`）。
+   >
+   > 3. 字符串必须使用**双引号**表示，不能使用单引号。
+   >
+   > 4. **对象的键名必须放在双引号里面**。
+   >
    > 5. 数组或对象最后一个成员的后面，不能加逗号。
    >
-   > - `JSON.stringify`方法用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被`JSON.parse`方法还原。`JSON.stringify`方法还可以接受一个数组，作为第二个参数，指定需要转成字符串的属性。`JSON.stringify`还可以接受第三个参数，用于增加返回的 JSON 字符串的可读性。如果是数字，表示每个属性前面添加的空格（最多不超过10个）；如果是字符串（不超过10个字符），则该字符串会添加在每行前面。
-   > - `JSON.parse`方法用于将 JSON 字符串转换成对应的值。`JSON.parse`方法可以接受一个处理函数，作为第二个参数，用法与`JSON.stringify`方法类似。
+   >    ​
+   >
+   > - **`JSON.stringify`**
+   >
+   >   - 用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被`JSON.parse`方法还原。
+   >
+   >   - 第二个参数可以接受一个数组，用于控制如何筛选对象的键值，指定需要转成字符串的属性。
+   >
+   >   - 第二个参数还可以传入一个函数，这样对象的每个键值对都会被函数先处理：
+   >
+   >   - 第三个参数用于增加返回的 JSON 字符串的可读性：
+   >
+   >     如果是数字，表示每个属性前面添加的空格（最多不超过10个）；
+   >
+   >     如果是字符串（不超过10个字符），则该字符串会添加在每行前面。
+   >
+   >   - 如果还需要精确控制输出的属性，可以在对象中定义一个`toJson()`方法，在方法中直接返回一个对象（希望JSON序列化的属性，属性值自己设置），然后再调用本方法
+   >
+   > - **`JSON.parse`**
+   >
+   >   - 用于将 JSON 字符串转换成对应的值。
+   >   - 第二个参数可以接受一个处理函数，用法与`JSON.stringify`方法类似。
 
 3. **jQuery的Ajax**
 
